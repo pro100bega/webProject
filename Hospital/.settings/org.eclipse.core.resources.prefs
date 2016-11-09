@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/signIn.jsp=UTF-8
+encoding//WebContent/addPatient.jsp=UTF-8
+encoding//WebContent/index.jsp=UTF-8
+encoding//WebContent/read.jsp=UTF-8
+encoding//src/by/htp6/hospital/bean/Patient.java=UTF-8
