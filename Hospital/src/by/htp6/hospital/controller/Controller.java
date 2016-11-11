@@ -1,8 +1,6 @@
 package by.htp6.hospital.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,13 +29,7 @@ public class Controller extends HttpServlet {
 		String commandName = request.getParameter("command");
 		Command command = commandProvider.getCommand(commandName);
 		
-		command.execute(request, response);
-		
-		String url = "hello.jsp";
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-		dispatcher.forward(request, response);
-		
+		command.execute(request, response);		
 	}
 
 }

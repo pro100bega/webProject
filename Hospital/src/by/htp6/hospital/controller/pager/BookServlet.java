@@ -2,7 +2,6 @@ package by.htp6.hospital.controller.pager;
 
 import java.io.IOException;
 
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,11 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/signIn")
-public class SingInServlet extends HttpServlet {
+@WebServlet("/book")
+public class BookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public SingInServlet() {
+	public BookServlet() {
 		super();
 	}
 
@@ -25,8 +24,8 @@ public class SingInServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String url = "WEB-INF/signIn.jsp";
-		
+		String url = "WEB-INF/bookUser.jsp";
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}

@@ -4,22 +4,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <link rel="stylesheet" href="content/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="content/signin.css">
 
-<title>Sign in</title>
+<title>Book user</title>
 </head>
 <body>
 	<div class = "container">
 	<form action="controller" class="form-signin" method = "post">
-		<h2 class="form-signin-heading">Please sign in</h2>	
-		<input type = "hidden" name = "command" value = "LOGIN_USER">
+		<h2 class="form-signin-heading">Registration</h2>	
+		<input type = "hidden" name = "command" value = "BOOK_USER">
 		<input type="text" class="form-control" name="username"
-		 			placeholder="Username" required>
+		 			placeholder="New username" required>
 		<input type = "password" class="form-control" name = "password"
-					placeholder="Password" required>
-		<input type="submit" class="btn btn-lg btn-primary btn-block" value = "Sign in">
+					placeholder="New password" required>
+		<input type="submit" class="btn btn-lg btn-primary btn-block" value = "Book">
 	</form>
 	</div>
 </body>

@@ -3,6 +3,7 @@ package by.htp6.hospital.command;
 import java.util.HashMap;
 import java.util.Map;
 
+import by.htp6.hospital.command.impl.BookUserCommand;
 import by.htp6.hospital.command.impl.LogInUserCommand;
 
 public class CommandProvider {
@@ -12,6 +13,7 @@ public class CommandProvider {
 	
 	private CommandProvider(){
 		commands.put("LOGIN_USER", new LogInUserCommand());
+		commands.put("BOOK_USER", new BookUserCommand());
 	}
 	
 	public static CommandProvider getInstance(){

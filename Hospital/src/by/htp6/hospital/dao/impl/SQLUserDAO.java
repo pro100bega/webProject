@@ -14,13 +14,14 @@ public class SQLUserDAO implements UserDAO {
 
 	@Override
 	public User logination(String username, String password) throws DAOException {
+		Connection connection = null;
 		try {
 			String dbName = "root";
 			String dbPassword = "Bega15326";
 			String url = "jdbc:mysql://127.0.0.1/hospital?useSSL=false";
 
 			Class.forName("org.gjt.mm.mysql.Driver");
-			Connection connection = DriverManager.getConnection(url, dbName, dbPassword);
+			connection = DriverManager.getConnection(url, dbName, dbPassword);
 
 			String query = "SELECT * FROM user WHERE username = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -31,17 +32,20 @@ public class SQLUserDAO implements UserDAO {
 				if (password.equals(resultSet.getString("password"))) {
 					User user = new User(resultSet.getInt("id"), resultSet.getString("username"),
 							resultSet.getString("password"), resultSet.getString("type"));
+					connection.close();
 					return user;
 				} else {
+					connection.close();
 					throw new DAOException("Incorrect password or username");
 				}
 			} else {
+				connection.close();
 				throw new DAOException("Incorrect password or username");
 			}
 		} catch (ClassNotFoundException e) {
 			throw new DAOException(e);
 		} catch (SQLException e) {
 			throw new DAOException(e);
-		}
+		} 		
 	}
 }
