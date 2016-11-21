@@ -1,23 +1,23 @@
 package by.htp6.hospital.service.factory;
 
-import by.htp6.hospital.service.BookUserService;
-import by.htp6.hospital.service.LogInUserService;
-import by.htp6.hospital.service.impl.BookUser;
-import by.htp6.hospital.service.impl.LogInUser;
+import by.htp6.hospital.service.LogUpService;
+import by.htp6.hospital.service.LogInService;
+import by.htp6.hospital.service.impl.LogUp;
+import by.htp6.hospital.service.impl.LogIn;
 
 public class ServiceFactory {
 	private static final ServiceFactory instance = new ServiceFactory();
 	
-	private LogInUserService logInUser = new LogInUser();
+	private LogInService logIn = new LogIn();
 	
-	private BookUserService bookUser = new BookUser();
+	private LogUpService logUp = new LogUp();
 	
-	public BookUserService getBookUser() {
-		return bookUser;
+	public LogUpService getLogUpUser() {
+		return logUp;
 	}
 
-	public LogInUserService getLoginUserService(){
-		return this.logInUser;
+	public LogInService getLoginUserService(){
+		return this.logIn;
 	}
 	
 	private ServiceFactory(){}

@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+TABLE {
+	width: 300px; /* Ширина таблицы */
+	border-bottom: 2px solid maroon; /* Линия внизу таблицы */
+	background: #fffacd; /* Цвет фона таблицы */
+}
+
+TH {
+	background: maroon; /* Цвет фона заголовка */
+	color: white; /* Цвет текста */
+	text-align: left; /* Выравнивание по левому краю */
+}
+
+TD, TH {
+	padding: 3px; /* Поля вокруг текста */
+}

@@ -1,27 +1,23 @@
 package by.htp6.hospital.dao.impl;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import by.htp6.hospital.bean.User;
-import by.htp6.hospital.dao.UserDAO;
+import by.htp6.hospital.dao.UserLogInDAO;
 import by.htp6.hospital.dao.exception.DAOException;
+import by.htp6.hospital.dao.pool.ConnectionPool;
 
-public class SQLUserDAO implements UserDAO {
+public class SQLUserLoginationDAO implements UserLogInDAO {
 
 	@Override
 	public User logination(String username, String password) throws DAOException {
-		Connection connection = null;
 		try {
-			String dbName = "root";
-			String dbPassword = "Bega15326";
-			String url = "jdbc:mysql://127.0.0.1/hospital?useSSL=false";
-
 			Class.forName("org.gjt.mm.mysql.Driver");
-			connection = DriverManager.getConnection(url, dbName, dbPassword);
+			ConnectionPool connectionPool = ConnectionPool.getInstance();
+			Connection connection = connectionPool.take();
 
 			String query = "SELECT * FROM user WHERE username = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -45,6 +41,8 @@ public class SQLUserDAO implements UserDAO {
 		} catch (ClassNotFoundException e) {
 			throw new DAOException(e);
 		} catch (SQLException e) {
+			throw new DAOException(e);
+		} catch (InterruptedException e) {
 			throw new DAOException(e);
 		} 		
 	}

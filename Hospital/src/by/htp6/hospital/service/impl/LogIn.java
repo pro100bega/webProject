@@ -1,34 +1,36 @@
 package by.htp6.hospital.service.impl;
 
 import by.htp6.hospital.bean.User;
-import by.htp6.hospital.dao.UserRegistrationDAO;
+import by.htp6.hospital.dao.UserLogInDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.factory.DAOFactory;
-import by.htp6.hospital.service.BookUserService;
+import by.htp6.hospital.service.LogInService;
 import by.htp6.hospital.service.exception.ServiceException;
 
-public class BookUser implements BookUserService{
+public class LogIn implements LogInService{
 
 	@Override
-	public User book(String username, String password) throws ServiceException {
+	public User logIn(String username, String password) throws ServiceException {
 		if (null == username || null == password){
-			throw new ServiceException("Username or password cant be empty");
+			throw new ServiceException("Username or password can`t be empty");
 		}
 		
 		if ("".equals(username) || "".equals(password)){
-			throw new ServiceException("Username or password cant be empty");
+			throw new ServiceException("Username or password can`t be empty");
 		}
 		
 		DAOFactory daoFactory = DAOFactory.getInstance();
-		UserRegistrationDAO registrationDAO = daoFactory.getUserRegistrationDAO();
+		
+		UserLogInDAO userLoginationDao = daoFactory.getUserLoginationDao();
+		
 		User user;
+		
 		try {
-			user = registrationDAO.registration(username, password);
+			user = userLoginationDao.logination(username, password);
 			return user;
+			
 		} catch (DAOException e) {
 			throw new ServiceException(e);
-		}	
+		}
 	}
-
-	
 }

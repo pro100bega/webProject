@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="content/bootstrap/css/bootstrap.css" />
-<link rel="stylesheet" href="content/starter-template.css">
+<link rel="stylesheet" href="css/bootstrap/css/bootstrap.css" />
+<link rel="stylesheet" href="css/starter-template.css">
 <title>Success</title>
 </head>
 <body>
@@ -35,8 +35,8 @@
 		<div class="starter-template">
 			<h1>Registration success!</h1>
 			<div class="alert alert-success">
-				<strong>Registration done OK!</strong>
-				<c:out value="User: ${requestScope.user.username} succesfully registrated.">
+				<strong>Sign up done OK!</strong>
+				<c:out value="User succesfully signed up.">
 				</c:out>
 			</div>
 		</div>

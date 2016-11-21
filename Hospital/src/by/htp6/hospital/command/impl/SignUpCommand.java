@@ -6,35 +6,31 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import by.htp6.hospital.bean.User;
 import by.htp6.hospital.command.Command;
-import by.htp6.hospital.service.LogInUserService;
+import by.htp6.hospital.service.LogUpService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.factory.ServiceFactory;
 
-public class LogInUserCommand implements Command{
+public class SignUpCommand implements Command{
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response)
+	public void execute(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		
-		HttpSession session = request.getSession(true);
-		
+				
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		LogInUserService loginUserService = serviceFactory.getLoginUserService();
+		LogUpService bookUserService = serviceFactory.getLogUpUser();
 		
 		User user = null;
 		try {
-			user = loginUserService.logIn(username, password);
-			session.setAttribute("authorisedUser", user);
+			user = bookUserService.book(username, password);
+			request.setAttribute("user", user);
 			
-			String url = "hello.jsp";
-			
+			String url = "WEB-INF/signUpSuccess.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 			
@@ -43,8 +39,7 @@ public class LogInUserCommand implements Command{
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 		}
-		
-		
+				
 	}
 	
 }
