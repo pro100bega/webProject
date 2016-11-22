@@ -26,26 +26,26 @@ public class SignInCommand implements Command{
 		String password = request.getParameter("password");
 		
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		LogInService loginUserService = serviceFactory.getLoginUserService();
+		LogInService loginUserService = serviceFactory.getLoginUser();
 		
 		User user = null;
 		try {
 			user = loginUserService.logIn(username, password);
 			session.setAttribute("authorisedUser", user);
 			
-			String url = null;
+			String url = "index.jsp";
 			
-			switch(user.getType()){
-			case "guest":
-				url = "index.jsp";
-				break;
-			case "doctor":
-				url = "doctor/doctorPanel.jsp";
-				break;
-			case "admin":
-				url = "administrator/administrationPanel.jsp";
-				break;
-			}
+//			switch(user.getType()){
+//			case "guest":
+//				url = "index.jsp";
+//				break;
+//			case "doctor":
+//				url = "doctor/doctorPanel.jsp";
+//				break;
+//			case "admin":
+//				url = "administrator/administrationPanel.jsp";
+//				break;
+//			}
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);

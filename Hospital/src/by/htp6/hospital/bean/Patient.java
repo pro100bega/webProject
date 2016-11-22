@@ -16,6 +16,16 @@ public class Patient implements Serializable {
 	private String surname;
 	
 	private String diagnosis;
+	
+	private int doctorId;
+
+	public int getDoctorId() {
+		return doctorId;
+	}
+
+	public void setDoctorId(int doctorId) {
+		this.doctorId = doctorId;
+	}
 
 	public int getId() {
 		return id;
@@ -60,19 +70,20 @@ public class Patient implements Serializable {
 	 * @param surname
 	 * user last name 
 	 */
-	public Patient(String name, String surname, String diagnosis){
+	public Patient(String name, String surname, String diagnosis, int doctorId){
 		this.name = name;
 		this.surname = surname;
 		this.diagnosis = diagnosis;
+		this.doctorId = doctorId;
 	}
 	
 	public Patient(int id, String name,
-			String surname, String diagnosis) {
-		super();
+			String surname, String diagnosis, int doctorId) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.diagnosis = diagnosis;
+		this.doctorId = doctorId;
 	}
 	
 	

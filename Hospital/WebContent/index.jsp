@@ -12,6 +12,8 @@
 <fmt:message bundle="${local}" key="navbar.home" var="home"/>
 <fmt:message bundle="${local}" key="navbar.about" var="about"/>
 <fmt:message bundle="${local}" key="navbar.contact" var="contact"/>
+<fmt:message bundle="${local}" key="navbar.adminPanel" var="admin"/>
+<fmt:message bundle="${local}" key="navbar.doctorPanel" var="doctor"/>
 <fmt:message bundle="${local}" key="message.welcome" var="welcomeMessage"/>
 <fmt:message bundle="${local}" key="button.signIn" var="signInButton"/>
 <fmt:message bundle="${local}" key="button.signUp" var="signUpButton"/>
@@ -44,9 +46,13 @@
 					<li class="active"><a href="#"><c:out value="${home}"></c:out></a></li>
 					<li><a href="#about"><c:out value="${about}"></c:out></a></li>
 					<li><a href="#contact"><c:out value="${contact}"></c:out></a></li>
-					<c:if test="${sessionScope.authorisedUser.type eq \"admin\"}">
-					<li><a href="administrator/administrationPanel">
-					<c:out value="${about}"></c:out></a></li>
+					<c:if test="${sessionScope.authorisedUser.type eq 'admin'}">
+					<li><a href="administrator/administrationPanel.jsp">
+					<c:out value="${admin}"></c:out></a></li>
+					</c:if>
+					<c:if test="${sessionScope.authorisedUser.type eq 'doctor'}">
+					<li><a href="controller">
+					<c:out value="${doctor}"></c:out></a></li>
 					</c:if>
 				</ul>
 				<form class="navbar-nav navbar-right" action="controller"

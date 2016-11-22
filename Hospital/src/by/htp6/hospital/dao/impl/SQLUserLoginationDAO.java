@@ -15,7 +15,6 @@ public class SQLUserLoginationDAO implements UserLogInDAO {
 	@Override
 	public User logination(String username, String password) throws DAOException {
 		try {
-			Class.forName("org.gjt.mm.mysql.Driver");
 			ConnectionPool connectionPool = ConnectionPool.getInstance();
 			Connection connection = connectionPool.take();
 
@@ -28,18 +27,16 @@ public class SQLUserLoginationDAO implements UserLogInDAO {
 				if (password.equals(resultSet.getString("password"))) {
 					User user = new User(resultSet.getInt("id"), resultSet.getString("username"),
 							resultSet.getString("password"), resultSet.getString("type"));
-					connection.close();
+					connectionPool.free(connection);
 					return user;
 				} else {
-					connection.close();
+					connectionPool.free(connection);
 					throw new DAOException("Incorrect password or username");
 				}
 			} else {
-				connection.close();
+				connectionPool.free(connection);
 				throw new DAOException("Incorrect password or username");
 			}
-		} catch (ClassNotFoundException e) {
-			throw new DAOException(e);
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		} catch (InterruptedException e) {

@@ -21,7 +21,7 @@ public class LogIn implements LogInService{
 		
 		DAOFactory daoFactory = DAOFactory.getInstance();
 		
-		UserLogInDAO userLoginationDao = daoFactory.getUserLoginationDao();
+		UserLogInDAO userLoginationDao = daoFactory.getUserLoginationDAO();
 		
 		User user;
 		

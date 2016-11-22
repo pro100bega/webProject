@@ -14,31 +14,34 @@ public class SQLUserRegistrationDAO implements UserLogUpDAO {
 
 	@Override
 	public User registration(String username, String password) throws DAOException {
-		if (!checkUsernameInBase(username)){
+		if (!checkUsernameInBase(username)) {
 			try {
-				Class.forName("org.gjt.mm.mysql.Driver");
 				ConnectionPool connectionPool = ConnectionPool.getInstance();
 				Connection connection = connectionPool.take();
-				
-				String query = "INSERT INTO user(username, password, type) VALUES(?,?,?)";
-				PreparedStatement preparedStatement = connection.prepareStatement(query);
-				preparedStatement.setString(1, username);
-				preparedStatement.setString(2, password);
-				preparedStatement.setString(3, "guest"); // default user type 
-				preparedStatement.executeUpdate();
-				
-				User user = getUserFromDatabase(connection, username);
-				connectionPool.free(connection);
-				
-				return user;
-				
-			} catch (ClassNotFoundException e) {
-				throw new DAOException(e);
-			} catch (SQLException e) {
-				throw new DAOException(e);
+				try {
+					String query = "INSERT INTO user(username, password, type) VALUES(?,?,?)";
+					PreparedStatement preparedStatement = connection.prepareStatement(query);
+					preparedStatement.setString(1, username);
+					preparedStatement.setString(2, password);
+					preparedStatement.setString(3, "guest"); // default user
+																// type
+					preparedStatement.executeUpdate();
+
+					User user = getUserFromDatabase(connection, username);
+					connectionPool.free(connection);
+
+					return user;
+				} catch (SQLException e) {
+					connectionPool.free(connection);
+					throw new DAOException(e);
+				} catch (InterruptedException e) {
+					connectionPool.free(connection);
+					throw new DAOException(e);
+				}
 			} catch (InterruptedException e) {
 				throw new DAOException(e);
 			}
+
 		} else {
 			throw new DAOException("Uername \"" + username + "\" is already exists");
 		}
@@ -47,8 +50,8 @@ public class SQLUserRegistrationDAO implements UserLogUpDAO {
 	// checks if user name already exists in database
 	/**
 	 * @param username
-	 *            Returns {@code true} if user name already exists in database or
-	 *            {@code false} in another case.
+	 *            Returns {@code true} if user name already exists in database
+	 *            or {@code false} in another case.
 	 */
 	private boolean checkUsernameInBase(String username) throws DAOException {
 		boolean exists = false;
@@ -56,7 +59,7 @@ public class SQLUserRegistrationDAO implements UserLogUpDAO {
 			ConnectionPool connectionPool = ConnectionPool.getInstance();
 			Connection connection = connectionPool.take();
 			String query = "SELECT * FROM user WHERE username = ?";
-			
+
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, username);
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -73,12 +76,12 @@ public class SQLUserRegistrationDAO implements UserLogUpDAO {
 			throw new DAOException(e);
 		}
 	}
-	
+
 	/**
 	 * @param username
-	 * Creates and returns {@code User} object from database.
+	 *            Creates and returns {@code User} object from database.
 	 */
-	private User getUserFromDatabase(Connection connection,String username) throws DAOException {
+	private User getUserFromDatabase(Connection connection, String username) throws DAOException {
 		try {
 			String query = "SELECT * FROM user WHERE username = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -89,7 +92,7 @@ public class SQLUserRegistrationDAO implements UserLogUpDAO {
 					resultSet.getString("password"), resultSet.getString("type"));
 			connection.close();
 			return user;
-			
+
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}

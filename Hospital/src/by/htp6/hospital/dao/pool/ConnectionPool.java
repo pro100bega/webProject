@@ -19,6 +19,11 @@ public class ConnectionPool implements Closeable {
 	}
 
 	public void init() throws SQLException{
+		try {
+			Class.forName("org.gjt.mm.mysql.Driver");
+		} catch (ClassNotFoundException e) {
+			throw new SQLException(e);
+		}
 		ResourceBundle resourceBundle = ResourceBundle.getBundle("resources.dbResource");
 		String url = "jdbc:mysql://127.0.0.1/hospital?useSSL=false";
 		String dbUsername = resourceBundle.getString("db.username");

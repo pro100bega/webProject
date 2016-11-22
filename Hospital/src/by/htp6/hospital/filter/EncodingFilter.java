@@ -1,4 +1,4 @@
-package by.htp6.hospital.bean;
+package by.htp6.hospital.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;
