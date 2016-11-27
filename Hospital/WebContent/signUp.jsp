@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/signin.css">
 
+<link rel="shortcut icon" href="hospital.ico" type="image/x-icon">
 <title><c:out value="${signUpTitle}"></c:out> </title>
 </head>
 <body>

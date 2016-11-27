@@ -13,7 +13,7 @@
 <fmt:message bundle="${local}" key="navbar.about" var="about"/>
 <fmt:message bundle="${local}" key="navbar.contact" var="contact"/>
 <fmt:message bundle="${local}" key="navbar.adminPanel" var="admin"/>
-<fmt:message bundle="${local}" key="navbar.doctorPanel" var="doctor"/>
+<fmt:message bundle="${local}" key="navbar.doctorPanel" var="doctorPanel"/>
 <fmt:message bundle="${local}" key="message.welcome" var="welcomeMessage"/>
 <fmt:message bundle="${local}" key="button.signIn" var="signInButton"/>
 <fmt:message bundle="${local}" key="button.signUp" var="signUpButton"/>
@@ -24,8 +24,8 @@
 <link rel="stylesheet" href="css/starter-template.css">
 <link rel="stylesheet"
 	href="css/bootstrap/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="content/theme.css">
 
+<link rel="shortcut icon" href="hospital.ico" type="image/x-icon">
 <title><c:out value="${homeTitle}"></c:out> </title>
 </head>
 <body>
@@ -51,8 +51,9 @@
 					<c:out value="${admin}"></c:out></a></li>
 					</c:if>
 					<c:if test="${sessionScope.authorisedUser.type eq 'doctor'}">
-					<li><a href="controller">
-					<c:out value="${doctor}"></c:out></a></li>
+					<li><a 
+					href="controller?doctorId=${sessionScope.authorisedUser.id}&command=DISPLAY_PATIENTS">
+					<c:out value="${doctorPanel}"></c:out></a></li>
 					</c:if>
 				</ul>
 				<form class="navbar-nav navbar-right" action="controller"
@@ -62,13 +63,13 @@
 					<input type="hidden" name="lastPage" value="index.jsp">
 					<button type="submit" class="btn btn-xs btn-default">ru</button>
 				</form>
-				<form class="navbar-nav navbar-right" action="controller"
-					method="post">
-					<input type="hidden" name="command" value="SET_LOCALE">
-					<input type="hidden" name="localeName" value="en_US">
+				
+				<form class="navbar-nav navbar-right" 
+							action="controller?command=SET_LOCALE&localeName=en_US"	method="get">
 					<input type="hidden" name="lastPage" value="index.jsp">
 					<button type="submit" class="btn btn-xs btn-default">en</button>
 				</form>
+				
 				<c:if test="${sessionScope.authorisedUser eq null}">
 
 					<form class="navbar-form navbar-right" action="signIn.jsp"

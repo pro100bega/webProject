@@ -21,7 +21,9 @@ public class SQLPatientListDAO implements PatientListDAO{
 			try {
 				String query = "SELECT * FROM patient WHERE doctor_id = ?";
 				PreparedStatement preparedStatement = connection.prepareStatement(query);
-				preparedStatement.setInt(0, doctorId);
+				String doctorIdString = "" + doctorId;
+				preparedStatement.setString(1, doctorIdString);
+				
 				ResultSet resultSet = preparedStatement.executeQuery();
 				List<Patient> patients = new ArrayList<>();
 				while (resultSet.next()){

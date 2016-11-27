@@ -1,11 +1,14 @@
 package by.htp6.hospital.service.impl;
 
+import java.security.NoSuchAlgorithmException;
+
 import by.htp6.hospital.bean.User;
 import by.htp6.hospital.dao.UserLogInDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.factory.DAOFactory;
 import by.htp6.hospital.service.LogInService;
 import by.htp6.hospital.service.exception.ServiceException;
+import by.htp6.hospital.utility.MD5Encryptor;
 
 public class LogIn implements LogInService{
 
@@ -26,10 +29,13 @@ public class LogIn implements LogInService{
 		User user;
 		
 		try {
-			user = userLoginationDao.logination(username, password);
+			String encryptedPassword = MD5Encryptor.getHashCode(password);
+			user = userLoginationDao.logination(username, encryptedPassword);
 			return user;
 			
 		} catch (DAOException e) {
+			throw new ServiceException(e);
+		} catch (NoSuchAlgorithmException e) {
 			throw new ServiceException(e);
 		}
 	}

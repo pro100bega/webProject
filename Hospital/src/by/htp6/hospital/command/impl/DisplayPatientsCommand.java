@@ -20,6 +20,7 @@ public class DisplayPatientsCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("tut2");
 		HttpSession session = request.getSession(false);
 		
 		// if patient list does not exist in session scope
@@ -30,7 +31,7 @@ public class DisplayPatientsCommand implements Command {
 				PatientTransmitorService patientTransmitor = serviceFactory.getPatientTransmitor();
 				List<Patient> patients = patientTransmitor.transmitPatient(doctorId);
 				session.setAttribute("patients", patients);
-				String url = "WEB-INF/doctor/doctorPanel.jsp";
+				String url = "doctor/doctorPanel.jsp";
 				RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 				dispatcher.forward(request, response);
 			} 
@@ -43,7 +44,9 @@ public class DisplayPatientsCommand implements Command {
 		}
 		// if patient list already exists in session scope
 		else {
-			
+			String url = "doctor/doctorPanel.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+			dispatcher.forward(request, response);
 		}
 	}
 

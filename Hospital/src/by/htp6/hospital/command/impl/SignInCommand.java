@@ -34,19 +34,6 @@ public class SignInCommand implements Command{
 			session.setAttribute("authorisedUser", user);
 			
 			String url = "index.jsp";
-			
-//			switch(user.getType()){
-//			case "guest":
-//				url = "index.jsp";
-//				break;
-//			case "doctor":
-//				url = "doctor/doctorPanel.jsp";
-//				break;
-//			case "admin":
-//				url = "administrator/administrationPanel.jsp";
-//				break;
-//			}
-			
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 			
