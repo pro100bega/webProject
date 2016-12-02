@@ -1,109 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<fmt:setLocale value="${sessionScope.localeName}"/>
-<fmt:setBundle basename="resources.localization" var="local"/>
-<fmt:message bundle="${local}" key="navbar.projectName" var="projectName"/>
-<fmt:message bundle="${local}" key="navbar.home" var="home"/>
-<fmt:message bundle="${local}" key="navbar.about" var="about"/>
-<fmt:message bundle="${local}" key="navbar.contact" var="contact"/>
-<fmt:message bundle="${local}" key="navbar.adminPanel" var="admin"/>
-<fmt:message bundle="${local}" key="navbar.doctorPanel" var="doctorPanel"/>
-<fmt:message bundle="${local}" key="message.welcome" var="welcomeMessage"/>
-<fmt:message bundle="${local}" key="button.signIn" var="signInButton"/>
-<fmt:message bundle="${local}" key="button.signUp" var="signUpButton"/>
-<fmt:message bundle="${local}" key="button.signOut" var="signOutButton"/>
-<fmt:message bundle="${local}" key="title.home" var="homeTitle"/>
+<%@include file="elements/index/e_localeMessages.jsp"%>
 
 <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/starter-template.css">
-<link rel="stylesheet"
-	href="css/bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/signin.css">
 
-<link rel="shortcut icon" href="hospital.ico" type="image/x-icon">
-<title><c:out value="${homeTitle}"></c:out> </title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<title><c:out value="${homeTitle}"></c:out></title>
 </head>
 <body>
-
-	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#"><c:out value="${projectName}"></c:out></a>
-			</div>
-			<div class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#"><c:out value="${home}"></c:out></a></li>
-					<li><a href="#about"><c:out value="${about}"></c:out></a></li>
-					<li><a href="#contact"><c:out value="${contact}"></c:out></a></li>
-					<c:if test="${sessionScope.authorisedUser.type eq 'admin'}">
-					<li><a href="administrator/administrationPanel.jsp">
-					<c:out value="${admin}"></c:out></a></li>
-					</c:if>
-					<c:if test="${sessionScope.authorisedUser.type eq 'doctor'}">
-					<li><a 
-					href="controller?doctorId=${sessionScope.authorisedUser.id}&command=DISPLAY_PATIENTS">
-					<c:out value="${doctorPanel}"></c:out></a></li>
-					</c:if>
-				</ul>
-				<form class="navbar-nav navbar-right" action="controller"
-					method="post">
-					<input type="hidden" name="command" value="SET_LOCALE">
-					<input type="hidden" name="localeName" value="ru_RU">
-					<input type="hidden" name="lastPage" value="index.jsp">
-					<button type="submit" class="btn btn-xs btn-default">ru</button>
-				</form>
-				
-				<form class="navbar-nav navbar-right" 
-							action="controller?command=SET_LOCALE&localeName=en_US"	method="get">
-					<input type="hidden" name="lastPage" value="index.jsp">
-					<button type="submit" class="btn btn-xs btn-default">en</button>
-				</form>
-				
-				<c:if test="${sessionScope.authorisedUser eq null}">
-
-					<form class="navbar-form navbar-right" action="signIn.jsp"
-						method="post">
-						<button type="submit" class="btn btn btn-success">
-						<c:out value="${signInButton}"></c:out></button>
-					</form>
-					<form class="navbar-form navbar-right" action="signUp.jsp"
-						method="post">
-						<button type="submit" class="btn btn btn-primary">
-							<c:out value="${signUpButton}"></c:out></button>
-					</form>
-				</c:if>
-				<c:if test="${not(sessionScope.authorisedUser eq null)}">
-					<form class="navbar-form navbar-right" action="controller" method="post">
-						<input type="hidden" name="command" value="SIGN_OUT">
-						<input type="hidden" name="lastPage" value="index.jsp">
- 						<c:out value="${sessionScope.authorisedUser.username}"></c:out>
-						<button type="submit" class="btn btn btn-danger">
-							<c:out value="${signOutButton}"></c:out></button>	
-					</form>
-				</c:if>
-			</div>
-			<!--/.nav-collapse -->
-		</div>
-	</div>
-
+	<div class="background-image"></div>
+	<%@include file="elements/index/e_navbar.jsp"%>
 	<div class="container">
-
 		<div class="starter-template">
-			<h1><c:out value="${welcomeMessage}"></c:out></h1>
+			<h1>
+				<c:out value="${welcomeMessage}"></c:out>
+			</h1>
+			<c:if test="${sessionScope.authorisedUser eq null}">
+				<form action="controller" class="form-signin" method="post">
+					<c:if test="${requestScope.error eq null}">
+						<h2 class="form-signin-heading">
+							<c:out value="${signInHeading}"></c:out>
+						</h2>
+					</c:if>
+					<c:if test="${requestScope.error eq true}">
+						<div class="alert alert-danger">
+							<strong><c:out value="${signInError}"></c:out></strong>
+						</div>
+					</c:if>
+					<input type="hidden" name="command" value="SIGN_IN"> <input
+						type="text" class="form-control" name="username"
+						placeholder="${usernamePlaceholder}" required
+						pattern="[0-9a-zA-Z_]{6,20}"> <input type="password"
+						class="form-control" name="password"
+						placeholder="${passwordPlaceholder}" required
+						pattern="[0-9a-zA-Z]{6,20}"> <input type="submit"
+						class="btn btn-lg btn-success btn-block" value="${signInButton}">
+				</form>
+			</c:if>
 			<p class="lead"></p>
 		</div>
-
 	</div>
 	<!-- /.container -->
 </body>

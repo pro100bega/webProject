@@ -1,7 +1,7 @@
 package by.htp6.hospital.dao.impl;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,12 +19,12 @@ public class SQLPatientListDAO implements PatientListDAO{
 			ConnectionPool connectionPool = ConnectionPool.getInstance();
 			Connection connection = connectionPool.take();
 			try {
-				String query = "SELECT * FROM patient WHERE doctor_id = ?";
-				PreparedStatement preparedStatement = connection.prepareStatement(query);
+				String query = "CALL select_patient_by_doctor_id(?)";
+				CallableStatement callableStatement = connection.prepareCall(query);
 				String doctorIdString = "" + doctorId;
-				preparedStatement.setString(1, doctorIdString);
+				callableStatement.setString(1, doctorIdString);
 				
-				ResultSet resultSet = preparedStatement.executeQuery();
+				ResultSet resultSet = callableStatement.executeQuery();
 				List<Patient> patients = new ArrayList<>();
 				while (resultSet.next()){
 					int id = resultSet.getInt("id");

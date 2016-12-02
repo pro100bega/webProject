@@ -20,7 +20,6 @@ public class DisplayPatientsCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("tut2");
 		HttpSession session = request.getSession(false);
 		
 		// if patient list does not exist in session scope

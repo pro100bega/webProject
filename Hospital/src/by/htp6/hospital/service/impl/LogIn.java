@@ -1,14 +1,15 @@
 package by.htp6.hospital.service.impl;
 
 import java.security.NoSuchAlgorithmException;
-
+import java.util.regex.Matcher;
 import by.htp6.hospital.bean.User;
 import by.htp6.hospital.dao.UserLogInDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.factory.DAOFactory;
 import by.htp6.hospital.service.LogInService;
 import by.htp6.hospital.service.exception.ServiceException;
-import by.htp6.hospital.utility.MD5Encryptor;
+import by.htp6.hospital.tools.MD5Encryptor;
+import by.htp6.hospital.tools.PatternContainer;
 
 public class LogIn implements LogInService{
 
@@ -20,6 +21,16 @@ public class LogIn implements LogInService{
 		
 		if ("".equals(username) || "".equals(password)){
 			throw new ServiceException("Username or password can`t be empty");
+		}
+		
+		Matcher matcher = PatternContainer.usernamePattern.matcher(username);
+		if (!matcher.find()){
+			throw new ServiceException("Username must contain only [A-Z],[a-z],[0-9] symbols");
+		}
+		
+		matcher = PatternContainer.passwordPattern.matcher(password);
+		if (!matcher.find()){
+			throw new ServiceException("Password must contain only [A-Z],[a-z],[0-9] symbols");
 		}
 		
 		DAOFactory daoFactory = DAOFactory.getInstance();

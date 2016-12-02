@@ -1,12 +1,14 @@
 package by.htp6.hospital.command;
 
 import java.util.HashMap;
-import java.util.Map;
 
+import java.util.Map;
 import by.htp6.hospital.command.impl.SignUpCommand;
 import by.htp6.hospital.command.impl.SignInCommand;
 import by.htp6.hospital.command.impl.SignOutCommand;
+import by.htp6.hospital.command.impl.DischargePatientCommand;
 import by.htp6.hospital.command.impl.DisplayPatientsCommand;
+import by.htp6.hospital.command.impl.FindPatientCommand;
 import by.htp6.hospital.command.impl.SetLocaleCommand;
 
 public class CommandProvider {
@@ -20,6 +22,8 @@ public class CommandProvider {
 		commands.put("SIGN_OUT", new SignOutCommand());
 		commands.put("SET_LOCALE", new SetLocaleCommand());
 		commands.put("DISPLAY_PATIENTS", new DisplayPatientsCommand());
+		commands.put("DISCHARGE_PATIENT", new DischargePatientCommand());
+		commands.put("FIND_PATIENT", new FindPatientCommand());
 
 	}
 	

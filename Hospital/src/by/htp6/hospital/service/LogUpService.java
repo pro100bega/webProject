@@ -4,5 +4,5 @@ import by.htp6.hospital.bean.User;
 import by.htp6.hospital.service.exception.ServiceException;
 
 public interface LogUpService {
-	User book(String username, String password) throws ServiceException;
+	User logUp(String username, String password, String userType) throws ServiceException;
 }

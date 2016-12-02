@@ -1,4 +1,4 @@
-package by.htp6.hospital.utility;
+package by.htp6.hospital.tools;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

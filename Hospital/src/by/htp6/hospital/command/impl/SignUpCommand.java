@@ -21,13 +21,14 @@ public class SignUpCommand implements Command{
 				
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String userType = request.getParameter("userType");
 		
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		LogUpService bookUserService = serviceFactory.getLogUpUser();
+		LogUpService logUpUserService = serviceFactory.getLogUpUser();
 		
 		User user = null;
 		try {
-			user = bookUserService.book(username, password);
+			user = logUpUserService.logUp(username, password, userType);
 			request.setAttribute("user", user);
 			
 			String url = "WEB-INF/signUpSuccess.jsp";
@@ -35,7 +36,8 @@ public class SignUpCommand implements Command{
 			dispatcher.forward(request, response);
 			
 		} catch (ServiceException e) {
-			String url = "error.jsp";
+			String url = "signUp.jsp";
+			request.setAttribute("error", "true");
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 		}

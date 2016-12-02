@@ -38,7 +38,8 @@ public class SignInCommand implements Command{
 			dispatcher.forward(request, response);
 			
 		} catch (ServiceException e) {
-			String url = "error.jsp";
+			String url = "index.jsp";
+			request.setAttribute("error", "true");
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 		}

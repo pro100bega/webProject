@@ -17,7 +17,7 @@ public class SignOutCommand implements Command{
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		String url = request.getParameter("lastPage");
+		String url = "index.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}
