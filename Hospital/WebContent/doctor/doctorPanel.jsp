@@ -7,12 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<%@include file="../elements/doctor/e_localeMessages.jsp" %>
+<%@include file="../elements/doctor/e_localeMessages.jsp"%>
 
 <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/starter-template.css">
 <link rel="stylesheet" href="css/bootstrap/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="content/theme.css">
 
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
@@ -23,9 +22,44 @@
 	<%@include file="../elements/doctor/e_navbar.jsp"%>
 	<div class="container">
 		<div class="row">
+			<div class="col-sm-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<c:out value="${newPatientHeading}">
+							</c:out>
+						</h3>
+					</div>
+					<div class="panel-body">
+						<form action="controller" method="post">
+							<input type="hidden" name="command" value="ADD_NEW_PATIENT">
+							<p>
+								<c:out value="${nameMessage}"></c:out>
+								<br /> <input type="text" name="name"
+									placeholder="${nameMessage}">
+							</p>
+							<p>
+								<c:out value="${surnameMessage}"></c:out>
+								<br /> <input type="text" name="surname"
+									placeholder="${surnameMessage}">
+							</p>
+							<p>
+								<c:out value="${diagnosisMessage}"></c:out>
+								<br />
+								<textarea name="diagnosis"
+									placeholder="${diagnosisMessage}" required rows="2" cols="30"
+									maxlength=60></textarea>
+							</p>
+							<button type="submit" class="btn btn btn-success">
+								<c:out value="${addNewPatientButton}"></c:out>
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
 			<c:forEach var="patient" items="${sessionScope.patients}">
-				<div class="col-sm-4">
-					<div class="panel panel-success">
+				<div class="col-sm-6">
+					<div class="panel panel-info">
 						<div class="panel-heading">
 							<h3 class="panel-title">
 								<c:out value="${patientInfo}: ${patient.id}">

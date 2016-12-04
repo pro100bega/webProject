@@ -23,7 +23,7 @@
 </head>
 <body>
 	<div class="container">
-	<form action="controller" class="form-signin" method="post">
+	<form action="controller" class="form-signin" method="get">
 		<c:if test="${requestScope.error eq null}">
 			<h2 class="form-signin-heading"><c:out value="${signInHeading}"></c:out> </h2>
 		</c:if>	

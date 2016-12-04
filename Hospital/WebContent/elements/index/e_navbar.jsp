@@ -48,7 +48,7 @@
 			</c:if>
 			<c:if test="${not(sessionScope.authorisedUser eq null)}">
 				<form class="navbar-form navbar-right" action="controller"
-					method="post">
+					method="get">
 					<input type="hidden" name="command" value="SIGN_OUT">
 					<span style="color:#9e9e9e;">
 					<c:out value="${sessionScope.authorisedUser.username}"></c:out>

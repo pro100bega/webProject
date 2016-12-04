@@ -1,10 +1,12 @@
 package by.htp6.hospital.dao.factory;
 
+import by.htp6.hospital.dao.AddNewPatientDAO;
 import by.htp6.hospital.dao.DischargePatientDAO;
 import by.htp6.hospital.dao.FindPatientDAO;
 import by.htp6.hospital.dao.PatientListDAO;
 import by.htp6.hospital.dao.UserLogInDAO;
 import by.htp6.hospital.dao.UserLogUpDAO;
+import by.htp6.hospital.dao.impl.SQLAddNewPatientDAO;
 import by.htp6.hospital.dao.impl.SQLDischargePatientDAO;
 import by.htp6.hospital.dao.impl.SQLFindPatientDAO;
 import by.htp6.hospital.dao.impl.SQLPatientListDAO;
@@ -23,6 +25,8 @@ public class DAOFactory {
 	private DischargePatientDAO dischargePatientDAO = new SQLDischargePatientDAO();
 	
 	private FindPatientDAO findPatientDAO = new SQLFindPatientDAO();
+	
+	private AddNewPatientDAO addNewPatientDAO = new SQLAddNewPatientDAO();
 
 	public UserLogInDAO getUserLoginationDAO() {
 		return this.userLoginationDAO;
@@ -42,6 +46,10 @@ public class DAOFactory {
 	
 	public FindPatientDAO getFindPatientDAO() {
 		return this.findPatientDAO;
+	}
+	
+	public AddNewPatientDAO getAddNewPatientDAO() {
+		return this.addNewPatientDAO;
 	}
 	
 	private DAOFactory() {

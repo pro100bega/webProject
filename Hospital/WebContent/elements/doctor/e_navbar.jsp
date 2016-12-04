@@ -22,18 +22,18 @@
 				<li><a href="index.jsp"><c:out value="${home}"></c:out></a></li>
 				<li><a href="#about"><c:out value="${about}"></c:out></a></li>
 				<li><a href="#contact"><c:out value="${contact}"></c:out></a></li>
-				<li class="active"><a href="doctor/redirection.jsp"> <c:out
+				<li class="active"><a href="#"> <c:out
 							value="${doctorPanel}"></c:out></a></li>
 			</ul>
 			<form class="navbar-nav navbar-right" action="controller"
-				method="post">
+				method="get">
 				<input type="hidden" name="command" value="SET_LOCALE"> <input
 					type="hidden" name="localeName" value="ru_RU"> <input
 					type="hidden" name="redirect" value="doctor/redirection.jsp">
 				<button type="submit" class="btn btn-xs btn-default">ru</button>
 			</form>
 			<form class="navbar-nav navbar-right" action="controller"
-				method="post">
+				method="get">
 				<input type="hidden" name="command" value="SET_LOCALE"> <input
 					type="hidden" name="localeName" value="en_US"> <input
 					type="hidden" name="redirect" value="doctor/redirection.jsp">
@@ -44,6 +44,11 @@
 				<input type="hidden" name="command" value="FIND_PATIENT">
 				<input type="text" class="form-control" name="searchData"
 					placeholder="${searchPlaceholder}" value="${requestScope.searchData}">
+			</form>
+			<form action="newPatient.jsp" method="get">
+				<button type="submit" class="btn btn btn-success">
+					<c:out value="${newPatientButton}"></c:out>
+				</button>
 			</form>
 			<form class="navbar-form navbar-right" action="controller"
 				method="post">

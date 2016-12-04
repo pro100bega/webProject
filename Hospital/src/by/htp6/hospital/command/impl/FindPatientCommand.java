@@ -29,12 +29,13 @@ public class FindPatientCommand implements Command {
 			int doctorId = user.getId();
 
 			ServiceFactory serviceFactory = ServiceFactory.getInstance();
-			FindPatientService findPatientService = serviceFactory.getFindPatientService();
+			FindPatientService findPatientService = serviceFactory.getFindPatient();
 
 			try {
 				List<Patient> patients = findPatientService.findPatients(searchData, doctorId);
 				session.setAttribute("foundPatients", patients);
-				String url = "doctor/foundPatients.jsp?searchData=" + searchData;
+				request.setAttribute("searchData", searchData);
+				String url = "doctor/foundPatients.jsp";
 				RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 				dispatcher.forward(request, response);
 			} catch (ServiceException e) {

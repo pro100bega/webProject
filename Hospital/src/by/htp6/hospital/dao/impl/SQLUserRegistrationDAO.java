@@ -16,6 +16,7 @@ import by.htp6.hospital.dao.pool.ConnectionPool;
 
 public class SQLUserRegistrationDAO implements UserLogUpDAO {
 	private static final Logger log = LogManager.getLogger(SQLUserRegistrationDAO.class.getName());
+	
 	@Override
 	public User registration(String username, String password, String userType) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -71,7 +72,7 @@ public class SQLUserRegistrationDAO implements UserLogUpDAO {
 				return (answer.equals("yes")) ? true : false;
 			} else {
 				callableStatement.close();
-				throw new DAOException();
+				throw new DAOException("Database error");
 			}
 		} catch (SQLException e) {
 			log.error(e.getMessage());

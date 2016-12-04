@@ -6,6 +6,7 @@ import java.util.Map;
 import by.htp6.hospital.command.impl.SignUpCommand;
 import by.htp6.hospital.command.impl.SignInCommand;
 import by.htp6.hospital.command.impl.SignOutCommand;
+import by.htp6.hospital.command.impl.AddNewPatientCommand;
 import by.htp6.hospital.command.impl.DischargePatientCommand;
 import by.htp6.hospital.command.impl.DisplayPatientsCommand;
 import by.htp6.hospital.command.impl.FindPatientCommand;
@@ -24,6 +25,7 @@ public class CommandProvider {
 		commands.put("DISPLAY_PATIENTS", new DisplayPatientsCommand());
 		commands.put("DISCHARGE_PATIENT", new DischargePatientCommand());
 		commands.put("FIND_PATIENT", new FindPatientCommand());
+		commands.put("ADD_NEW_PATIENT", new AddNewPatientCommand());
 
 	}
 	

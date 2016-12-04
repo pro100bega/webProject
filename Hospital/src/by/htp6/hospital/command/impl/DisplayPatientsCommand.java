@@ -1,6 +1,7 @@
 package by.htp6.hospital.command.impl;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -29,6 +30,7 @@ public class DisplayPatientsCommand implements Command {
 				ServiceFactory serviceFactory = ServiceFactory.getInstance();
 				PatientTransmitorService patientTransmitor = serviceFactory.getPatientTransmitor();
 				List<Patient> patients = patientTransmitor.transmitPatient(doctorId);
+				Collections.reverse(patients);
 				session.setAttribute("patients", patients);
 				String url = "doctor/doctorPanel.jsp";
 				RequestDispatcher dispatcher = request.getRequestDispatcher(url);

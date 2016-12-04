@@ -24,3 +24,6 @@
 <fmt:message bundle="${local}" key="message.name" var="nameMessage" />
 <fmt:message bundle="${local}" key="message.surname" var="surnameMessage" />
 <fmt:message bundle="${local}" key="message.diagnosis" var="diagnosisMessage" />
+<fmt:message bundle="${local}" key="button.addNewPatient" var="addNewPatientButton" />
+<fmt:message bundle="${local}" key="heading.newPatient" var="newPatientHeading" />
+<fmt:message bundle="${local}" key="button.newPatient" var="newPatientButton" />

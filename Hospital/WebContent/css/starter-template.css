@@ -39,3 +39,7 @@ footer {
     z-index: -100;
     border-bottom: solid 5px;
 }
+
+.row {
+	top: 60px;
+}
