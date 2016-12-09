@@ -31,7 +31,7 @@ footer {
 
 .background-image {
 
-    height: 400px;
+    height: 450px;
     background-image: url('images/hospital-background.jpg');
     width: 100%;
     position: absolute;
@@ -42,4 +42,12 @@ footer {
 
 .row {
 	top: 60px;
+}
+
+dt {
+	font-size: 17px;
+}
+
+dd {
+	font-size: 15px;
 }

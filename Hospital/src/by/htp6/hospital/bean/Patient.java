@@ -85,7 +85,4 @@ public class Patient implements Serializable {
 		this.diagnosis = diagnosis;
 		this.doctorId = doctorId;
 	}
-	
-	
-	
 }

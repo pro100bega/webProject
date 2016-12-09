@@ -8,7 +8,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <%@include file="../elements/doctor/e_localeMessages.jsp"%>
-
+<script src="scripts/jquery-3.1.1.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$(".row").fadeIn(1500);
+	});
+</script>
 <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/starter-template.css">
 <link rel="stylesheet" href="css/bootstrap/css/bootstrap-theme.min.css">
@@ -22,10 +27,10 @@
 
 	<%@include file="../elements/doctor/e_navbar.jsp"%>
 	<div class="container">
-		<div class="row">
+		<div class="row" style="display:none;">
 			<c:forEach var="patient" items="${sessionScope.foundPatients}">
 				<div class="col-sm-4">
-					<div class="panel panel-success">
+					<div class="panel panel-info">
 						<div class="panel-heading">
 							<h3 class="panel-title">
 								<c:out value="${patientInfo} ${patient.id}">

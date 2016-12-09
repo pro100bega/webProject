@@ -19,7 +19,7 @@ public class AddNewPatientCommand implements Command{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession(true);
 		
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
@@ -34,10 +34,11 @@ public class AddNewPatientCommand implements Command{
 		try {
 			addNewPatientService.addNewPatient(name, surname, diagnosis, doctorId);
 			session.removeAttribute("patients");
-			response.sendRedirect("doctor/redirection.jsp");
+			String url = "doctor/success.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+			dispatcher.forward(request, response);
 		} catch (ServiceException e) {
-			request.setAttribute("error", "true");
-			String url = "doctor/doctorPanel.jsp";
+			String url = "doctor/error.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 		}

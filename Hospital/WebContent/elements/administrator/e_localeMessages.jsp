@@ -11,23 +11,19 @@
 <fmt:message bundle="${local}" key="navbar.home" var="home" />
 <fmt:message bundle="${local}" key="navbar.about" var="about" />
 <fmt:message bundle="${local}" key="navbar.contact" var="contact" />
-<fmt:message bundle="${local}" key="navbar.doctorPanel"
-	var="doctorPanel" />
-<fmt:message bundle="${local}" key="title.doctorPanel" var="doctorPanelTitle" />
-
+<fmt:message bundle="${local}" key="navbar.adminPanel"
+	var="adminPanel" />
 <fmt:message bundle="${local}" key="title.error" var="errorTitle" />
-<fmt:message bundle="${local}" key="placeholder.finalDiagnosis" var="finalDiagnosis" />
+<fmt:message bundle="${local}" key="title.adminPanel" var="adminPanelTitle" />
 <fmt:message bundle="${local}" key="placeholder.search" var="searchPlaceholder" />
 <fmt:message bundle="${local}" key="message.patientInfo" var="patientInfo" />
 <fmt:message bundle="${local}" key="message.name" var="nameMessage" />
 <fmt:message bundle="${local}" key="message.surname" var="surnameMessage" />
 <fmt:message bundle="${local}" key="message.diagnosis" var="diagnosisMessage" />
-<fmt:message bundle="${local}" key="message.sortByName" var="sortByNameMessage" />
-<fmt:message bundle="${local}" key="message.sortBySurname" var="sortBySurnameMessage" />
-<fmt:message bundle="${local}" key="message.sortByDiagnosis" var="sortByDiagnosisMessage" />
+<fmt:message bundle="${local}" key="message.databaseLog" var="databaseLogMessage" />
+<fmt:message bundle="${local}" key="message.userList" var="userListMessage" />
+<fmt:message bundle="${local}" key="message.doctorList" var="doctorListMessage" />
+<fmt:message bundle="${local}" key="message.nurseList" var="nurseListMessage" />
 <fmt:message bundle="${local}" key="button.signOut" var="signOutButton" />
-<fmt:message bundle="${local}" key="button.newPatient" var="newPatientButton" />
-<fmt:message bundle="${local}" key="button.discharge" var="dischargeButton" />
-<fmt:message bundle="${local}" key="button.edit" var="editButton" />
-<fmt:message bundle="${local}" key="error.discharge" var="dischargeError" />
-
+<fmt:message bundle="${local}" key="button.newDoctor" var="newDoctorButton"/>
+<fmt:message bundle="${local}" key="button.addNewDoctor" var="addNewDoctorButton"/>

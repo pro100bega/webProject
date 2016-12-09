@@ -17,12 +17,10 @@ public class SetLocaleCommand implements Command {
 		HttpSession session = request.getSession(true);		
 		switch(locale){
 			case "ru_RU":
-				session = request.getSession(true);
 				session.setAttribute("localeName", "ru_RU");
 				response.sendRedirect(redirect);
 				break;
 			case "en_US":
-				session = request.getSession(true);
 				session.setAttribute("localeName", "en_US");
 				response.sendRedirect(redirect);
 				break;

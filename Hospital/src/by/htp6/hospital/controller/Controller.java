@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import by.htp6.hospital.command.Command;
 import by.htp6.hospital.command.CommandProvider;
 
@@ -31,6 +32,7 @@ public class Controller extends HttpServlet {
 		CommandProvider commandProvider = CommandProvider.getInstance();
 		String commandName = request.getParameter("command");
 		Command command = commandProvider.getCommand(commandName);
+		
 		command.execute(request, response);
 	}
 

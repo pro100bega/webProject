@@ -20,7 +20,15 @@
 <c:if test="${requestScope.error eq true}">
 	<fmt:message bundle="${local}" key="error.signUp" var="signUpError"/>
 </c:if>
-
+<script src="scripts/jquery-3.1.1.js"></script>
+<script src="scripts/jquery.validate.min.js"></script>
+<script src="scripts/validation.js"></script>
+<c:if test="${sessionScope.localeName eq null}">
+	<script src="scripts/messages_ru.js"></script>
+</c:if>
+<c:if test="${sessionScope.localeName eq 'ru_RU'}">
+	<script src="scripts/messages_ru.js"></script>
+</c:if>
 
 <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/signin.css">
@@ -41,10 +49,15 @@
 		</c:if>
 		<input type="hidden" name="command" value="SIGN_UP">
 		<input type="hidden" name="userType" value="guest">
+		<label><c:out value="${usernameMessage}"></c:out></label>
 		<input type="text" class="form-control" name="username"
-		 			placeholder="${usernamePlaceholder}" required pattern="[0-9a-zA-Z_]{6,20}">
-		<input type="password" class="form-control" name="password"
-					placeholder="${passwordPlaceholder}" required pattern="[0-9a-zA-Z]{6,20}">
+		 			placeholder="${usernamePlaceholder}">
+		<label><c:out value="${passwordMessage}"></c:out></label>
+		<input type="password" id="password" class="form-control" name="password"
+					placeholder="${passwordPlaceholder}">
+		<label><c:out value="${confirmPasswordMessage}"></c:out></label>
+		<input type="password" class="form-control" name="passwordConfirm"
+					placeholder="${passwordConfirmPlaceholder}">
 		<input type="submit" class="btn btn-lg btn-primary btn-block" value="${signUpButton}">
 	</form>
 	</div>

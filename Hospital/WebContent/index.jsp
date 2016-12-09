@@ -10,7 +10,20 @@
 <link rel="stylesheet" href="css/starter-template.css">
 <link rel="stylesheet" href="css/bootstrap/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="css/signin.css">
-
+<script src="scripts/jquery-3.1.1.js"></script>
+<script src="scripts/jquery.validate.min.js"></script>
+<script src="scripts/validation.js"></script>
+<c:if test="${sessionScope.localeName eq null}">
+	<script src="scripts/messages_ru.js"></script>
+</c:if>
+<c:if test="${sessionScope.localeName eq 'ru_RU'}">
+	<script src="scripts/messages_ru.js"></script>
+</c:if>
+<script type="text/javascript">
+			$(function() {
+				$('.form-signin').fadeIn(1000);
+			});
+		</script>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <title><c:out value="${homeTitle}"></c:out></title>
 </head>
@@ -23,7 +36,8 @@
 				<c:out value="${welcomeMessage}"></c:out>
 			</h1>
 			<c:if test="${sessionScope.authorisedUser eq null}">
-				<form action="controller" class="form-signin" method="post">
+				<form action="controller" class="form-signin" method="post"
+					style="display:none;">
 					<c:if test="${requestScope.error eq null}">
 						<h2 class="form-signin-heading">
 							<c:out value="${signInHeading}"></c:out>
@@ -48,5 +62,7 @@
 		</div>
 	</div>
 	<!-- /.container -->
+	<div class="container">
+	</div>
 </body>
 </html>

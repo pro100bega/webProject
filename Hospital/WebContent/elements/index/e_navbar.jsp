@@ -23,6 +23,10 @@
 					<li><a href="doctor/redirection.jsp"> <c:out
 								value="${doctorPanel}"></c:out></a></li>
 				</c:if>
+				<c:if test="${sessionScope.authorisedUser.type eq 'admin'}">
+					<li><a href="administrator/redirection.jsp"> <c:out
+								value="${adminPanel}"></c:out></a></li>
+				</c:if>
 			</ul>
 			<form class="navbar-nav navbar-right" action="controller"
 				method="get">

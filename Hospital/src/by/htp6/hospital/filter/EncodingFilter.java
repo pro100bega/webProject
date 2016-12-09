@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebFilter;
 
 @WebFilter("/*")
 public class EncodingFilter implements Filter {
-	private static final String encoding = "utf-8";
+	private static final String encoding = "UTF-8";
 	
     public EncodingFilter() {
     }

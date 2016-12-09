@@ -2,13 +2,17 @@ package by.htp6.hospital.service.factory;
 
 import by.htp6.hospital.service.LogUpService;
 import by.htp6.hospital.service.PatientTransmitorService;
+import by.htp6.hospital.service.SortPatientsService;
 import by.htp6.hospital.service.AddNewPatientService;
+import by.htp6.hospital.service.AssignProcedureService;
 import by.htp6.hospital.service.DischargePatientService;
 import by.htp6.hospital.service.FindPatientService;
 import by.htp6.hospital.service.LogInService;
 import by.htp6.hospital.service.impl.LogUp;
 import by.htp6.hospital.service.impl.PatientTransmitor;
+import by.htp6.hospital.service.impl.SortPatients;
 import by.htp6.hospital.service.impl.AddNewPatient;
+import by.htp6.hospital.service.impl.AssignProcedure;
 import by.htp6.hospital.service.impl.DischargePatient;
 import by.htp6.hospital.service.impl.FindPatient;
 import by.htp6.hospital.service.impl.LogIn;
@@ -27,6 +31,10 @@ public class ServiceFactory {
 	private FindPatientService findPatient = new FindPatient();
 	
 	private AddNewPatientService addNewPatient = new AddNewPatient();
+	
+	private SortPatientsService sortPatients = new SortPatients();
+	
+	private AssignProcedureService assignProcedure = new AssignProcedure();
 
 	public LogInService getLoginUser() {
 		return this.logIn;
@@ -50,6 +58,14 @@ public class ServiceFactory {
 	
 	public AddNewPatientService getAddNewPatient() {
 		return this.addNewPatient;
+	}
+	
+	public SortPatientsService getSortPatients() {
+		return this.sortPatients;
+	}
+	
+	public AssignProcedureService getAssignProcedure() {
+		return this.assignProcedure;
 	}
 
 	private ServiceFactory() {
