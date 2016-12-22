@@ -19,4 +19,20 @@ public class PatternContainer {
 	public static final Pattern patientNamePattern = 
 			Pattern.compile("^[А-Яа-я]{1,20}$|^[A-Za-z]{1,20}$");
 	
+	//Log search format pattern
+	public static final Pattern logSearchPattern =
+			Pattern.compile("^[A-Za-z0-9\\._: ]{1,18}$");
+	
+	//Ru date format pattern
+	public static final Pattern enDateFormatPattern =
+			Pattern.compile("^(19|20)\\d\\d-((0[1-9]|1[012])-"
+					+ "(0[1-9]|[12]\\d)|(0[13-9]|1[012])-30|(0[13578]|1[02])-31)$");
+	
+	//En date format pattern
+	public static final Pattern ruDateFormatPattern = 
+			Pattern.compile("((0[1-9]|[12]\\d)\\.(0[1-9]|1[012])|30\\.(0[13-9]|1[012])"
+					+ "|31\\.(0[13578]|1[02]))\\.(19|20)\\d\\d");
+	
+	public static final Pattern notePatern =
+			Pattern.compile("^[А-Яа-я0-9\\. -,]{0,100}");
 }

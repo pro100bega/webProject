@@ -20,9 +20,11 @@ public class AddNewPatientCommand implements Command{
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
-		
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
+		char sex = request.getParameter("sex").charAt(0);
+		String birthDate = request.getParameter("birthDate");
+		String note = request.getParameter("note");
 		String diagnosis = request.getParameter("diagnosis");
 		
 		User doctor = (User)session.getAttribute("authorisedUser");
@@ -32,7 +34,8 @@ public class AddNewPatientCommand implements Command{
 		AddNewPatientService addNewPatientService = serviceFactory.getAddNewPatient();
 		
 		try {
-			addNewPatientService.addNewPatient(name, surname, diagnosis, doctorId);
+			addNewPatientService.addNewPatient(name, surname, sex, birthDate,
+					diagnosis, doctorId, note);
 			session.removeAttribute("patients");
 			String url = "doctor/success.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);

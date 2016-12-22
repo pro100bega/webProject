@@ -1,17 +1,20 @@
 package by.htp6.hospital.command;
 
 import java.util.HashMap;
-
 import java.util.Map;
+
 import by.htp6.hospital.command.impl.SignUpCommand;
-import by.htp6.hospital.command.impl.SortPatientsCommand;
 import by.htp6.hospital.command.impl.SignInCommand;
 import by.htp6.hospital.command.impl.SignOutCommand;
 import by.htp6.hospital.command.impl.AddNewPatientCommand;
-import by.htp6.hospital.command.impl.AssignProcedureCommand;
+import by.htp6.hospital.command.impl.AddAddpointmentCommand;
 import by.htp6.hospital.command.impl.DischargePatientCommand;
-import by.htp6.hospital.command.impl.DisplayPatientsCommand;
+import by.htp6.hospital.command.impl.GetPatientListCommand;
+import by.htp6.hospital.command.impl.FindLogCommand;
 import by.htp6.hospital.command.impl.FindPatientCommand;
+import by.htp6.hospital.command.impl.GetAdministratorInfoCommand;
+import by.htp6.hospital.command.impl.GetAppointmentListCommand;
+import by.htp6.hospital.command.impl.PerformAppointmentCommand;
 import by.htp6.hospital.command.impl.SetLocaleCommand;
 
 public class CommandProvider {
@@ -24,13 +27,15 @@ public class CommandProvider {
 		commands.put("SIGN_UP", new SignUpCommand());
 		commands.put("SIGN_OUT", new SignOutCommand());
 		commands.put("SET_LOCALE", new SetLocaleCommand());
-		commands.put("DISPLAY_PATIENTS", new DisplayPatientsCommand());
+		commands.put("GET_PATIENT_LIST", new GetPatientListCommand());
 		commands.put("DISCHARGE_PATIENT", new DischargePatientCommand());
 		commands.put("FIND_PATIENT", new FindPatientCommand());
 		commands.put("ADD_NEW_PATIENT", new AddNewPatientCommand());
-		commands.put("SORT_PATIENTS", new SortPatientsCommand());
-		commands.put("ASSIGN_PROCEDURE", new AssignProcedureCommand());
-
+		commands.put("GET_ADMIN_INFO", new GetAdministratorInfoCommand());
+		commands.put("FIND_LOG", new FindLogCommand());
+		commands.put("GET_APPOINTMENTS", new GetAppointmentListCommand());
+		commands.put("ADD_APPOINTMENT", new AddAddpointmentCommand());
+		commands.put("PERFORM_APPOINTMENT", new PerformAppointmentCommand());
 	}
 	
 	public static CommandProvider getInstance(){

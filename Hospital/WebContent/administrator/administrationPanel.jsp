@@ -7,15 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="../elements/administrator/e_localeMessages.jsp"%>
 
-<script src="../scripts/jquery-3.1.1.js"></script>
+<script src="scripts/jquery-3.1.1.js"></script>
 
-<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.css">
-<link rel="stylesheet" href="../css/starter-template.css">
-<link rel="stylesheet"
-	href="../css/bootstrap/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="../css/dashboard.css">
+<link rel="stylesheet" href="css/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="css/starter-template.css">
+<link rel="stylesheet" href="css/bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/dashboard.css">
 
-<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <title>${adminPanelTitle}</title>
 </head>
 <body>
@@ -46,25 +45,28 @@
 				</h2>
 				<div class="panel panel-default">
 					<table class="table">
-						<thead class="thead-inverse">
+						<thead>
 							<tr>
-								<td>1</td>
-								<td>2</td>
-								<td>3</td>
-								<td>4</td>
+								<td>Id</td>
+								<td><c:out value="${logMessageHeading}"></c:out></td>
+								<td><c:out value="${logTableNameHeading}"></c:out></td>
+								<td><c:out value="${logRowIdHeading}"></c:out></td>
+								<td><c:out value="${logTimeHeading}"></c:out></td>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>2</td>
-								<td>3</td>
-								<td>4</td>
-							</tr>
+							<c:forEach var="log" items="${sessionScope.logList}">
+								<tr>
+									<td><c:out value="${log.id}"></c:out>
+									<td><c:out value="${log.message}"></c:out>
+									<td><c:out value="${log.tableName}"></c:out>
+									<td><c:out value="${log.rowId}"></c:out>
+									<td><c:out value="${log.time}"></c:out>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
-
 			</div>
 		</div>
 	</div>

@@ -20,7 +20,9 @@
 				<li><a href="#about"><c:out value="${about}"></c:out></a></li>
 				<li><a href="#contact"><c:out value="${contact}"></c:out></a></li>
 				<c:if test="${sessionScope.authorisedUser.type eq 'doctor'}">
-					<li><a href="doctor/redirection.jsp"> <c:out
+					<c:set var="doctorId" value="${sessionScope.authorisedUser.id}"></c:set>
+					<li><a 
+					href="controller?command=GET_PATIENT_LIST&currentPage=1"> <c:out
 								value="${doctorPanel}"></c:out></a></li>
 				</c:if>
 				<c:if test="${sessionScope.authorisedUser.type eq 'admin'}">
@@ -33,14 +35,14 @@
 				<input type="hidden" name="command" value="SET_LOCALE"> <input
 					type="hidden" name="localeName" value="ru_RU"> <input
 					type="hidden" name="redirect" value="index.jsp">
-				<button type="submit" class="btn btn-xs btn-default">ru</button>
+				<button type="submit" id="ru-button"></button>
 			</form>
 			<form class="navbar-nav navbar-right" action="controller"
 				method="get">
 				<input type="hidden" name="command" value="SET_LOCALE"> <input
 					type="hidden" name="localeName" value="en_US"> <input
 					type="hidden" name="redirect" value="index.jsp">
-				<button type="submit" class="btn btn-xs btn-default">en</button>
+				<button type="submit" id="en-button"></button>
 			</form>
 			<c:if test="${sessionScope.authorisedUser eq null}">
 				<form class="navbar-form navbar-right" action="signUp.jsp"

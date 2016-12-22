@@ -31,11 +31,19 @@ public class SignInCommand implements Command{
 		User user = null;
 		try {
 			user = loginUserService.logIn(username, password);
+			String url = null;
+			switch(user.getType()){
+			case "doctor":
+				url = "controller?command=GET_PATIENT_LIST&doctorId=" + user.getId() +
+						"&currentPage=1&patientsPerPage=14";
+				break;
+			case "admin":
+				url = "controller?command=GET_ADMIN_INFO";
+				break;
+			}
 			session.setAttribute("authorisedUser", user);
 			
-			String url = "index.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-			dispatcher.forward(request, response);
+			response.sendRedirect(url);
 			
 		} catch (ServiceException e) {
 			String url = "index.jsp";

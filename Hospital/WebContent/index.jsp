@@ -10,9 +10,11 @@
 <link rel="stylesheet" href="css/starter-template.css">
 <link rel="stylesheet" href="css/bootstrap/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="css/signin.css">
+
 <script src="scripts/jquery-3.1.1.js"></script>
 <script src="scripts/jquery.validate.min.js"></script>
 <script src="scripts/validation.js"></script>
+<script src="css/bootstrap/js/bootstrap.js"></script>
 <c:if test="${sessionScope.localeName eq null}">
 	<script src="scripts/messages_ru.js"></script>
 </c:if>
@@ -20,10 +22,14 @@
 	<script src="scripts/messages_ru.js"></script>
 </c:if>
 <script type="text/javascript">
-			$(function() {
-				$('.form-signin').fadeIn(1000);
-			});
-		</script>
+	$(function() {
+		setTimeout(function(){
+			$('.form-signin').fadeIn(1000);
+			
+		}, 500);
+		$('h1').fadeIn(1000);
+	});
+</script>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <title><c:out value="${homeTitle}"></c:out></title>
 </head>
@@ -32,12 +38,12 @@
 	<%@include file="elements/index/e_navbar.jsp"%>
 	<div class="container">
 		<div class="starter-template">
-			<h1>
+			<h1 style="display : none;">
 				<c:out value="${welcomeMessage}"></c:out>
 			</h1>
 			<c:if test="${sessionScope.authorisedUser eq null}">
 				<form action="controller" class="form-signin" method="post"
-					style="display:none;">
+					style="display: none;">
 					<c:if test="${requestScope.error eq null}">
 						<h2 class="form-signin-heading">
 							<c:out value="${signInHeading}"></c:out>
@@ -63,6 +69,7 @@
 	</div>
 	<!-- /.container -->
 	<div class="container">
+
 	</div>
 </body>
 </html>

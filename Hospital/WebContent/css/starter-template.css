@@ -51,3 +51,25 @@ dt {
 dd {
 	font-size: 15px;
 }
+
+#en-button {
+    background: url(images/en.gif) no-repeat 0 0;  
+    border: 0px; 
+    text-indent: -9000px;
+    width: 27px;
+    height: 19px;
+    cursor: pointer;
+    color: #505050  
+    background-color: #505050 
+}
+ 
+#ru-button {
+    background: url(images/ru.gif) no-repeat 0 0; 
+    border: 0px; 
+    text-indent: -9000px;
+    width: 27px;
+    height: 19px;
+    cursor: pointer;
+    color: #505050 ;
+    background-color: #505050     
+}

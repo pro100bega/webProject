@@ -6,5 +6,9 @@ import by.htp6.hospital.bean.Patient;
 import by.htp6.hospital.service.exception.ServiceException;
 
 public interface FindPatientService {
-	List<Patient> findPatients(String searchData, int doctorId) throws ServiceException;
+	List<Patient> findPatientsByDoctorId(String searchData, int doctorId,
+			int offset, int count, String orderBy) throws ServiceException;
+	
+	List<Patient> findPatients(String searchData, int offset, int count,
+			String orderBy) throws ServiceException;
 }

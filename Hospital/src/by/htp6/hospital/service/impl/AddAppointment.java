@@ -1,15 +1,15 @@
 package by.htp6.hospital.service.impl;
 
-import by.htp6.hospital.dao.AssignProcedureDAO;
+import by.htp6.hospital.dao.AddAppointmentDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.factory.DAOFactory;
-import by.htp6.hospital.service.AssignProcedureService;
+import by.htp6.hospital.service.AddAppointmentService;
 import by.htp6.hospital.service.exception.ServiceException;
 
-public class AssignProcedure implements AssignProcedureService{
+public class AddAppointment implements AddAppointmentService{
 
 	@Override
-	public void assignProcedure(int patientId, int doctorId, String type, String name)
+	public void addAppointment(int patientId, int doctorId, String type, String name)
 			throws ServiceException {
 		if (patientId == 0 || doctorId == 0 || null == type || null == name){
 			throw new ServiceException("Illegal arguments");
@@ -20,10 +20,10 @@ public class AssignProcedure implements AssignProcedureService{
 		}
 		
 		DAOFactory daoFactory = DAOFactory.getInstance();
-		AssignProcedureDAO assignProcedureDAO = daoFactory.getAssignProcedureDAO();
+		AddAppointmentDAO assignProcedureDAO = daoFactory.getAddAppointmentDAO();
 		
 		try {
-			assignProcedureDAO.assignProcedure(patientId, doctorId, type, name);
+			assignProcedureDAO.addAppointment(patientId, doctorId, type, name);
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}

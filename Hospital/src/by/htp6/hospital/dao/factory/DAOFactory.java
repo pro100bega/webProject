@@ -1,17 +1,29 @@
 package by.htp6.hospital.dao.factory;
 
 import by.htp6.hospital.dao.AddNewPatientDAO;
-import by.htp6.hospital.dao.AssignProcedureDAO;
+import by.htp6.hospital.dao.GetAppointmentListDAO;
+import by.htp6.hospital.dao.AddAppointmentDAO;
 import by.htp6.hospital.dao.DischargePatientDAO;
+import by.htp6.hospital.dao.FindLogDAO;
 import by.htp6.hospital.dao.FindPatientDAO;
-import by.htp6.hospital.dao.PatientListDAO;
+import by.htp6.hospital.dao.GetLogDAO;
+import by.htp6.hospital.dao.GetPatientDAO;
+import by.htp6.hospital.dao.GetPatientListDAO;
+import by.htp6.hospital.dao.GetPatientsCountDAO;
+import by.htp6.hospital.dao.PerformAppointmentDAO;
 import by.htp6.hospital.dao.UserLogInDAO;
 import by.htp6.hospital.dao.UserLogUpDAO;
 import by.htp6.hospital.dao.impl.SQLAddNewPatientDAO;
-import by.htp6.hospital.dao.impl.SQLAssignProcedureDAO;
+import by.htp6.hospital.dao.impl.SQLGetAppointmentListDAO;
+import by.htp6.hospital.dao.impl.SQLAddAppointmentDAO;
 import by.htp6.hospital.dao.impl.SQLDischargePatientDAO;
+import by.htp6.hospital.dao.impl.SQLFindLogDAO;
 import by.htp6.hospital.dao.impl.SQLFindPatientDAO;
-import by.htp6.hospital.dao.impl.SQLPatientListDAO;
+import by.htp6.hospital.dao.impl.SQLGetLogDAO;
+import by.htp6.hospital.dao.impl.SQLGetPatientDAO;
+import by.htp6.hospital.dao.impl.SQLGetPatientListDAO;
+import by.htp6.hospital.dao.impl.SQLGetPatientsCountDAO;
+import by.htp6.hospital.dao.impl.SQLPerformAppointmentDAO;
 import by.htp6.hospital.dao.impl.SQLUserLoginationDAO;
 import by.htp6.hospital.dao.impl.SQLUserRegistrationDAO;
 
@@ -22,7 +34,9 @@ public class DAOFactory {
 
 	private UserLogUpDAO userRegistrationDAO = new SQLUserRegistrationDAO();
 	
-	private PatientListDAO patientListDAO = new SQLPatientListDAO();
+	private GetPatientListDAO getPatientListDAO = new SQLGetPatientListDAO();
+	
+	private GetPatientsCountDAO getPatientsCountDAO = new SQLGetPatientsCountDAO();
 	
 	private DischargePatientDAO dischargePatientDAO = new SQLDischargePatientDAO();
 	
@@ -30,7 +44,17 @@ public class DAOFactory {
 	
 	private AddNewPatientDAO addNewPatientDAO = new SQLAddNewPatientDAO();
 	
-	private AssignProcedureDAO assignProcedureDAO = new SQLAssignProcedureDAO();
+	private AddAppointmentDAO addAppointmentDAO = new SQLAddAppointmentDAO();
+	
+	private GetLogDAO getLogDAO = new SQLGetLogDAO();
+	
+	private FindLogDAO findLogDAO = new SQLFindLogDAO();
+	
+	private GetAppointmentListDAO getAppointmentListDAO = new SQLGetAppointmentListDAO();
+	
+	private PerformAppointmentDAO performAppointmentDAO = new SQLPerformAppointmentDAO();
+	
+	private GetPatientDAO getPatientDAO = new SQLGetPatientDAO();
 
 	public UserLogInDAO getUserLoginationDAO() {
 		return this.userLoginationDAO;
@@ -40,8 +64,12 @@ public class DAOFactory {
 		return this.userRegistrationDAO;
 	}
 
-	public PatientListDAO getPatientListDAO() {
-		return this.patientListDAO;
+	public GetPatientListDAO getGetPatientListDAO() {
+		return this.getPatientListDAO;
+	}
+	
+	public GetPatientsCountDAO getGetPatientsCountDAO() {
+		return this.getPatientsCountDAO;
 	}
 
 	public DischargePatientDAO getDischargePatientDAO() {
@@ -56,8 +84,28 @@ public class DAOFactory {
 		return this.addNewPatientDAO;
 	}
 	
-	public AssignProcedureDAO getAssignProcedureDAO() {
-		return this.assignProcedureDAO;
+	public AddAppointmentDAO getAddAppointmentDAO() {
+		return this.addAppointmentDAO;
+	}
+	
+	public GetLogDAO getGetLogDAO() {
+		return this.getLogDAO;
+	}
+	
+	public FindLogDAO getFindLogDAO() {
+		return this.findLogDAO;
+	}
+	
+	public GetAppointmentListDAO getGetAppointmentListDAO() {
+		return this.getAppointmentListDAO;
+	}
+	
+	public PerformAppointmentDAO getPerformAppointmentDAO() {
+		return this.performAppointmentDAO;
+	}
+	
+	public GetPatientDAO getGetPatientDAO() {
+		return this.getPatientDAO;
 	}
 	
 	private DAOFactory() {

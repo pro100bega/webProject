@@ -27,3 +27,7 @@
 <fmt:message bundle="${local}" key="button.signOut" var="signOutButton" />
 <fmt:message bundle="${local}" key="button.newDoctor" var="newDoctorButton"/>
 <fmt:message bundle="${local}" key="button.addNewDoctor" var="addNewDoctorButton"/>
+<fmt:message bundle="${local}" key="heading.log.message" var="logMessageHeading"/>
+<fmt:message bundle="${local}" key="heading.log.tableName" var="logTableNameHeading"/>
+<fmt:message bundle="${local}" key="heading.log.rowId" var="logRowIdHeading"/>
+<fmt:message bundle="${local}" key="heading.log.time" var="logTimeHeading"/>
