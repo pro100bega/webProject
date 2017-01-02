@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation"">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -12,22 +12,26 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#"><c:out value="${projectName}"></c:out></a>
+			<a class="navbar-brand" href="index.jsp"><c:out value="${projectName}"></c:out></a>
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#"><c:out value="${home}"></c:out></a></li>
-				<li><a href="#about"><c:out value="${about}"></c:out></a></li>
-				<li><a href="#contact"><c:out value="${contact}"></c:out></a></li>
+				<li class="active" id="liHome"><a href="index.jsp"><c:out value="${home}"></c:out></a></li>
+				<li id="liAbout"><a href="about.jsp"><c:out value="${about}"></c:out></a></li>
+				<li id="liContact"><a href="contact.jsp"><c:out value="${contact}"></c:out></a></li>
 				<c:if test="${sessionScope.authorisedUser.type eq 'doctor'}">
-					<c:set var="doctorId" value="${sessionScope.authorisedUser.id}"></c:set>
 					<li><a 
-					href="controller?command=GET_PATIENT_LIST&currentPage=1"> <c:out
+					href="controller?command=GET_PATIENT_LIST"> <c:out
 								value="${doctorPanel}"></c:out></a></li>
 				</c:if>
 				<c:if test="${sessionScope.authorisedUser.type eq 'admin'}">
 					<li><a href="administrator/redirection.jsp"> <c:out
 								value="${adminPanel}"></c:out></a></li>
+				</c:if>
+				<c:if test="${sessionScope.authorisedUser.type eq 'nurse'}">
+					<li><a 
+					href="controller?command=GET_PATIENT_LIST"> <c:out
+								value="${nursePanel}"></c:out></a></li>
 				</c:if>
 			</ul>
 			<form class="navbar-nav navbar-right" action="controller"
@@ -46,7 +50,7 @@
 			</form>
 			<c:if test="${sessionScope.authorisedUser eq null}">
 				<form class="navbar-form navbar-right" action="signUp.jsp"
-					method="post">
+					method="get">
 					<button type="submit" class="btn btn btn-primary">
 						<c:out value="${signUpButton}"></c:out>
 					</button>

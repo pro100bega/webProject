@@ -25,7 +25,8 @@ public class ConnectionPool implements Closeable {
 			throw new SQLException(e);
 		}
 		ResourceBundle resourceBundle = ResourceBundle.getBundle("resources.dbResource");
-		String url = "jdbc:mysql://127.0.0.1/hospital?useSSL=false";
+		String url = "jdbc:mysql://127.0.0.1/hospital?UseSSL=false"
+				+ "?useUnicode=yes&characterEncoding=UTF-8";
 		String dbUsername = resourceBundle.getString("db.username");
 		String dbPassword = resourceBundle.getString("db.password");
 		

@@ -2,6 +2,9 @@ package by.htp6.hospital.service.impl;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.htp6.hospital.bean.Patient;
 import by.htp6.hospital.dao.GetPatientListDAO;
 import by.htp6.hospital.dao.exception.DAOException;
@@ -10,6 +13,7 @@ import by.htp6.hospital.service.GetPatientListService;
 import by.htp6.hospital.service.exception.ServiceException;
 
 public class GetPatientList implements GetPatientListService {
+	private static final Logger log = LogManager.getLogger(GetPatientList.class);
 
 	@Override
 	public List<Patient> getPatientsListForDoctor(int doctorId, int offset,
@@ -25,6 +29,7 @@ public class GetPatientList implements GetPatientListService {
 					offset, patientsPerPage, orderBy);
 			return patients;
 		} catch (DAOException e) {
+			log.error(e.getMessage());
 			throw new ServiceException(e);
 		}
 	}
@@ -43,6 +48,7 @@ public class GetPatientList implements GetPatientListService {
 					patientsPerPage, orderBy);
 			return patients;
 		} catch (DAOException e) {
+			log.error(e.getMessage());
 			throw new ServiceException(e);
 		}
 	}

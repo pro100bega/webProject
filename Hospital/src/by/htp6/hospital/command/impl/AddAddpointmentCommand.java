@@ -35,6 +35,7 @@ public class AddAddpointmentCommand implements Command{
 			String url = "controller?command=GET_APPOINTMENTS&patientId=" + selectedPatientId;
 			response.sendRedirect(url);
 		} catch (ServiceException e) {
+			request.setAttribute("errorMessage", e.getMessage());
 			response.sendRedirect("error.jsp");
 		}
 	}

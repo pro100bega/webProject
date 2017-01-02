@@ -1,6 +1,7 @@
 package by.htp6.hospital.command;
 
 import java.util.HashMap;
+
 import java.util.Map;
 
 import by.htp6.hospital.command.impl.SignUpCommand;
@@ -9,11 +10,13 @@ import by.htp6.hospital.command.impl.SignOutCommand;
 import by.htp6.hospital.command.impl.AddNewPatientCommand;
 import by.htp6.hospital.command.impl.AddAddpointmentCommand;
 import by.htp6.hospital.command.impl.DischargePatientCommand;
+import by.htp6.hospital.command.impl.EditPatientCommand;
 import by.htp6.hospital.command.impl.GetPatientListCommand;
 import by.htp6.hospital.command.impl.FindLogCommand;
 import by.htp6.hospital.command.impl.FindPatientCommand;
 import by.htp6.hospital.command.impl.GetAdministratorInfoCommand;
-import by.htp6.hospital.command.impl.GetAppointmentListCommand;
+import by.htp6.hospital.command.impl.GetEditPatientPageCommand;
+import by.htp6.hospital.command.impl.GetPatientInfoCommand;
 import by.htp6.hospital.command.impl.PerformAppointmentCommand;
 import by.htp6.hospital.command.impl.SetLocaleCommand;
 
@@ -33,9 +36,11 @@ public class CommandProvider {
 		commands.put("ADD_NEW_PATIENT", new AddNewPatientCommand());
 		commands.put("GET_ADMIN_INFO", new GetAdministratorInfoCommand());
 		commands.put("FIND_LOG", new FindLogCommand());
-		commands.put("GET_APPOINTMENTS", new GetAppointmentListCommand());
+		commands.put("GET_PATIENT_INFO", new GetPatientInfoCommand());
 		commands.put("ADD_APPOINTMENT", new AddAddpointmentCommand());
 		commands.put("PERFORM_APPOINTMENT", new PerformAppointmentCommand());
+		commands.put("GET_EDIT_PATIENT_PAGE", new GetEditPatientPageCommand());
+		commands.put("EDIT_PATIENT", new EditPatientCommand());
 	}
 	
 	public static CommandProvider getInstance(){

@@ -3,6 +3,9 @@ package by.htp6.hospital.service.impl;
 import java.util.List;
 import java.util.regex.Matcher;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.htp6.hospital.bean.Patient;
 import by.htp6.hospital.dao.FindPatientDAO;
 import by.htp6.hospital.dao.exception.DAOException;
@@ -12,6 +15,7 @@ import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.tools.PatternContainer;
 
 public class FindPatient implements FindPatientService{
+	private static final Logger log = LogManager.getLogger(FindPatient.class);
 
 	@Override
 	public List<Patient> findPatientsByDoctorId(String searchData, int doctorId,
@@ -37,6 +41,7 @@ public class FindPatient implements FindPatientService{
 					doctorId, offset, count, orderBy);
 			return patients;
 		} catch (DAOException e) {
+			log.error(e.getMessage());
 			throw new ServiceException(e);
 		}
 	}
@@ -65,6 +70,7 @@ public class FindPatient implements FindPatientService{
 					offset, count, orderBy);
 			return patients;
 		} catch (DAOException e) {
+			log.error(e.getMessage());
 			throw new ServiceException(e);
 		}
 	}

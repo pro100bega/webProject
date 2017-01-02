@@ -13,7 +13,7 @@
 <script src="css/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$(".col-sm-9").fadeIn(1500);
+		$(".col-sm-9").fadeIn(600);
 
 		$('.panel-heading').on('click', function() {
 			$(this).siblings().toggle(400);

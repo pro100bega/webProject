@@ -89,7 +89,7 @@ public class PatientDisplay extends BodyTagSupport {
 				out.write("<td>" + patient.getSurname() + "</td>");
 				out.write("<td>" + patient.getDiagnosis() + "</td>");
 				out.write("<td>" + patient.getReceiptDate() + "</td>");
-				out.write("<td><a href=\"controller?command=GET_APPOINTMENTS"
+				out.write("<td><a href=\"controller?command=GET_PATIENT_INFO&status=undone"
 						+ "&patientId=" + patient.getId() + "\">" + learnMore + "</td>");
 				out.write("<tr>");
 			}

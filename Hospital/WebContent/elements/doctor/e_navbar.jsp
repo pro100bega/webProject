@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<c:if test="${sessionScope.authorisedUser eq null}">
+<c:if test="${sessionScope.authorisedUser.type != 'doctor'}">
 	<c:redirect url="index.jsp" />
 </c:if>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -20,8 +20,8 @@
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="index.jsp"><c:out value="${home}"></c:out></a></li>
-				<li><a href="#about"><c:out value="${about}"></c:out></a></li>
-				<li><a href="#contact"><c:out value="${contact}"></c:out></a></li>
+				<li><a href="about.jsp"><c:out value="${about}"></c:out></a></li>
+				<li><a href="contact.jsp"><c:out value="${contact}"></c:out></a></li>
 				<li class="active"><a
 					href="controller?command=GET_PATIENT_LIST">
 						<c:out value="${doctorPanel}"></c:out>

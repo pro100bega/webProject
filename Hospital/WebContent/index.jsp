@@ -24,10 +24,10 @@
 <script type="text/javascript">
 	$(function() {
 		setTimeout(function(){
-			$('.form-signin').fadeIn(1000);
+			$('.form-signin').fadeIn(600);
 			
-		}, 500);
-		$('h1').fadeIn(1000);
+		}, 300);
+		$('h1').fadeIn(600);
 	});
 </script>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -68,8 +68,16 @@
 		</div>
 	</div>
 	<!-- /.container -->
-	<div class="container">
-
+	<div class="container" style="left: 8%; top: 430px; position: absolute;">
+		<div class="page-header">
+			<center><h1><c:out value="${aboutTitle}"></c:out></h1></center>
+		</div>
+		<p>
+		<c:out value="${aboutMessage}"></c:out> &copy;
+		<c:out value="${bugReportFirstMessage}"></c:out>
+		<a href="bugReport.jsp"><c:out value="${linkMessage}"></c:out></a>
+		<c:out value="${bugReportSecondMessage}"></c:out>
+		</p>		
 	</div>
 </body>
 </html>

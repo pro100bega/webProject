@@ -13,7 +13,7 @@ public class PatternContainer {
 	
 	//Diagnosis format pattern
 	public static final Pattern diagnosisPattern =
-			Pattern.compile("^[А-Яа-я \\-]{1,20}$|^[A-Za-z \\-]{1,50}$");
+			Pattern.compile("^[А-Яа-я -]{1,50}$|^[A-Za-z -]{1,50}$");
 	
 	//Patient name format pattern
 	public static final Pattern patientNamePattern = 

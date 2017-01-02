@@ -5,6 +5,7 @@
 <c:if test="${sessionScope.authorisedUser eq null}">
 	<c:redirect url="../index.jsp" />
 </c:if>
+<c:set var="patientId" value="${sessionScope.selectedPatient.id}"></c:set>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
@@ -32,14 +33,16 @@
 				method="get">
 				<input type="hidden" name="command" value="SET_LOCALE"> <input
 					type="hidden" name="localeName" value="ru_RU"> <input
-					type="hidden" name="redirect" value="doctor/patientPanel.jsp">
+					type="hidden" name="redirect" 
+					value="controller?command=GET_PATIENT_INFO&patientId=${patientId}&status=undone">
 				<button type="submit" id="ru-button"></button>
 			</form>
 			<form class="navbar-nav navbar-right" action="controller"
 				method="get">
 				<input type="hidden" name="command" value="SET_LOCALE"> <input
 					type="hidden" name="localeName" value="en_US"> <input
-					type="hidden" name="redirect" value="doctor/patientPanel.jsp">
+					type="hidden" name="redirect" 
+					value="controller?command=GET_PATIENT_INFO&patientId=${patientId}&status=undone">
 				<button type="submit" id="en-button"></button>
 			</form>
 			<form class="navbar-form navbar-right" action="controller"

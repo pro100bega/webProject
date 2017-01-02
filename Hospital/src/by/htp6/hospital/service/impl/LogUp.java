@@ -3,6 +3,9 @@ package by.htp6.hospital.service.impl;
 import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.htp6.hospital.bean.User;
 import by.htp6.hospital.dao.UserLogUpDAO;
 import by.htp6.hospital.dao.exception.DAOException;
@@ -13,6 +16,7 @@ import by.htp6.hospital.tools.MD5Encryptor;
 import by.htp6.hospital.tools.PatternContainer;
 
 public class LogUp implements LogUpService{
+	private static final Logger log = LogManager.getLogger(LogUp.class);
 
 	@Override
 	public User logUp(String username, String password, String userType) throws ServiceException {
@@ -49,8 +53,10 @@ public class LogUp implements LogUpService{
 			user = registrationDAO.registration(username, encryptedPassword, userType);
 			return user;
 		} catch (DAOException e) {
+			log.error(e.getMessage());
 			throw new ServiceException(e);
 		} catch (NoSuchAlgorithmException e) {
+			log.error(e.getMessage());
 			throw new ServiceException(e);
 		}	
 	}

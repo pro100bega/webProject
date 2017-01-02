@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.htp6.hospital.dao.AddNewPatientDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.factory.DAOFactory;
@@ -13,6 +16,7 @@ import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.tools.PatternContainer;
 
 public class AddNewPatient implements AddNewPatientService{
+	private static final Logger log = LogManager.getLogger(AddNewPatient.class);
 
 	@Override
 	public void addNewPatient(String name, String surname, char sex,
@@ -55,6 +59,7 @@ public class AddNewPatient implements AddNewPatientService{
 			try {
 				date = dateFormat.parse(birthDate);
 			} catch (ParseException e) {
+				log.error(e.getMessage());
 				throw new ServiceException(e);
 			}
 		} else {
@@ -62,6 +67,7 @@ public class AddNewPatient implements AddNewPatientService{
 			try {
 				date = dateFormat.parse(birthDate);
 			} catch (ParseException e) {
+				log.error(e.getMessage());
 				throw new ServiceException(e);
 			}
 		}
@@ -77,8 +83,10 @@ public class AddNewPatient implements AddNewPatientService{
 		AddNewPatientDAO addNewPatientDAO = daoFactory.getAddNewPatientDAO();
 		
 		try {
-			addNewPatientDAO.addNewPatient(name, surname, sex, date, diagnosis, doctorId, note);
+			addNewPatientDAO.addNewPatient(name, surname, sex, date, diagnosis,
+					doctorId, note);
 		} catch (DAOException e) {
+			log.error(e.getMessage());
 			throw new ServiceException(e);
 		}
 	}

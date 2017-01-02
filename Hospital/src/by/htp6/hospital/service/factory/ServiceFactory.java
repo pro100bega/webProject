@@ -8,6 +8,7 @@ import by.htp6.hospital.service.PerformAppointmentService;
 import by.htp6.hospital.service.AddNewPatientService;
 import by.htp6.hospital.service.AddAppointmentService;
 import by.htp6.hospital.service.DischargePatientService;
+import by.htp6.hospital.service.EditPatientService;
 import by.htp6.hospital.service.FindLogService;
 import by.htp6.hospital.service.FindPatientService;
 import by.htp6.hospital.service.GetAppointmentListService;
@@ -20,6 +21,7 @@ import by.htp6.hospital.service.impl.PerformAppointment;
 import by.htp6.hospital.service.impl.AddNewPatient;
 import by.htp6.hospital.service.impl.AddAppointment;
 import by.htp6.hospital.service.impl.DischargePatient;
+import by.htp6.hospital.service.impl.EditPatient;
 import by.htp6.hospital.service.impl.FindLog;
 import by.htp6.hospital.service.impl.FindPatient;
 import by.htp6.hospital.service.impl.GetAppointmentList;
@@ -55,6 +57,8 @@ public class ServiceFactory {
 	private PerformAppointmentService performAppointment = new PerformAppointment();
 	
 	private GetPatientService getPatient = new GetPatient();
+	
+	private EditPatientService editPatient = new EditPatient();
 
 	public LogInService getLoginUser() {
 		return this.logIn;
@@ -106,6 +110,10 @@ public class ServiceFactory {
 	
 	public GetPatientService getGetPatient() { 
 		return this.getPatient;
+	}
+	
+	public EditPatientService getEditPatient() {
+		return this.editPatient;
 	}
 	
 	private ServiceFactory() {

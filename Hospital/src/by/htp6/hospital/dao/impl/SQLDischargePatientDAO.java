@@ -4,11 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.htp6.hospital.dao.DischargePatientDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
 public class SQLDischargePatientDAO implements DischargePatientDAO{
+	private static final Logger log = LogManager.getLogger(SQLDischargePatientDAO.class);
 
 	@Override
 	public boolean dishcargePatient(int patientId, String finalDiagnosis) throws DAOException {
@@ -22,8 +26,10 @@ public class SQLDischargePatientDAO implements DischargePatientDAO{
 			int resultOfUpdate = preparedStatement.executeUpdate();
 			return (resultOfUpdate == 0) ? false : true;
 		} catch (InterruptedException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		} catch (SQLException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		}
 	}
@@ -38,6 +44,7 @@ public class SQLDischargePatientDAO implements DischargePatientDAO{
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		}
 	}

@@ -9,12 +9,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.htp6.hospital.bean.Log;
 import by.htp6.hospital.dao.FindLogDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
 public class SQLFindLogDAO implements FindLogDAO {
+	private static final Logger log = LogManager.getLogger(SQLFindLogDAO.class);
 
 	/**
 	 * @author Бегенч
@@ -58,8 +63,10 @@ public class SQLFindLogDAO implements FindLogDAO {
 			return logList;
 			
 		} catch (InterruptedException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		} catch (SQLException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		}
 	}

@@ -18,7 +18,7 @@ import by.htp6.hospital.service.GetPatientService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.factory.ServiceFactory;
 
-public class GetAppointmentListCommand implements Command {
+public class GetPatientInfoCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)

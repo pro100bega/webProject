@@ -12,7 +12,7 @@ public class Patient implements Serializable {
 	
 	private String surname;
 	
-	private char sex;
+	private String sex;
 	
 	private String birthDate;
 	
@@ -48,11 +48,11 @@ public class Patient implements Serializable {
 		this.surname = surname;
 	}
 
-	public char getSex() {
+	public String getSex() {
 		return sex;
 	}
 
-	public void setSex(char sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 
@@ -100,7 +100,7 @@ public class Patient implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Patient(int id, String name, String surname, char sex, String birthDate, String diagnosis, int doctorId,
+	public Patient(int id, String name, String surname, String sex, String birthDate, String diagnosis, int doctorId,
 			String receiptDate, String note) {
 		super();
 		this.id = id;
@@ -118,7 +118,7 @@ public class Patient implements Serializable {
 		super();
 	}
 
-	public Patient(String name, String surname, char sex, String birthDate, String diagnosis, int doctorId,
+	public Patient(String name, String surname, String sex, String birthDate, String diagnosis, int doctorId,
 			String note) {
 		super();
 		this.name = name;
@@ -130,7 +130,7 @@ public class Patient implements Serializable {
 		this.note = note;
 	}
 
-	public Patient(String name, String surname, char sex, String birthDate, String diagnosis, int doctorId) {
+	public Patient(String name, String surname, String sex, String birthDate, String diagnosis, int doctorId) {
 		super();
 		this.name = name;
 		this.surname = surname;
@@ -151,7 +151,7 @@ public class Patient implements Serializable {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((note == null) ? 0 : note.hashCode());
 		result = prime * result + ((receiptDate == null) ? 0 : receiptDate.hashCode());
-		result = prime * result + sex;
+		result = prime * result + ((sex == null) ? 0 : sex.hashCode()); 
 		result = prime * result + ((surname == null) ? 0 : surname.hashCode());
 		return result;
 	}
@@ -194,7 +194,10 @@ public class Patient implements Serializable {
 				return false;
 		} else if (!receiptDate.equals(other.receiptDate))
 			return false;
-		if (sex != other.sex)
+		if (sex == null) { 
+			if (other.sex != null)
+				return false;
+		} else if (!sex.equals(other.sex))
 			return false;
 		if (surname == null) {
 			if (other.surname != null)

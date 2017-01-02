@@ -6,11 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.htp6.hospital.dao.GetPatientsCountDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
 public class SQLGetPatientsCountDAO implements GetPatientsCountDAO {
+	private static final Logger log = LogManager.getLogger(SQLGetPatientsCountDAO.class);
 
 	@Override
 	public int getPatientsCountByDoctorId(int doctorId) throws DAOException {
@@ -32,8 +36,10 @@ public class SQLGetPatientsCountDAO implements GetPatientsCountDAO {
 
 			return patientsCount;
 		} catch (InterruptedException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		} catch (SQLException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		}
 	}
@@ -56,8 +62,10 @@ public class SQLGetPatientsCountDAO implements GetPatientsCountDAO {
 
 			return patientsCount;
 		} catch (InterruptedException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		} catch (SQLException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		}
 	}
@@ -83,8 +91,10 @@ public class SQLGetPatientsCountDAO implements GetPatientsCountDAO {
 
 			return patientsCount;
 		} catch (InterruptedException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		} catch (SQLException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		}
 	}
@@ -109,8 +119,10 @@ public class SQLGetPatientsCountDAO implements GetPatientsCountDAO {
 
 			return patientsCount;
 		} catch (InterruptedException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		} catch (SQLException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		}
 	}

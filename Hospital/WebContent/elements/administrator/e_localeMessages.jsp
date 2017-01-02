@@ -10,7 +10,7 @@
 	var="projectName" />
 <fmt:message bundle="${local}" key="navbar.home" var="home" />
 <fmt:message bundle="${local}" key="navbar.about" var="about" />
-<fmt:message bundle="${local}" key="navbar.contact" var="contact" />
+<fmt:message bundle="${local}" key="navbar.contacts" var="contact" />
 <fmt:message bundle="${local}" key="navbar.adminPanel"
 	var="adminPanel" />
 <fmt:message bundle="${local}" key="title.error" var="errorTitle" />

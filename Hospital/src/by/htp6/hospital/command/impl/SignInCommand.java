@@ -34,11 +34,15 @@ public class SignInCommand implements Command{
 			String url = null;
 			switch(user.getType()){
 			case "doctor":
-				url = "controller?command=GET_PATIENT_LIST&doctorId=" + user.getId() +
-						"&currentPage=1&patientsPerPage=14";
+				url = "controller?command=GET_PATIENT_LIST" +
+						"&currentPage=1&patientsPerPage=13";
 				break;
 			case "admin":
 				url = "controller?command=GET_ADMIN_INFO";
+				break;
+			case "nurse":
+				url = "controller?command=GET_PATIENT_LIST" + 
+						"&currentPage=1&patientsPerPage=13";
 				break;
 			}
 			session.setAttribute("authorisedUser", user);

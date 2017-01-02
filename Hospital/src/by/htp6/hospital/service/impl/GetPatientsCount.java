@@ -1,5 +1,8 @@
 package by.htp6.hospital.service.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.htp6.hospital.dao.GetPatientsCountDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.factory.DAOFactory;
@@ -7,6 +10,7 @@ import by.htp6.hospital.service.GetPatientsCountService;
 import by.htp6.hospital.service.exception.ServiceException;
 
 public class GetPatientsCount implements GetPatientsCountService{
+	private static final Logger log = LogManager.getLogger(GetPatientsCount.class);
 
 	@Override
 	public int getPatientsCountByDoctorId(int doctorId) throws ServiceException {
@@ -21,6 +25,7 @@ public class GetPatientsCount implements GetPatientsCountService{
 			int patientsCount = getPatientsCountDAO.getPatientsCountByDoctorId(doctorId);
 			return patientsCount;
 		} catch (DAOException e) {
+			log.error(e.getMessage());
 			throw new ServiceException(e);
 		}
 	}
@@ -34,6 +39,7 @@ public class GetPatientsCount implements GetPatientsCountService{
 			int patientsCount = getPatientsCountDAO.getPatientsCount();
 			return patientsCount;
 		} catch (DAOException e) {
+			log.error(e.getMessage());
 			throw new ServiceException(e);
 		}		
 	}
@@ -56,6 +62,7 @@ public class GetPatientsCount implements GetPatientsCountService{
 					doctorId);
 			return patientsCount;
 		} catch (DAOException e) {
+			log.error(e.getMessage());
 			throw new ServiceException(e);
 		}
 	}
@@ -73,6 +80,7 @@ public class GetPatientsCount implements GetPatientsCountService{
 			int patientsCount = getPatientsCountDAO.getPatientsCount(searchData);
 			return patientsCount;
 		} catch (DAOException e) {
+			log.error(e.getMessage());
 			throw new ServiceException(e);
 		}	
 	}

@@ -11,7 +11,22 @@
 <script src="css/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$(".panel-body").fadeIn(1500);
+		$(".panel-body").fadeIn(500);
+		$(".panel-heading").on("click", function() {
+			$(".panel-body").slideToggle(500);
+		});
+
+		$('#dischargeShowButton').on('click', function() {
+			$(this).hide();
+			$('#dischargeForm').fadeIn(500);
+		});
+
+		$('#dischargeCancelButton').on('click', function() {
+			$('#dischargeForm').fadeOut(500);
+			setTimeout(function() {
+				$('#dischargeShowButton').fadeIn();
+			}, 500);
+		});
 	});
 </script>
 <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css" />
@@ -29,6 +44,9 @@
 </head>
 <body>
 	<%@ include file="../elements/doctor/e_patientNavbar.jsp"%>
+
+	<%@ include file="../elements/doctor/e_newAppointmentModal.jsp"%>
+
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
@@ -40,25 +58,69 @@
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="col-6">
+					<div class="page-header">
+						<h1>
+							<c:out value="${patientInfoHeading}"></c:out>
+						</h1>
+					</div>
+					<p>
+						<label> <c:out value="${nameMessage}:"></c:out>
+						</label>
+						<c:out value="${selectedPatient.name}"></c:out>
+					</p>
+					<p>
+						<label> <c:out value="${surnameMessage}:"></c:out>
+						</label>
+						<c:out value="${selectedPatient.surname}"></c:out>
+					</p>
+					<p>
+						<label> <c:out value="${sexMessage}:"></c:out>
+						</label>
+						<c:if test="${selectedPatient.sex == 'м'}">
+							<c:out value="${fullMaleMessage}"></c:out>
+						</c:if>
+						<c:if test="${selectedPatient.sex == 'ж'}">
+							<c:out value="${fullFemaleMessage}"></c:out>
+						</c:if>
+					</p>
+					<p>
+						<label> <c:out value="${birthDateMessage}:"></c:out>
+						</label>
+						<c:out value="${selectedPatient.birthDate}"></c:out>
+					</p>
+					<p>
+						<label> <c:out value="${diagnosisMessage}:"></c:out>
+						</label>
+						<c:out value="${selectedPatient.diagnosis}"></c:out>
+					</p>
+					<p>
+						<label> <c:out value="${receiptDateMessage}:"></c:out>
+						</label>
+						<c:out value="${selectedPatient.receiptDate}"></c:out>
+					</p>
 					<div class="panel panel-info">
 						<div class="panel-heading">
 							<h3 class="panel-title">
-								<c:out
-									value="${patientInfo}:
-										 ${selectedPatient.id}, ${selectedPatient.name}
-										  ${selectedPatient.surname}, 
-										  ${selectedPatient.diagnosis}">
+								<c:out value="${appointmentsListHeading}">
 								</c:out>
 							</h3>
 						</div>
 						<div class="panel-body" style="display: none;">
-							<table class="table table-bordered">
+							<table class="table table-hover">
 								<thead>
-									<tr>
-										<td><c:out value="${patientIdMessage}"></c:out></td>
-										<td><c:out value="${doctorIdMessage}"></c:out></td>
-										<td><c:out value="${appointmentTypeMessage}"></c:out></td>
-										<td><c:out value="${appointmentNameMessage}"></c:out></td>
+									<tr class="success">
+										<td><strong> <c:out
+													value="${appointmentTypeMessage}"></c:out>
+										</strong></td>
+										<td><strong> <c:out
+													value="${appointmentNameMessage}"></c:out>
+										</strong></td>
+										<td><strong> <c:out
+													value="${appointmentTimeMessage}"></c:out>
+										</strong></td>
+										<td><strong> <c:out
+													value="${executionPeriodMessage}"></c:out>
+										</strong></td>
 										<td></td>
 									</tr>
 								</thead>
@@ -66,17 +128,18 @@
 									<c:forEach var="appointment"
 										items="${sessionScope.appointments}">
 										<tr>
-											<td><c:out value="${appointment.patientId}"></c:out></td>
-											<td><c:out value="${appointment.doctorId}"></c:out></td>
 											<td><c:out value="${appointment.type}"></c:out></td>
 											<td><c:out value="${appointment.name}"></c:out></td>
+											<td><c:out value="${appointment.appointmentDate}">
+												</c:out></td>
+											<td><c:out value="${appointment.appointmentTerm}">
+												</c:out></td>
 											<td>
 												<form action="controller" method="post">
 													<input type="hidden" name="command"
-														value="PERFORM_APPOINTMENT">
-													<input type="hidden" name="id" value="${appointment.id}">
-													<input type="hidden" name="type"
-														value="${appointment.type}">
+														value="PERFORM_APPOINTMENT"> <input type="hidden"
+														name="id" value="${appointment.id}"> <input
+														type="hidden" name="type" value="${appointment.type}">
 													<button type="submit" class="btn btn-sm btn-success">
 														<c:out value="${performAppointmentButton}">
 														</c:out>
@@ -86,16 +149,14 @@
 										</tr>
 									</c:forEach>
 									<tr>
-										<td><c:out value="${selectedPatient.id}"></c:out></td>
-										<td><c:out value="${selectedPatient.doctorId}"></c:out></td>
-										<td><input type="text" class="form-control"></td>
-										<td><input type="text" class="form-control"></td>
+
 										<td>
 											<form>
-												<button type="submit" class="btn btn-sm btn-success">
-												<c:out value="${addAppointmentButton}">
-												</c:out>
-											</button>
+												<button type="button" class="btn btn btn-success"
+													data-toggle="modal" data-target="#newAppointmentModal">
+													<c:out value="${addAppointmentButton}">
+													</c:out>
+												</button>
 											</form>
 										</td>
 									</tr>
@@ -103,6 +164,39 @@
 							</table>
 						</div>
 					</div>
+
+					<form action="" style="display: none;" id="dischargeForm">
+						<input type="hidden" name="command" value="DISCHARGE_PATIENT">
+						<input type="hidden" name="patientId"
+							value="${selectedPatient.id}">
+						<p>
+							<label> <c:out value="${dischargeHeading}:"></c:out>
+							</label>
+						</p>
+						<p>
+							<textarea rows="3" cols="3" class="form-control"
+								name="finalDiagnois" placeholder="${finalDiagnosisPlaceholder}"></textarea>
+						</p>
+						<p>
+							<button type="sumbit" class="btn btn btn-danger">
+								<c:out value="${dischargeButton}"></c:out>
+							</button>
+							<button type="button" class="btn btn btn-default"
+								id="dischargeCancelButton">
+								<c:out value="${cancelButton}"></c:out>
+							</button>
+						</p>
+					</form>
+					<button type="button" class="btn btn btn-danger"
+						id="dischargeShowButton">
+						<c:out value="${dischargeButton}"></c:out>
+					</button>
+					<form action="controller" method="get">
+						<input type="hidden" name="command" value="GET_EDIT_PATIENT_PAGE">
+						<button type="submit" class="btn btn btn-warning">
+							<c:out value="${editButton}"></c:out>
+						</button>
+					</form>
 				</div>
 			</div>
 		</div>

@@ -3,6 +3,10 @@ package by.htp6.hospital.dao.impl;
 import java.sql.Connection;
 
 import java.util.Date;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import by.htp6.hospital.dao.AddNewPatientDAO;
@@ -10,7 +14,8 @@ import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
 public class SQLAddNewPatientDAO implements AddNewPatientDAO {
-
+	private static final Logger log = LogManager.getLogger(SQLAddNewPatientDAO.class);
+	
 	@Override
 	public void addNewPatient(String name, String surname, char sex,
 			Date birthDate , String diagnosis, int doctorId, String note) throws DAOException {
@@ -33,8 +38,10 @@ public class SQLAddNewPatientDAO implements AddNewPatientDAO {
 			preparedStatement.close();
 			connectionPool.free(connection);
 		} catch (InterruptedException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		} catch (SQLException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		}
 	}

@@ -9,12 +9,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.htp6.hospital.bean.Log;
 import by.htp6.hospital.dao.GetLogDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
 public class SQLGetLogDAO implements GetLogDAO{
+	private static final Logger log = LogManager.getLogger(SQLGetLogDAO.class);
 
 	@Override
 	public List<Log> getLog() throws DAOException {
@@ -43,8 +47,10 @@ public class SQLGetLogDAO implements GetLogDAO{
 			connectionPool.free(connection);
 			return logList;
 		} catch (InterruptedException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		} catch (SQLException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		}
 	}

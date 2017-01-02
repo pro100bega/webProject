@@ -8,12 +8,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.htp6.hospital.bean.Patient;
 import by.htp6.hospital.dao.FindPatientDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
 public class SQLFindPatientDAO implements FindPatientDAO{
+	private static final Logger log = LogManager.getLogger(SQLFindPatientDAO.class);
 	
 	/**
 	 * @author Бегенч
@@ -52,7 +56,7 @@ public class SQLFindPatientDAO implements FindPatientDAO{
 				int patientId = resultSet.getInt("id");
 				String name = resultSet.getString("name");
 				String surname = resultSet.getString("surname");
-				char sex = resultSet.getString("sex").charAt(0);
+				String sex = resultSet.getString("sex");
 				String birthDate = birthDateFormat.format(resultSet.getDate("birth_date"));
 				String diagnosis = resultSet.getString("diagnosis");
 				String receiptDate = receiptDateFormat.format(resultSet.getDate("receipt_date"));
@@ -66,8 +70,10 @@ public class SQLFindPatientDAO implements FindPatientDAO{
 			connectionPool.free(connection);
 			return patients;
 		} catch (InterruptedException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		} catch (SQLException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		}
 	}
@@ -102,7 +108,7 @@ public class SQLFindPatientDAO implements FindPatientDAO{
 				int patientId = resultSet.getInt("id");
 				String name = resultSet.getString("name");
 				String surname = resultSet.getString("surname");
-				char sex = resultSet.getString("sex").charAt(0);
+				String sex = resultSet.getString("sex");
 				String birthDate = birthDateFormat.format(resultSet.getDate("birth_date"));
 				String diagnosis = resultSet.getString("diagnosis");
 				String receiptDate = receiptDateFormat.format(resultSet.getDate("receipt_date"));
@@ -116,8 +122,10 @@ public class SQLFindPatientDAO implements FindPatientDAO{
 			connectionPool.free(connection);
 			return patients;
 		} catch (InterruptedException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		} catch (SQLException e) {
+			log.error(e.getMessage());
 			throw new DAOException(e);
 		}
 	}

@@ -4,6 +4,7 @@ import by.htp6.hospital.dao.AddNewPatientDAO;
 import by.htp6.hospital.dao.GetAppointmentListDAO;
 import by.htp6.hospital.dao.AddAppointmentDAO;
 import by.htp6.hospital.dao.DischargePatientDAO;
+import by.htp6.hospital.dao.EditPatientDAO;
 import by.htp6.hospital.dao.FindLogDAO;
 import by.htp6.hospital.dao.FindPatientDAO;
 import by.htp6.hospital.dao.GetLogDAO;
@@ -17,6 +18,7 @@ import by.htp6.hospital.dao.impl.SQLAddNewPatientDAO;
 import by.htp6.hospital.dao.impl.SQLGetAppointmentListDAO;
 import by.htp6.hospital.dao.impl.SQLAddAppointmentDAO;
 import by.htp6.hospital.dao.impl.SQLDischargePatientDAO;
+import by.htp6.hospital.dao.impl.SQLEditPatientDAO;
 import by.htp6.hospital.dao.impl.SQLFindLogDAO;
 import by.htp6.hospital.dao.impl.SQLFindPatientDAO;
 import by.htp6.hospital.dao.impl.SQLGetLogDAO;
@@ -55,6 +57,8 @@ public class DAOFactory {
 	private PerformAppointmentDAO performAppointmentDAO = new SQLPerformAppointmentDAO();
 	
 	private GetPatientDAO getPatientDAO = new SQLGetPatientDAO();
+	
+	private EditPatientDAO editPatientDAO = new SQLEditPatientDAO();
 
 	public UserLogInDAO getUserLoginationDAO() {
 		return this.userLoginationDAO;
@@ -106,6 +110,10 @@ public class DAOFactory {
 	
 	public GetPatientDAO getGetPatientDAO() {
 		return this.getPatientDAO;
+	}
+	
+	public EditPatientDAO getEditPatientDAO() {
+		return this.editPatientDAO;
 	}
 	
 	private DAOFactory() {

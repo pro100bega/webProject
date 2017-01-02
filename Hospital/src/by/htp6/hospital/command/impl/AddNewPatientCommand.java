@@ -36,8 +36,9 @@ public class AddNewPatientCommand implements Command{
 		try {
 			addNewPatientService.addNewPatient(name, surname, sex, birthDate,
 					diagnosis, doctorId, note);
-			session.removeAttribute("patients");
 			String url = "doctor/success.jsp";
+			String successMessage = "patientAdded";
+			request.setAttribute("successMessage", successMessage);
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 		} catch (ServiceException e) {

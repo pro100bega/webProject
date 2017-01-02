@@ -24,13 +24,15 @@ public class DischargePatientCommand implements Command {
 			dischargePatientService.dischargePatient(patientId, finalDiagnosis);
 			HttpSession session = request.getSession(false);
 			session.removeAttribute("patients");
-			String url = "doctor/redirection.jsp";
+			String url = "doctor/success.jsp";
+			request.setAttribute("successMessage", "discharge");
 			response.sendRedirect(url);
 		} catch (ServiceException e) {
 			HttpSession session = request.getSession(false);
 			session.removeAttribute("patients");
-			session.setAttribute("error", patientId);
-			String url = "doctor/redirection.jsp";
+			session.setAttribute("error", "true");
+			request.setAttribute("errorMessage", e.getMessage());
+			String url = "doctor/error.jsp";
 			response.sendRedirect(url);
 		}
 		

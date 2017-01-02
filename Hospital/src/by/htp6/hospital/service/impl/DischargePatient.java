@@ -2,6 +2,9 @@ package by.htp6.hospital.service.impl;
 
 import java.util.regex.Matcher;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.htp6.hospital.dao.DischargePatientDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.factory.DAOFactory;
@@ -10,6 +13,7 @@ import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.tools.PatternContainer;
 
 public class DischargePatient implements DischargePatientService{
+	private static final Logger log = LogManager.getLogger(DischargePatient.class);
 
 	@Override
 	public boolean dischargePatient(int patientId, String finalDiagnosis) throws ServiceException {
@@ -32,6 +36,7 @@ public class DischargePatient implements DischargePatientService{
 		try {
 			return dischargePatientDAO.dishcargePatient(patientId, finalDiagnosis);
 		} catch (DAOException e) {
+			log.error(e.getMessage());
 			throw new ServiceException(e);
 		}
 	}
