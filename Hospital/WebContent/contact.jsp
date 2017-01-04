@@ -24,25 +24,37 @@
 <body>
 
 	<%@ include file="elements/index/e_contactNavbar.jsp"%>
-	
+
 	<div class="container">
 		<div class="jumbotron">
-			<h2><c:out value="${contactInformationHeading}"></c:out></h2>
+			<h2>
+				<span class="glyphicon glyphicon-bookmark"></span>
+				<c:out value="${contactInformationHeading}"></c:out>
+			</h2>
 			<address>
-				<strong><c:out value="${phoneNumberHeading}"></c:out></strong> <br>
+				<img src="css/images/contact.jpg" class="img-thumbnail"
+					style="width: 200px;"><br> <strong><c:out
+						value="${begenchMessage} ${shamuradovMessage}"></c:out> <br>
+				</strong>
+			</address>
+			<address>
+				<strong> <span class="glyphicon glyphicon-phone-alt"></span>
+					<c:out value="${phoneNumberHeading}"></c:out></strong> <br>
 				+375(25)786-25-99
 			</address>
 			<address>
-				<strong><c:out value="${emailHeading}"></c:out></strong> <br>
-				<a>pro100bega@gmail.com</a>
+				<strong> <span class="glyphicon glyphicon-envelope"></span>
+					<c:out value="${emailHeading}"></c:out></strong> <br> <a>pro100bega@gmail.com</a>
 			</address>
 			<address>
-				<strong><c:out value="${vkHeading}"></c:out></strong> <br>
-				<a href="https://vk.com/pro100bega">vk.com/pro100bega</a>
+				<strong> <span class="glyphicon glyphicon-link"></span> <c:out
+						value="${vkHeading}"></c:out></strong> <br> <a
+					href="https://vk.com/pro100bega">vk.com/pro100bega</a>
 			</address>
 			<address>
-				<strong><c:out value="${skypeHeading}"></c:out></strong> <br>
-				<a>imabad13</a>
+				<strong>
+				<span class="glyphicon glyphicon-earphone"></span>
+				<c:out value="${skypeHeading}"></c:out></strong> <br> <a>imabad13</a>
 			</address>
 		</div>
 	</div>

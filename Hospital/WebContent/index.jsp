@@ -72,7 +72,7 @@
 		<div class="page-header">
 			<center><h1><c:out value="${aboutTitle}"></c:out></h1></center>
 		</div>
-		<p>
+		<p style="text-indent : 40px;">
 		<c:out value="${aboutMessage}"></c:out> &copy;
 		<c:out value="${bugReportFirstMessage}"></c:out>
 		<a href="bugReport.jsp"><c:out value="${linkMessage}"></c:out></a>

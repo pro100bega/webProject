@@ -33,7 +33,7 @@ public class SQLFindPatientDAO implements FindPatientDAO{
 		try {
 			String query;
 			if (null == orderBy) {
-				query = "CALL find_patients_by_doctor_id(?,?,?,?,receipt_date)";
+				query = "CALL find_patients_by_doctor_id(?,?,?,?,'receipt_date')";
 			} else {
 				query = "CALL find_patients_by_doctor_id(?,?,?,?," + orderBy + ")";
 			}
@@ -85,9 +85,9 @@ public class SQLFindPatientDAO implements FindPatientDAO{
 		try {
 			String query;
 			if (null == orderBy) {
-				query = "CALL find_patients_by_doctor_id(?,?,?,receipt_date)";
+				query = "CALL find_patients(?,?,?,'receipt_date')";
 			} else {
-				query = "CALL find_patients_by_doctor_id(?,?,?," + orderBy + ")";
+				query = "CALL find_patients(?,?,?," + orderBy + ")";
 			}
 			
 			Connection connection = connectionPool.take();

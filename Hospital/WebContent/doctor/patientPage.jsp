@@ -35,7 +35,7 @@
 <link rel="stylesheet" href="css/dashboard.css">
 
 
-<c:set var="selectedPatient" value="${sessionScope.selectedPatient}"></c:set>
+<c:set var="selectedPatient" value="${requestScope.selectedPatient}"></c:set>
 <c:set var="patientName" value="${selectedPatient.name}"></c:set>
 <c:set var="patientSurname" value="${selectedPatient.surname}"></c:set>
 
@@ -154,6 +154,7 @@
 											<form>
 												<button type="button" class="btn btn btn-success"
 													data-toggle="modal" data-target="#newAppointmentModal">
+													<span class="glyphicon glyphicon-plus"></span>
 													<c:out value="${addAppointmentButton}">
 													</c:out>
 												</button>
@@ -165,7 +166,8 @@
 						</div>
 					</div>
 
-					<form action="" style="display: none;" id="dischargeForm">
+					<form action="controller" method="post" style="display: none;"
+						id="dischargeForm">
 						<input type="hidden" name="command" value="DISCHARGE_PATIENT">
 						<input type="hidden" name="patientId"
 							value="${selectedPatient.id}">
@@ -175,10 +177,11 @@
 						</p>
 						<p>
 							<textarea rows="3" cols="3" class="form-control"
-								name="finalDiagnois" placeholder="${finalDiagnosisPlaceholder}"></textarea>
+								name="finalDiagnosis" placeholder="${finalDiagnosisPlaceholder}"></textarea>
 						</p>
 						<p>
 							<button type="sumbit" class="btn btn btn-danger">
+								<span class="glyphicon glyphicon-trash"></span>
 								<c:out value="${dischargeButton}"></c:out>
 							</button>
 							<button type="button" class="btn btn btn-default"
@@ -189,11 +192,15 @@
 					</form>
 					<button type="button" class="btn btn btn-danger"
 						id="dischargeShowButton">
+						<span class="glyphicon glyphicon-trash"></span>
 						<c:out value="${dischargeButton}"></c:out>
 					</button>
+
 					<form action="controller" method="get">
-						<input type="hidden" name="command" value="GET_EDIT_PATIENT_PAGE">
+						<br> <input type="hidden" name="command"
+							value="GET_EDIT_PATIENT_PAGE">
 						<button type="submit" class="btn btn btn-warning">
+							<span class="glyphicon glyphicon-pencil"></span>
 							<c:out value="${editButton}"></c:out>
 						</button>
 					</form>

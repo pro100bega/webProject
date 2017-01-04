@@ -23,15 +23,15 @@
 				<li><a href="about.jsp"><c:out value="${about}"></c:out></a></li>
 				<li><a href="contact.jsp"><c:out value="${contact}"></c:out></a></li>
 				<li class="active"><a
-					href="controller?command=GET_PATIENT_LIST">
-						<c:out value="${doctorPanel}"></c:out>
+					href="controller?command=GET_PATIENT_LIST"> <c:out
+							value="${doctorPanel}"></c:out>
 				</a></li>
 			</ul>
 			<form class="navbar-nav navbar-right" action="controller"
 				method="get">
 				<input type="hidden" name="command" value="SET_LOCALE"> <input
 					type="hidden" name="localeName" value="ru_RU"> <input
-					type="hidden" name="redirect" 
+					type="hidden" name="redirect"
 					value="controller?command=GET_PATIENT_LIST">
 				<button type="submit" id="ru-button"></button>
 			</form>
@@ -39,16 +39,20 @@
 				method="get">
 				<input type="hidden" name="command" value="SET_LOCALE"> <input
 					type="hidden" name="localeName" value="en_US"> <input
-					type="hidden" name="redirect" 
+					type="hidden" name="redirect"
 					value="controller?command=GET_PATIENT_LIST">
 				<button type="submit" id="en-button"></button>
 			</form>
 			<form class="navbar-form navbar-right" action="controller"
 				method="post">
-				<input type="hidden" name="command" value="FIND_PATIENT"> <input
-					type="search" class="form-control" name="searchData"
-					placeholder="${searchPlaceholder}"
-					value="${requestScope.searchData}">
+				<div class="form-group has-feedback">
+					<input type="hidden" name="command" value="FIND_PATIENT"> <input
+						type="search" class="form-control" name="searchData"
+						placeholder="${searchPlaceholder}"
+						pattern="^[А-Яа-я0-9\._: ]{1,18}$"
+						value="${requestScope.searchData}"> <span
+						class="glyphicon glyphicon-search form-control-feedback"> </span>
+				</div>
 			</form>
 			<form class="navbar-form navbar-right" id="newPatientForm">
 				<button type="button" class="btn btn btn-success"
@@ -58,7 +62,7 @@
 			</form>
 			<form class="navbar-form navbar-right" action="controller"
 				method="get">
-				<input type="hidden" name="command" value="SIGN_OUT"> <span
+				<input type="hidden" name="command" value="SIGN_OUT"><span
 					style="color: #9e9e9e;"> <c:out
 						value="${sessionScope.authorisedUser.username}">
 					</c:out>

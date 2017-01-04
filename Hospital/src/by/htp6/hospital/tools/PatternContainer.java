@@ -33,6 +33,15 @@ public class PatternContainer {
 			Pattern.compile("((0[1-9]|[12]\\d)\\.(0[1-9]|1[012])|30\\.(0[13-9]|1[012])"
 					+ "|31\\.(0[13578]|1[02]))\\.(19|20)\\d\\d");
 	
+	//Note format pattern
 	public static final Pattern notePatern =
-			Pattern.compile("^[А-Яа-я0-9\\. -,]{0,100}");
+			Pattern.compile("^[А-Яа-я0-9\\. \\-,]{0,100}");
+	
+	//Bug report header format pattern
+	public static final Pattern headerPattern =
+			Pattern.compile("^[A-Za-z \\.,\\-!\\?]{5,20}$|^[А-Яа-я ё\\.,\\-!\\?]{5,20}$");
+	
+	//Bug report message format pattern
+	public static final Pattern messagePattern =
+			Pattern.compile("^[A-Za-z \\.,\\-!\\?]{5,255}$|^[А-Яа-я ё\\.,\\-!\\?]{5,255}$");
 }

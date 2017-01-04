@@ -8,12 +8,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<%@include file="../elements/doctor/e_localeMessages.jsp"%>
+<%@include file="../elements/nurse/e_localeMessages.jsp"%>
 <script src="scripts/jquery-3.1.1.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$(".row").fadeIn(1500);
-		$("#newPatientForm").remove();
+		$(".row").fadeIn(600);
 	});
 </script>
 <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css" />
@@ -23,13 +22,11 @@
 
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
-<title><c:out value="${doctorPanelTitle}"></c:out></title>
+<title><c:out value="${nursePanelTitle}"></c:out></title>
 </head>
 <body>
 
-	<%@ include file="../elements/doctor/e_newPatientModal.jsp"%>
-
-	<%@ include file="../elements/doctor/e_navbar.jsp"%>
+	<%@ include file="../elements/nurse/e_navbar.jsp"%>
 	<div class="container">
 		<div class="row">
 

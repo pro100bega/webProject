@@ -2,7 +2,6 @@ package by.htp6.hospital.command.impl;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +17,7 @@ public class SignOutCommand implements Command{
 		HttpSession session = request.getSession();
 		session.invalidate();
 		String url = "index.jsp";
-		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-		dispatcher.forward(request, response);
+		response.sendRedirect(url);
 	}
 
 }

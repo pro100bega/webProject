@@ -14,7 +14,7 @@ import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
 public class SQLUserLoginationDAO implements UserLogInDAO {
-	private static final Logger log = LogManager.getLogger(SQLUserLoginationDAO.class);
+	private static final Logger log = LogManager.getRootLogger();
 
 	@Override
 	public User logination(String username, String password) throws DAOException {

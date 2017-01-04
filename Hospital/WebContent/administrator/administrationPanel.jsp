@@ -27,6 +27,13 @@
 								value="${databaseLogMessage}">
 							</c:out>
 					</a></li>
+					<li><a
+						href="controller?command=GET_REPORTS&currentPage=1&reportsPerPage=13">
+							<c:out
+								value="${bugsMessage} 
+							(${requestScope.unreadReportsCount})">
+							</c:out>
+					</a></li>
 					<li><a href="#"> <c:out value="${userListMessage}">
 							</c:out>
 					</a></li>
@@ -40,9 +47,11 @@
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
 				id="databaseLogPanel">
-				<h2 class="subheader">
-					<c:out value="${databaseLogMessage}"></c:out>
-				</h2>
+				<div class="page-header">
+					<h2 class="subheader">
+						<c:out value="${databaseLogMessage}"></c:out>
+					</h2>
+				</div>
 				<div class="panel panel-default">
 					<table class="table">
 						<thead>
@@ -55,7 +64,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="log" items="${sessionScope.logList}">
+							<c:forEach var="log" items="${requestScope.logList}">
 								<tr>
 									<td><c:out value="${log.id}"></c:out>
 									<td><c:out value="${log.message}"></c:out>

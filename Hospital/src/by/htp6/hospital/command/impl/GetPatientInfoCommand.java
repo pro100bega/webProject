@@ -45,8 +45,8 @@ public class GetPatientInfoCommand implements Command {
 			List<Appointment> appointents = getAppointmentList.
 					getAppointmentList(selectedPatient.getId(), status);
 
-			session.setAttribute("selectedPatient", selectedPatient);
-			session.setAttribute("appointments", appointents);
+			request.setAttribute("selectedPatient", selectedPatient);
+			request.setAttribute("appointments", appointents);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);

@@ -15,6 +15,7 @@
 	var="adminPanel" />
 <fmt:message bundle="${local}" key="title.error" var="errorTitle" />
 <fmt:message bundle="${local}" key="title.adminPanel" var="adminPanelTitle" />
+<fmt:message bundle="${local}" key="title.bugReport" var="bugReportTitle" />
 <fmt:message bundle="${local}" key="placeholder.search" var="searchPlaceholder" />
 <fmt:message bundle="${local}" key="message.patientInfo" var="patientInfo" />
 <fmt:message bundle="${local}" key="message.name" var="nameMessage" />
@@ -24,9 +25,14 @@
 <fmt:message bundle="${local}" key="message.userList" var="userListMessage" />
 <fmt:message bundle="${local}" key="message.doctorList" var="doctorListMessage" />
 <fmt:message bundle="${local}" key="message.nurseList" var="nurseListMessage" />
+<fmt:message bundle="${local}" key="message.header" var="headerMessage" />
+<fmt:message bundle="${local}" key="message.message" var="messageMessage" />
+<fmt:message bundle="${local}" key="message.time" var="timeMessage" />
 <fmt:message bundle="${local}" key="button.signOut" var="signOutButton" />
 <fmt:message bundle="${local}" key="button.newDoctor" var="newDoctorButton"/>
 <fmt:message bundle="${local}" key="button.addNewDoctor" var="addNewDoctorButton"/>
+<fmt:message bundle="${local}" key="button.return" var="returnButton"/>
+<fmt:message bundle="${local}" key="heading.bugs" var="bugsMessage"/>
 <fmt:message bundle="${local}" key="heading.log.message" var="logMessageHeading"/>
 <fmt:message bundle="${local}" key="heading.log.tableName" var="logTableNameHeading"/>
 <fmt:message bundle="${local}" key="heading.log.rowId" var="logRowIdHeading"/>

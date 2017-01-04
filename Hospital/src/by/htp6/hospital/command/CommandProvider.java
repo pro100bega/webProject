@@ -12,12 +12,15 @@ import by.htp6.hospital.command.impl.AddAddpointmentCommand;
 import by.htp6.hospital.command.impl.DischargePatientCommand;
 import by.htp6.hospital.command.impl.EditPatientCommand;
 import by.htp6.hospital.command.impl.GetPatientListCommand;
+import by.htp6.hospital.command.impl.GetReportsCommand;
+import by.htp6.hospital.command.impl.GetSingleReportCommand;
 import by.htp6.hospital.command.impl.FindLogCommand;
 import by.htp6.hospital.command.impl.FindPatientCommand;
 import by.htp6.hospital.command.impl.GetAdministratorInfoCommand;
 import by.htp6.hospital.command.impl.GetEditPatientPageCommand;
 import by.htp6.hospital.command.impl.GetPatientInfoCommand;
 import by.htp6.hospital.command.impl.PerformAppointmentCommand;
+import by.htp6.hospital.command.impl.SendReportCommand;
 import by.htp6.hospital.command.impl.SetLocaleCommand;
 
 public class CommandProvider {
@@ -41,6 +44,9 @@ public class CommandProvider {
 		commands.put("PERFORM_APPOINTMENT", new PerformAppointmentCommand());
 		commands.put("GET_EDIT_PATIENT_PAGE", new GetEditPatientPageCommand());
 		commands.put("EDIT_PATIENT", new EditPatientCommand());
+		commands.put("SEND_REPORT", new SendReportCommand());
+		commands.put("GET_REPORTS", new GetReportsCommand());
+		commands.put("GET_SINGLE_REPORT", new GetSingleReportCommand());
 	}
 	
 	public static CommandProvider getInstance(){

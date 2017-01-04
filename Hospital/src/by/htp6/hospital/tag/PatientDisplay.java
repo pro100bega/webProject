@@ -9,12 +9,12 @@ import java.util.ResourceBundle;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.BodyTagSupport;
+import javax.servlet.jsp.tagext.TagSupport;
 
 import by.htp6.hospital.bean.Patient;
 
 @SuppressWarnings("serial")
-public class PatientDisplay extends BodyTagSupport {
+public class PatientDisplay extends TagSupport {
 
 	private List<Patient> patients;
 
@@ -82,7 +82,6 @@ public class PatientDisplay extends BodyTagSupport {
 			out.write("</tr>");
 			out.write("</thead>");
 			out.write("<tbody>");
-			out.write("<tr>");
 			for (Patient patient : patients) {
 				out.write("<tr>");
 				out.write("<td>" + patient.getName() + "</td>");
@@ -91,9 +90,8 @@ public class PatientDisplay extends BodyTagSupport {
 				out.write("<td>" + patient.getReceiptDate() + "</td>");
 				out.write("<td><a href=\"controller?command=GET_PATIENT_INFO&status=undone"
 						+ "&patientId=" + patient.getId() + "\">" + learnMore + "</td>");
-				out.write("<tr>");
+				out.write("</tr>");
 			}
-			out.write("</tr>");
 			out.write("</tbody>");
 			out.write("</table>");
 			out.write("<center>");

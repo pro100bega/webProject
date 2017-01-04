@@ -25,7 +25,7 @@
 								value="${doctorPanel}"></c:out></a></li>
 				</c:if>
 				<c:if test="${sessionScope.authorisedUser.type eq 'admin'}">
-					<li><a href="administrator/redirection.jsp"> <c:out
+					<li><a href="controller?command=GET_ADMIN_INFO"> <c:out
 								value="${adminPanel}"></c:out></a></li>
 				</c:if>
 				<c:if test="${sessionScope.authorisedUser.type eq 'nurse'}">
