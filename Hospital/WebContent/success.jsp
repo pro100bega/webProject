@@ -9,6 +9,7 @@
 <%@ include file="elements/index/e_localeMessages.jsp" %>
 
 <fmt:message bundle="${local}" key="success.sendReport" var="sendReportSuccess"/>
+<fmt:message bundle="${local}" key="success.signUp" var="signUpSuccess"/>
 
 <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/starter-template.css">
@@ -36,6 +37,9 @@
 				<c:choose>
 					<c:when test="${message == 'sendReport'}">
 						<c:set var="successMessage" value="${sendReportSuccess}"></c:set>
+					</c:when>
+					<c:when test="${message == 'signUp'}">
+						<c:set var="successMessage" value="${signUpSuccess}"></c:set>
 					</c:when>
 				</c:choose>
 				<strong><c:out value="${successMessage}"></c:out></strong>

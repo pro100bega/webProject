@@ -9,6 +9,16 @@ public class User {
 	
 	private String type;
 	
+	private String createTime;
+	
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -43,10 +53,12 @@ public class User {
 	
 	public User(){}
 	
-	public User(int id, String username, String password, String type){
+	public User(int id, String username, String password, String type,
+			String createTime){
 		this.id = id;
 		this.username = username;
 		this.type = type;
 		this.password = password;
+		this.createTime = createTime;
 	}
 }

@@ -35,7 +35,7 @@ public class GetAdministratorInfoCommand implements Command {
 					getUnreadReportsCount.getUnreadReportsCountService();
 			
 			request.setAttribute("logList", logList);
-			request.setAttribute("unreadReportsCount", unreadReportsCount);
+			session.setAttribute("unreadReportsCount", unreadReportsCount);
 			
 			String url = "administrator/administrationPanel.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);

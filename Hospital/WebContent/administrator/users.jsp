@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="/WEB-INF/tld/reportDisplay.tld" prefix="ctg"%>
+<%@ taglib uri="/WEB-INF/tld/userDisplay.tld" prefix="ctg"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="css/dashboard.css">
 
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-<title>${bugReportTitle}</title>
+<title>${userListMessage}</title>
 </head>
 <body>
 	<%@include file="../elements/administrator/e_reportNavbar.jsp"%>
@@ -28,14 +28,14 @@
 								value="${databaseLogMessage}">
 							</c:out>
 					</a></li>
-					<li class="active"><a href="#"> <c:out
+					<li><a
+						href="controller?command=GET_REPORTS&currentPage=1&reportsPerPage=13">
+							<c:out
 								value="${bugsMessage} 
 							(${sessionScope.unreadReportsCount})">
 							</c:out>
 					</a></li>
-					<li><a
-						href="controller?command=GET_USER_LIST&currentPage=1&usersPerPage=9">
-							<c:out value="${userListMessage}">
+					<li class="active"><a href="#"> <c:out value="${userListMessage}">
 							</c:out>
 					</a></li>
 				</ul>
@@ -44,17 +44,17 @@
 				id="databaseLogPanel">
 				<div class="page-header">
 					<h2 class="subheader">
-						<c:out value="${bugsMessage}"></c:out>
+						<c:out value="${userListMessage}"></c:out>
 					</h2>
 				</div>
-				<c:set var="reports" value="${requestScope.reports}"></c:set>
-				<c:set var="reportsCount" value="${requestScope.reportsCount}"></c:set>
+				<c:set var="users" value="${requestScope.users}"></c:set>
+				<c:set var="usersCount" value="${requestScope.usersCount}"></c:set>
 				<c:set var="currentPage" value="${sessionScope.currentPage}"></c:set>
-				<c:set var="reportsPerPage" value="${sessionScope.reportsPerPage}"></c:set>
+				<c:set var="usersPerPage" value="${sessionScope.usersPerPage}"></c:set>
 
-				<ctg:reportDisplay reports="${reports}"
-					reportsCount="${reportsCount}" currentPage="${currentPage}"
-					reportsPerPage="${reportsPerPage}" />
+				<ctg:userDisplay users="${users}"
+					usersCount="${usersCount}" currentPage="${currentPage}"
+					usersPerPage="${usersPerPage}" />
 			</div>
 		</div>
 	</div>

@@ -8,6 +8,8 @@ import by.htp6.hospital.service.GetReportsCountService;
 import by.htp6.hospital.service.GetReportsService;
 import by.htp6.hospital.service.GetSingleReportService;
 import by.htp6.hospital.service.GetUnreadReportsCountService;
+import by.htp6.hospital.service.GetUserListService;
+import by.htp6.hospital.service.GetUsersCountService;
 import by.htp6.hospital.service.PerformAppointmentService;
 import by.htp6.hospital.service.SendReportService;
 import by.htp6.hospital.service.AddNewPatientService;
@@ -26,6 +28,8 @@ import by.htp6.hospital.service.impl.GetReports;
 import by.htp6.hospital.service.impl.GetReportsCount;
 import by.htp6.hospital.service.impl.GetSingleReport;
 import by.htp6.hospital.service.impl.GetUnreadReportsCount;
+import by.htp6.hospital.service.impl.GetUserList;
+import by.htp6.hospital.service.impl.GetUsersCount;
 import by.htp6.hospital.service.impl.PerformAppointment;
 import by.htp6.hospital.service.impl.SendReport;
 import by.htp6.hospital.service.impl.AddNewPatient;
@@ -80,6 +84,10 @@ public class ServiceFactory {
 	
 	private GetSingleReportService getSingleReport = new GetSingleReport();
 
+	private GetUserListService getUserList = new GetUserList();
+	
+	private GetUsersCountService getUsersCount = new GetUsersCount();
+	
 	public LogInService getLoginUser() {
 		return this.logIn;
 	}
@@ -156,6 +164,14 @@ public class ServiceFactory {
 		return this.getSingleReport;
 	}
 
+	public GetUserListService getGetUserList() {
+		return this.getUserList;
+	}
+	
+	public GetUsersCountService getGetUsersCount() {
+		return this.getUsersCount;
+	}
+	
 	private ServiceFactory() {
 	}
 

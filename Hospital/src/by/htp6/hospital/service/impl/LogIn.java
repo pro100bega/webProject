@@ -7,7 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import by.htp6.hospital.bean.User;
-import by.htp6.hospital.dao.UserLogInDAO;
+import by.htp6.hospital.dao.LogInDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.factory.DAOFactory;
 import by.htp6.hospital.service.LogInService;
@@ -40,13 +40,13 @@ public class LogIn implements LogInService{
 		
 		DAOFactory daoFactory = DAOFactory.getInstance();
 		
-		UserLogInDAO userLoginationDao = daoFactory.getUserLoginationDAO();
+		LogInDAO logInDao = daoFactory.getLogInDAO();
 		
 		User user;
 		
 		try {
 			String encryptedPassword = MD5Encryptor.getHashCode(password);
-			user = userLoginationDao.logination(username, encryptedPassword);
+			user = logInDao.logIn(username, encryptedPassword);
 			return user;
 			
 		} catch (DAOException e) {

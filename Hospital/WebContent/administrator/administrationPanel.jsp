@@ -31,16 +31,12 @@
 						href="controller?command=GET_REPORTS&currentPage=1&reportsPerPage=13">
 							<c:out
 								value="${bugsMessage} 
-							(${requestScope.unreadReportsCount})">
+							(${sessionScope.unreadReportsCount})">
 							</c:out>
 					</a></li>
-					<li><a href="#"> <c:out value="${userListMessage}">
-							</c:out>
-					</a></li>
-					<li><a href="#"> <c:out value="${doctorListMessage}">
-							</c:out>
-					</a></li>
-					<li><a href="#"> <c:out value="${nurseListMessage}">
+					<li><a
+						href="controller?command=GET_USER_LIST&currentPage=1&usersPerPage=9">
+							<c:out value="${userListMessage}">
 							</c:out>
 					</a></li>
 				</ul>

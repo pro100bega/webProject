@@ -36,7 +36,7 @@ public class GetSingleReportCommand implements Command{
 			Report report = getSingleReport.getReport(userType, reportId);
 			int unreadReportsCount = 
 					getUnreadReportsCount.getUnreadReportsCountService();
-			request.setAttribute("unreadReportsCount", unreadReportsCount);
+			session.setAttribute("unreadReportsCount", unreadReportsCount);
 			request.setAttribute("report", report);
 			
 			String url = "administrator/reportPage.jsp";

@@ -29,17 +29,14 @@
 							</c:out>
 					</a></li>
 					<li class="active"><a href="controller?command=GET_REPORTS">
-							<c:out value="${bugsMessage} 
-							(${requestScope.unreadReportsCount})">
+							<c:out
+								value="${bugsMessage} 
+							(${sessionScope.unreadReportsCount})">
 							</c:out>
 					</a></li>
-					<li><a href="#"> <c:out value="${userListMessage}">
-							</c:out>
-					</a></li>
-					<li><a href="#"> <c:out value="${doctorListMessage}">
-							</c:out>
-					</a></li>
-					<li><a href="#"> <c:out value="${nurseListMessage}">
+					<li><a
+						href="controller?command=GET_USER_LIST&currentPage=1&usersPerPage=9">
+							<c:out value="${userListMessage}">
 							</c:out>
 					</a></li>
 				</ul>

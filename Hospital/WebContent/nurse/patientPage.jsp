@@ -6,14 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<%@ include file="../elements/doctor/e_localeMessages.jsp"%>
+<%@ include file="../elements/nurse/e_localeMessages.jsp"%>
 <script src="scripts/jquery-3.1.1.js"></script>
 <script src="css/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$(".panel-body").fadeIn(1500);
-		$(".panel-heading").on("click", function(){
-			$(".panel-body").slideToggle(1000);
+		$(".panel-body").fadeIn(500);
+		$(".panel-heading").on("click", function() {
+			$(".panel-body").slideToggle(500);
 		});
 	});
 </script>
@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="css/dashboard.css">
 
 
-<c:set var="selectedPatient" value="${sessionScope.selectedPatient}"></c:set>
+<c:set var="selectedPatient" value="${requestScope.selectedPatient}"></c:set>
 <c:set var="patientName" value="${selectedPatient.name}"></c:set>
 <c:set var="patientSurname" value="${selectedPatient.surname}"></c:set>
 
@@ -31,9 +31,7 @@
 <title><c:out value="${patientSurname} ${patientName}"></c:out></title>
 </head>
 <body>
-	<%@ include file="../elements/doctor/e_patientNavbar.jsp"%>
-
-	<%@ include file="../elements/doctor/e_newAppointmentModal.jsp"%>
+	<%@ include file="../elements/nurse/e_patientNavbar.jsp"%>
 
 	<div class="container-fluid">
 		<div class="row">
@@ -94,62 +92,58 @@
 							</h3>
 						</div>
 						<div class="panel-body" style="display: none;">
-							<table class="table table-hover">
-								<thead>
-									<tr class="success">
-										<td><strong> <c:out
-													value="${appointmentTypeMessage}"></c:out>
-										</strong></td>
-										<td><strong> <c:out
-													value="${appointmentNameMessage}"></c:out>
-										</strong></td>
-										<td><strong> <c:out
-													value="${appointmentTimeMessage}"></c:out>
-										</strong></td>
-										<td><strong> <c:out
-													value="${executionPeriodMessage}"></c:out>
-										</strong></td>
-										<td></td>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="appointment"
-										items="${sessionScope.appointments}">
-										<tr>
-											<td><c:out value="${appointment.type}"></c:out></td>
-											<td><c:out value="${appointment.name}"></c:out></td>
-											<td><c:out value="${appointment.appointmentDate}">
-												</c:out></td>
-											<td><c:out value="${appointment.appointmentTerm}">
-												</c:out></td>
-											<td>
-												<form action="controller" method="post">
-													<input type="hidden" name="command"
-														value="PERFORM_APPOINTMENT"> <input type="hidden"
-														name="id" value="${appointment.id}"> <input
-														type="hidden" name="type" value="${appointment.type}">
-													<button type="submit" class="btn btn-sm btn-success">
-														<c:out value="${performAppointmentButton}">
-														</c:out>
-													</button>
-												</form>
-											</td>
+							<c:if test="${requestScope.appointments == null}">
+								<h4>
+									<c:out value="${emptyAppointmentsMessage}"></c:out>
+								</h4>
+							</c:if>
+							<c:if test="${requestScope.appointments != null}">
+								<table class="table table-hover">
+									<thead>
+										<tr class="success">
+											<td><strong> <c:out
+														value="${appointmentTypeMessage}"></c:out>
+											</strong></td>
+											<td><strong> <c:out
+														value="${appointmentNameMessage}"></c:out>
+											</strong></td>
+											<td><strong> <c:out
+														value="${appointmentTimeMessage}"></c:out>
+											</strong></td>
+											<td><strong> <c:out
+														value="${executionPeriodMessage}"></c:out>
+											</strong></td>
+											<td></td>
 										</tr>
-									</c:forEach>
-									<tr>
+									</thead>
+									<tbody>
+										<c:forEach var="appointment"
+											items="${requestScope.appointments}">
+											<tr>
+												<td><c:out value="${appointment.type}"></c:out></td>
+												<td><c:out value="${appointment.name}"></c:out></td>
+												<td><c:out value="${appointment.appointmentDate}">
+													</c:out></td>
+												<td><c:out value="${appointment.appointmentTerm}">
+													</c:out></td>
+												<td>
+													<form action="controller" method="post">
+														<input type="hidden" name="command"
+															value="PERFORM_APPOINTMENT"> <input type="hidden"
+															name="id" value="${appointment.id}"> <input
+															type="hidden" name="type" value="${appointment.type}">
+														<button type="submit" class="btn btn-sm btn-success">
+															<c:out value="${performAppointmentButton}">
+															</c:out>
+														</button>
+													</form>
+												</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</c:if>
 
-										<td>
-											<form>
-												<button type="button" class="btn btn btn-success"
-													data-toggle="modal" data-target="#newAppointmentModal">
-													<c:out value="${addAppointmentButton}">
-													</c:out>
-												</button>
-											</form>
-										</td>
-									</tr>
-								</tbody>
-							</table>
 						</div>
 					</div>
 				</div>

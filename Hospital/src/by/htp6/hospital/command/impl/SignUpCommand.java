@@ -7,7 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import by.htp6.hospital.bean.User;
 import by.htp6.hospital.command.Command;
 import by.htp6.hospital.service.LogUpService;
 import by.htp6.hospital.service.exception.ServiceException;
@@ -25,15 +24,13 @@ public class SignUpCommand implements Command{
 		
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		LogUpService logUpUserService = serviceFactory.getLogUpUser();
-		
-		User user = null;
+
 		try {
-			user = logUpUserService.logUp(username, password, userType);
-			request.setAttribute("user", user);
+			logUpUserService.logUp(username, password, userType);
+			request.setAttribute("successMessage", "signUp");
 			
-			String url = "WEB-INF/signUpSuccess.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-			dispatcher.forward(request, response);
+			String url = "success.jsp";
+			response.sendRedirect(url);
 			
 		} catch (ServiceException e) {
 			String url = "signUp.jsp";

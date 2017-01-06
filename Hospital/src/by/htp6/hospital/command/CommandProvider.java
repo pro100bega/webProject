@@ -14,6 +14,7 @@ import by.htp6.hospital.command.impl.EditPatientCommand;
 import by.htp6.hospital.command.impl.GetPatientListCommand;
 import by.htp6.hospital.command.impl.GetReportsCommand;
 import by.htp6.hospital.command.impl.GetSingleReportCommand;
+import by.htp6.hospital.command.impl.GetUserListCommand;
 import by.htp6.hospital.command.impl.FindLogCommand;
 import by.htp6.hospital.command.impl.FindPatientCommand;
 import by.htp6.hospital.command.impl.GetAdministratorInfoCommand;
@@ -47,6 +48,7 @@ public class CommandProvider {
 		commands.put("SEND_REPORT", new SendReportCommand());
 		commands.put("GET_REPORTS", new GetReportsCommand());
 		commands.put("GET_SINGLE_REPORT", new GetSingleReportCommand());
+		commands.put("GET_USER_LIST", new GetUserListCommand());
 	}
 	
 	public static CommandProvider getInstance(){

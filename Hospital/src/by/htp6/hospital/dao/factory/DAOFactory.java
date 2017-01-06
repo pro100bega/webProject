@@ -15,10 +15,12 @@ import by.htp6.hospital.dao.GetReportsCountDAO;
 import by.htp6.hospital.dao.GetReportsDAO;
 import by.htp6.hospital.dao.GetSingleReportDAO;
 import by.htp6.hospital.dao.GetUnreadReportsCountDAO;
+import by.htp6.hospital.dao.GetUserListDAO;
+import by.htp6.hospital.dao.GetUsersCountDAO;
 import by.htp6.hospital.dao.PerformAppointmentDAO;
 import by.htp6.hospital.dao.SendReportDAO;
-import by.htp6.hospital.dao.UserLogInDAO;
-import by.htp6.hospital.dao.UserLogUpDAO;
+import by.htp6.hospital.dao.LogInDAO;
+import by.htp6.hospital.dao.LogUpDAO;
 import by.htp6.hospital.dao.impl.SQLAddNewPatientDAO;
 import by.htp6.hospital.dao.impl.SQLGetAppointmentListDAO;
 import by.htp6.hospital.dao.impl.SQLAddAppointmentDAO;
@@ -34,17 +36,19 @@ import by.htp6.hospital.dao.impl.SQLGetReportsCountDAO;
 import by.htp6.hospital.dao.impl.SQLGetReportsDAO;
 import by.htp6.hospital.dao.impl.SQLGetSingleReportDAO;
 import by.htp6.hospital.dao.impl.SQLGetUnreadReportsCountDAO;
+import by.htp6.hospital.dao.impl.SQLGetUserListDAO;
+import by.htp6.hospital.dao.impl.SQLGetUsersCountDAO;
 import by.htp6.hospital.dao.impl.SQLPerformAppointmentDAO;
 import by.htp6.hospital.dao.impl.SQLSendReportDAO;
-import by.htp6.hospital.dao.impl.SQLUserLoginationDAO;
-import by.htp6.hospital.dao.impl.SQLUserRegistrationDAO;
+import by.htp6.hospital.dao.impl.SQLLogInDAO;
+import by.htp6.hospital.dao.impl.SQLLogUpDAO;
 
 public class DAOFactory {
 	private static final DAOFactory instance = new DAOFactory();
 
-	private UserLogInDAO userLoginationDAO = new SQLUserLoginationDAO();
+	private LogInDAO logInDAO = new SQLLogInDAO();
 
-	private UserLogUpDAO userRegistrationDAO = new SQLUserRegistrationDAO();
+	private LogUpDAO logUpDAO = new SQLLogUpDAO();
 
 	private GetPatientListDAO getPatientListDAO = new SQLGetPatientListDAO();
 
@@ -79,13 +83,17 @@ public class DAOFactory {
 	private GetUnreadReportsCountDAO getUnreadReportsCountDAO = new SQLGetUnreadReportsCountDAO();
 	
 	private GetSingleReportDAO getSingleReportDAO = new SQLGetSingleReportDAO();
+	
+	private GetUserListDAO getUserListDAO = new SQLGetUserListDAO();
+	
+	private GetUsersCountDAO getUsersCountDAO = new SQLGetUsersCountDAO();
 
-	public UserLogInDAO getUserLoginationDAO() {
-		return this.userLoginationDAO;
+	public LogInDAO getLogInDAO() {
+		return this.logInDAO;
 	}
 
-	public UserLogUpDAO getUserRegistrationDAO() {
-		return this.userRegistrationDAO;
+	public LogUpDAO getLogUpDAO() {
+		return this.logUpDAO;
 	}
 
 	public GetPatientListDAO getGetPatientListDAO() {
@@ -156,6 +164,14 @@ public class DAOFactory {
 		return this.getSingleReportDAO;
 	}
 
+	public GetUserListDAO getGetUserListDAO() {
+		return this.getUserListDAO;
+	}
+	
+	public GetUsersCountDAO getGetUsersCountDAO() {
+		return this.getUsersCountDAO;
+	}
+	
 	private DAOFactory() {
 	}
 

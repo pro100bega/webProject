@@ -37,16 +37,19 @@ public class GetPatientInfoCommand implements Command {
 			if (userType.equals("doctor")){
 				url = "doctor/patientPage.jsp";
 			} else if (userType.equals("nurse")) {
-				url = "doctor/patientPage.jsp";
+				url = "nurse/patientPage.jsp";
 			}
 			
 			Patient selectedPatient = getPatient.getPatient(patientId);
 			String status = request.getParameter("status");
-			List<Appointment> appointents = getAppointmentList.
+			List<Appointment> appointments = getAppointmentList.
 					getAppointmentList(selectedPatient.getId(), status);
 
 			request.setAttribute("selectedPatient", selectedPatient);
-			request.setAttribute("appointments", appointents);
+			
+			if (!appointments.isEmpty()) {
+				request.setAttribute("appointments", appointments);
+			}
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);

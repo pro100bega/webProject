@@ -1,6 +1,7 @@
 package by.htp6.hospital.dao.impl;
 
 import java.sql.CallableStatement;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,16 +10,15 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.htp6.hospital.bean.User;
-import by.htp6.hospital.dao.UserLogUpDAO;
+import by.htp6.hospital.dao.LogUpDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
-public class SQLUserRegistrationDAO implements UserLogUpDAO {
-	private static final Logger log = LogManager.getLogger(SQLUserRegistrationDAO.class);
+public class SQLLogUpDAO implements LogUpDAO {
+	private static final Logger log = LogManager.getLogger(SQLLogUpDAO.class);
 	
 	@Override
-	public User registration(String username, String password, String userType) throws DAOException {
+	public void logUp(String username, String password, String userType) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		try {
 			Connection connection = connectionPool.take();
@@ -30,12 +30,10 @@ public class SQLUserRegistrationDAO implements UserLogUpDAO {
 					preparedStatement.setString(2, password);
 					preparedStatement.setString(3, userType);
 					preparedStatement.executeUpdate();
-
-					User user = getUserFromDatabase(connection, username);
+					
 					preparedStatement.close();
 					connectionPool.free(connection);
 
-					return user;
 				} catch (SQLException e) {
 					log.error(e.getMessage());
 					connectionPool.free(connection);
@@ -79,27 +77,4 @@ public class SQLUserRegistrationDAO implements UserLogUpDAO {
 			throw new DAOException(e);
 		}
 	}
-
-	/**
-	 * @param username
-	 *            Creates and returns {@code User} object from database.
-	 */
-	private User getUserFromDatabase(Connection connection, String username) throws DAOException {
-		try {
-			String query = "SELECT * FROM user WHERE username = ?";
-			PreparedStatement preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, username);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			resultSet.next();
-			User user = new User(resultSet.getInt("id"), resultSet.getString("username"),
-					resultSet.getString("password"), resultSet.getString("type"));
-			connection.close();
-			return user;
-
-		} catch (SQLException e) {
-			log.info(e.getMessage());
-			throw new DAOException(e);
-		}
-	}
-
 }

@@ -10,19 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import by.htp6.hospital.bean.Report;
 import by.htp6.hospital.bean.User;
 import by.htp6.hospital.command.Command;
-import by.htp6.hospital.service.GetReportsCountService;
-import by.htp6.hospital.service.GetReportsService;
+import by.htp6.hospital.service.GetUserListService;
+import by.htp6.hospital.service.GetUsersCountService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.factory.ServiceFactory;
 
-public class GetReportsCommand implements Command {
+public class GetUserListCommand implements Command{
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 
 		User user = (User) session.getAttribute("authorisedUser");
@@ -39,34 +37,34 @@ public class GetReportsCommand implements Command {
 			currentPage = Integer.parseInt(requestCurrentPage);
 		}
 
-		String requestReportsPerPage = request.getParameter("reportsPerPage");
-		int reportsPerPage;
-		if (requestReportsPerPage == null) {
-			String sessionReportsPerPage = "" + 
-		session.getAttribute("reportsPerPage");
-			reportsPerPage = (sessionReportsPerPage == null) 
+		String requestUsersPerPage = request.getParameter("usersPerPage");
+		int usersPerPage;
+		if (requestUsersPerPage == null) {
+			String sessionUsersPerPage = "" + 
+		session.getAttribute("usersPerPage");
+			usersPerPage = (sessionUsersPerPage == null) 
 					? 10 
-					: Integer.parseInt(sessionReportsPerPage);
+					: Integer.parseInt(sessionUsersPerPage);
 		} else {
-			reportsPerPage = Integer.parseInt(requestReportsPerPage);
+			usersPerPage = Integer.parseInt(requestUsersPerPage);
 		}
 
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		GetReportsCountService getReportsCount = serviceFactory.getGetReportsCount();
-		GetReportsService getReports = serviceFactory.getGetReports();
+		GetUsersCountService getUsersCount = serviceFactory.getGetUsersCount();
+		GetUserListService getUserList = serviceFactory.getGetUserList();
 
 		try {
-			int reportsCount = getReportsCount.getReportsCountService();
-			int offset = reportsPerPage * (currentPage - 1);
-			List<Report> reports = getReports.getReports(userType, offset, 
-					reportsPerPage);
+			int usersCount = getUsersCount.getUsersCount();
+			int offset = usersPerPage * (currentPage - 1);
+			List<User> users = getUserList.getUserList(userType, offset, 
+					usersPerPage);
 		
 			session.setAttribute("currentPage", currentPage);
-			session.setAttribute("reportsPerPage", reportsPerPage);
-			request.setAttribute("reports", reports);
-			request.setAttribute("reportsCount", reportsCount);
+			session.setAttribute("usersPerPage", usersPerPage);
+			request.setAttribute("users", users);
+			request.setAttribute("usersCount", usersCount);
 			
-			String url = "administrator/reports.jsp";
+			String url = "administrator/users.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 			
@@ -74,6 +72,7 @@ public class GetReportsCommand implements Command {
 			String url = "error";
 			response.sendRedirect(url);
 		}
+		
 	}
 
 }

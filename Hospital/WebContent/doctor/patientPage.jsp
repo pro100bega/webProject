@@ -98,7 +98,7 @@
 						</label>
 						<c:out value="${selectedPatient.receiptDate}"></c:out>
 					</p>
-					<div class="panel panel-info">
+					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title">
 								<c:out value="${appointmentsListHeading}">
@@ -106,63 +106,70 @@
 							</h3>
 						</div>
 						<div class="panel-body" style="display: none;">
-							<table class="table table-hover">
-								<thead>
-									<tr class="success">
-										<td><strong> <c:out
-													value="${appointmentTypeMessage}"></c:out>
-										</strong></td>
-										<td><strong> <c:out
-													value="${appointmentNameMessage}"></c:out>
-										</strong></td>
-										<td><strong> <c:out
-													value="${appointmentTimeMessage}"></c:out>
-										</strong></td>
-										<td><strong> <c:out
-													value="${executionPeriodMessage}"></c:out>
-										</strong></td>
-										<td></td>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="appointment"
-										items="${sessionScope.appointments}">
+							<c:if test="${requestScope.appointments == null}">
+								<h4>
+									<c:out value="${emptyAppointmentsMessage}"></c:out>
+								</h4>
+							</c:if>
+							<c:if test="${requestScope.appointments != null}">
+								<table class="table table-hover">
+									<thead>
+										<tr class="success">
+											<td><strong> <c:out
+														value="${appointmentTypeMessage}"></c:out>
+											</strong></td>
+											<td><strong> <c:out
+														value="${appointmentNameMessage}"></c:out>
+											</strong></td>
+											<td><strong> <c:out
+														value="${appointmentTimeMessage}"></c:out>
+											</strong></td>
+											<td><strong> <c:out
+														value="${executionPeriodMessage}"></c:out>
+											</strong></td>
+											<td></td>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="appointment"
+											items="${requestScope.appointments}">
+											<tr>
+												<td><c:out value="${appointment.type}"></c:out></td>
+												<td><c:out value="${appointment.name}"></c:out></td>
+												<td><c:out value="${appointment.appointmentDate}">
+													</c:out></td>
+												<td><c:out value="${appointment.appointmentTerm}">
+													</c:out></td>
+												<td>
+													<form action="controller" method="post">
+														<input type="hidden" name="command"
+															value="PERFORM_APPOINTMENT"> <input type="hidden"
+															name="id" value="${appointment.id}"> <input
+															type="hidden" name="type" value="${appointment.type}">
+														<button type="submit" class="btn btn-sm btn-success">
+															<c:out value="${performAppointmentButton}">
+															</c:out>
+														</button>
+													</form>
+												</td>
+											</tr>
+										</c:forEach>
 										<tr>
-											<td><c:out value="${appointment.type}"></c:out></td>
-											<td><c:out value="${appointment.name}"></c:out></td>
-											<td><c:out value="${appointment.appointmentDate}">
-												</c:out></td>
-											<td><c:out value="${appointment.appointmentTerm}">
-												</c:out></td>
+
 											<td>
-												<form action="controller" method="post">
-													<input type="hidden" name="command"
-														value="PERFORM_APPOINTMENT"> <input type="hidden"
-														name="id" value="${appointment.id}"> <input
-														type="hidden" name="type" value="${appointment.type}">
-													<button type="submit" class="btn btn-sm btn-success">
-														<c:out value="${performAppointmentButton}">
+												<form>
+													<button type="button" class="btn btn btn-success"
+														data-toggle="modal" data-target="#newAppointmentModal">
+														<span class="glyphicon glyphicon-plus"></span>
+														<c:out value="${addAppointmentButton}">
 														</c:out>
 													</button>
 												</form>
 											</td>
 										</tr>
-									</c:forEach>
-									<tr>
-
-										<td>
-											<form>
-												<button type="button" class="btn btn btn-success"
-													data-toggle="modal" data-target="#newAppointmentModal">
-													<span class="glyphicon glyphicon-plus"></span>
-													<c:out value="${addAppointmentButton}">
-													</c:out>
-												</button>
-											</form>
-										</td>
-									</tr>
-								</tbody>
-							</table>
+									</tbody>
+								</table>
+							</c:if>
 						</div>
 					</div>
 

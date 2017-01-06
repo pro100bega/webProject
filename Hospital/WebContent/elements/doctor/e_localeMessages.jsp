@@ -41,6 +41,7 @@
 <fmt:message bundle="${local}" key="message.appointmentTime" var="appointmentTimeMessage" />
 <fmt:message bundle="${local}" key="message.executionPeriod" var="executionPeriodMessage" />
 <fmt:message bundle="${local}" key="message.learnMore" var="learnMoreMessage" />
+<fmt:message bundle="${local}" key="message.emptyAppointments" var="emptyAppointmentsMessage" />
 <fmt:message bundle="${local}" key="button.signOut" var="signOutButton" />
 <fmt:message bundle="${local}" key="button.newPatient" var="newPatientButton" />
 <fmt:message bundle="${local}" key="button.addNewPatient" var="addNewPatientButton" />

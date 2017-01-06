@@ -105,6 +105,8 @@ public class PatientDisplay extends TagSupport {
 					}
 				}
 			}
+			out.write("</center>");
+			
 		} catch (IOException e) {
 			throw new JspException(e);
 		}

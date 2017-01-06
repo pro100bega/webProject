@@ -11,6 +11,7 @@
 <fmt:message bundle="${local}" key="navbar.contacts" var="contact"/>
 <fmt:message bundle="${local}" key="navbar.adminPanel" var="adminPanel"/>
 <fmt:message bundle="${local}" key="navbar.doctorPanel" var="doctorPanel"/>
+<fmt:message bundle="${local}" key="navbar.nursePanel" var="nursePanel"/>
 <fmt:message bundle="${local}" key="message.welcome" var="welcomeMessage"/>
 <fmt:message bundle="${local}" key="message.bugReportFirstPart" var="bugReportFirstMessage"/>
 <fmt:message bundle="${local}" key="message.link" var="linkMessage"/>

@@ -1,13 +1,13 @@
 package by.htp6.hospital.service.impl;
 
 import java.security.NoSuchAlgorithmException;
+
 import java.util.regex.Matcher;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.htp6.hospital.bean.User;
-import by.htp6.hospital.dao.UserLogUpDAO;
+import by.htp6.hospital.dao.LogUpDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.factory.DAOFactory;
 import by.htp6.hospital.service.LogUpService;
@@ -19,7 +19,7 @@ public class LogUp implements LogUpService{
 	private static final Logger log = LogManager.getLogger(LogUp.class);
 
 	@Override
-	public User logUp(String username, String password, String userType) throws ServiceException {
+	public void logUp(String username, String password, String userType) throws ServiceException {
 		if (null == username || null == password || null == userType){
 			throw new ServiceException("Username or password cant be empty");
 		}
@@ -43,15 +43,12 @@ public class LogUp implements LogUpService{
 		}
 		
 		DAOFactory daoFactory = DAOFactory.getInstance();
-		
-		UserLogUpDAO registrationDAO = daoFactory.getUserRegistrationDAO();
-		
-		User user;
-		
+		LogUpDAO logUpDAO = daoFactory.getLogUpDAO();
+
 		try {
 			String encryptedPassword = MD5Encryptor.getHashCode(password);
-			user = registrationDAO.registration(username, encryptedPassword, userType);
-			return user;
+			logUpDAO.logUp(username, encryptedPassword, userType);
+			
 		} catch (DAOException e) {
 			log.error(e.getMessage());
 			throw new ServiceException(e);
