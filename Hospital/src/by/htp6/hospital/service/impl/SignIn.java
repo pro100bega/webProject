@@ -7,19 +7,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import by.htp6.hospital.bean.User;
-import by.htp6.hospital.dao.LogInDAO;
+import by.htp6.hospital.dao.SignInDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.factory.DAOFactory;
-import by.htp6.hospital.service.LogInService;
+import by.htp6.hospital.service.SignInService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.tools.MD5Encryptor;
 import by.htp6.hospital.tools.PatternContainer;
 
-public class LogIn implements LogInService{
-	private static final Logger log = LogManager.getLogger(LogIn.class);
+public class SignIn implements SignInService{
+	private static final Logger log = LogManager.getLogger(SignIn.class);
 
 	@Override
-	public User logIn(String username, String password) throws ServiceException {
+	public User signIn(String username, String password) throws ServiceException {
 		if (null == username || null == password){
 			throw new ServiceException("Username or password can`t be empty");
 		}
@@ -40,13 +40,13 @@ public class LogIn implements LogInService{
 		
 		DAOFactory daoFactory = DAOFactory.getInstance();
 		
-		LogInDAO logInDao = daoFactory.getLogInDAO();
+		SignInDAO logInDao = daoFactory.getSignInDAO();
 		
 		User user;
 		
 		try {
 			String encryptedPassword = MD5Encryptor.getHashCode(password);
-			user = logInDao.logIn(username, encryptedPassword);
+			user = logInDao.signIn(username, encryptedPassword);
 			return user;
 			
 		} catch (DAOException e) {

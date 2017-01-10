@@ -63,7 +63,7 @@ public class AddNewPatient implements AddNewPatientService{
 				throw new ServiceException(e);
 			}
 		} else {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			try {
 				date = dateFormat.parse(birthDate);
 			} catch (ParseException e) {

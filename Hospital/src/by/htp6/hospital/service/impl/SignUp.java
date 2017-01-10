@@ -7,19 +7,19 @@ import java.util.regex.Matcher;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.htp6.hospital.dao.LogUpDAO;
+import by.htp6.hospital.dao.SignUpDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.factory.DAOFactory;
-import by.htp6.hospital.service.LogUpService;
+import by.htp6.hospital.service.SignUpService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.tools.MD5Encryptor;
 import by.htp6.hospital.tools.PatternContainer;
 
-public class LogUp implements LogUpService{
-	private static final Logger log = LogManager.getLogger(LogUp.class);
+public class SignUp implements SignUpService{
+	private static final Logger log = LogManager.getLogger(SignUp.class);
 
 	@Override
-	public void logUp(String username, String password, String userType) throws ServiceException {
+	public void signUp(String username, String password, String userType) throws ServiceException {
 		if (null == username || null == password || null == userType){
 			throw new ServiceException("Username or password cant be empty");
 		}
@@ -43,11 +43,11 @@ public class LogUp implements LogUpService{
 		}
 		
 		DAOFactory daoFactory = DAOFactory.getInstance();
-		LogUpDAO logUpDAO = daoFactory.getLogUpDAO();
+		SignUpDAO logUpDAO = daoFactory.getSignUpDAO();
 
 		try {
 			String encryptedPassword = MD5Encryptor.getHashCode(password);
-			logUpDAO.logUp(username, encryptedPassword, userType);
+			logUpDAO.signUp(username, encryptedPassword, userType);
 			
 		} catch (DAOException e) {
 			log.error(e.getMessage());

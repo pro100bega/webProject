@@ -19,6 +19,13 @@ import by.htp6.hospital.dao.pool.ConnectionPool;
 
 public class SQLGetPatientListDAO implements GetPatientListDAO{
 	private static final Logger log = LogManager.getLogger(SQLGetPatientListDAO.class);
+	
+	private static final String SLQ_GET_PATIENT_LIST_FOR_DOCTOR =
+			"SELECT * FROM patient WHERE doctor_id = ?"
+							+ " ORDER BY receipt_date limit ?, ?";
+	
+	private static final String SQL_GET_ALL_PATIENTS_LIST = 
+			"SELECT * FROM patient ORDER BY receipt_date limit ?, ?";
 
 	@Override
 	public List<Patient> getPatientListForDoctor(int doctorId,
@@ -29,8 +36,7 @@ public class SQLGetPatientListDAO implements GetPatientListDAO{
 			try {
 				String query;
 				if (null == orderBy) {
-					query = "SELECT * FROM patient WHERE doctor_id = ?"
-							+ " ORDER BY receipt_date limit ?, ?";
+					query = SLQ_GET_PATIENT_LIST_FOR_DOCTOR;
 				} else {
 					query = "SELECT * FROM patient WHERE doctor_id = ?"
 							+ " ORDER BY " + orderBy + " limit ?, ?";
@@ -83,7 +89,7 @@ public class SQLGetPatientListDAO implements GetPatientListDAO{
 			try {
 				String query;
 				if (null == orderBy) {
-					query = "SELECT * FROM patient ORDER BY receipt_date limit ?, ?";
+					query = SQL_GET_ALL_PATIENTS_LIST;
 				} else {
 					query = "SELECT * FROM patient ORDER BY " + orderBy 
 							+ " limit ?, ?";

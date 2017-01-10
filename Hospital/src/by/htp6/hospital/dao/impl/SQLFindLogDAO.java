@@ -1,6 +1,7 @@
 package by.htp6.hospital.dao.impl;
 
 import java.sql.CallableStatement;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +21,8 @@ import by.htp6.hospital.dao.pool.ConnectionPool;
 
 public class SQLFindLogDAO implements FindLogDAO {
 	private static final Logger log = LogManager.getLogger(SQLFindLogDAO.class);
+	
+	private static final String SQL_FIND_LOG = "CALL find_log(?)";
 
 	/**
 	 * @author Бегенч
@@ -30,10 +33,13 @@ public class SQLFindLogDAO implements FindLogDAO {
 	@Override
 	public List<Log> findLog(String searchData) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Connection connection = null;
+		CallableStatement callableStatement = null;
+		
 		try {
-			Connection connection = connectionPool.take();
-			String sql = "CALL find_log(?)";
-			CallableStatement callableStatement = connection.prepareCall(sql);
+			connection = connectionPool.take();
+			
+			callableStatement = connection.prepareCall(SQL_FIND_LOG);
 			callableStatement.setString(1, searchData);
 			ResultSet resultSet = callableStatement.executeQuery();
 			
@@ -53,8 +59,6 @@ public class SQLFindLogDAO implements FindLogDAO {
 				log = new Log(id, message, tableName, rowId, time);
 				logList.add(log);
 			}
-			callableStatement.close();
-			connectionPool.free(connection);
 			
 			if (logList.size() == 0){
 				logList = Collections.emptyList();
@@ -68,6 +72,24 @@ public class SQLFindLogDAO implements FindLogDAO {
 		} catch (SQLException e) {
 			log.error(e.getMessage());
 			throw new DAOException(e);
+		} finally {
+			try {
+				if (callableStatement != null && !callableStatement.isClosed()) {
+					callableStatement.close();
+				}
+
+				if (connection != null) {
+					connectionPool.free(connection);
+				}
+
+			} catch (SQLException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			} catch (InterruptedException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			}
+
 		}
 	}
 

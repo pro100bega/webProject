@@ -19,6 +19,7 @@
 <fmt:message bundle="${local}" key="title.error" var="errorTitle" />
 <fmt:message bundle="${local}" key="placeholder.finalDiagnosis" var="finalDiagnosisPlaceholder" />
 <fmt:message bundle="${local}" key="placeholder.search" var="searchPlaceholder" />
+<fmt:message bundle="${local}" key="placeholder.appointmentName" var="appointmentNamePlaceholder" />
 <fmt:message bundle="${local}" key="message.patientInfo" var="patientInfo" />
 <fmt:message bundle="${local}" key="message.name" var="nameMessage" />
 <fmt:message bundle="${local}" key="message.surname" var="surnameMessage" />
@@ -42,6 +43,10 @@
 <fmt:message bundle="${local}" key="message.executionPeriod" var="executionPeriodMessage" />
 <fmt:message bundle="${local}" key="message.learnMore" var="learnMoreMessage" />
 <fmt:message bundle="${local}" key="message.emptyAppointments" var="emptyAppointmentsMessage" />
+<fmt:message bundle="${local}" key="message.procedure" var="procedureMessage" />
+<fmt:message bundle="${local}" key="message.injection" var="injectionMessage" />
+<fmt:message bundle="${local}" key="message.operation" var="operationMessage" />
+<fmt:message bundle="${local}" key="message.time" var="timeMessage" />
 <fmt:message bundle="${local}" key="button.signOut" var="signOutButton" />
 <fmt:message bundle="${local}" key="button.newPatient" var="newPatientButton" />
 <fmt:message bundle="${local}" key="button.addNewPatient" var="addNewPatientButton" />

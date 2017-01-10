@@ -8,6 +8,7 @@ import by.htp6.hospital.command.impl.SignUpCommand;
 import by.htp6.hospital.command.impl.SignInCommand;
 import by.htp6.hospital.command.impl.SignOutCommand;
 import by.htp6.hospital.command.impl.AddNewPatientCommand;
+import by.htp6.hospital.command.impl.ChangeUserTypeCommand;
 import by.htp6.hospital.command.impl.AddAddpointmentCommand;
 import by.htp6.hospital.command.impl.DischargePatientCommand;
 import by.htp6.hospital.command.impl.EditPatientCommand;
@@ -49,6 +50,7 @@ public class CommandProvider {
 		commands.put("GET_REPORTS", new GetReportsCommand());
 		commands.put("GET_SINGLE_REPORT", new GetSingleReportCommand());
 		commands.put("GET_USER_LIST", new GetUserListCommand());
+		commands.put("CHANGE_USER_TYPE", new ChangeUserTypeCommand());
 	}
 	
 	public static CommandProvider getInstance(){

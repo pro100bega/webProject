@@ -14,26 +14,47 @@ import by.htp6.hospital.dao.pool.ConnectionPool;
 public class SQLPerformAppointmentDAO implements PerformAppointmentDAO{
 	private static final Logger log = LogManager.getLogger(SQLPerformAppointmentDAO.class);
 
+	private static final String SQL_PERFORM_APPOINTMENT = 
+			"UPDATE appointment SET status = 'done', "
+			+ "perform_date = CURRENT_TIMESTAMP WHERE id = ?";
+	
 	@Override
 	public void performAppointment(int appointmentId) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
 		try {
-			Connection connection = connectionPool.take();
+			connection = connectionPool.take();
 			
-			String sql = "UPDATE appointment SET status = 'done', "
-					+ "perform_date = CURRENT_TIMESTAMP WHERE id = ?";
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement = connection.prepareStatement(SQL_PERFORM_APPOINTMENT);
 			preparedStatement.setInt(1, appointmentId);
 			preparedStatement.executeUpdate();
 			
-			preparedStatement.close();
-			connectionPool.free(connection);
 		} catch (InterruptedException e) {
 			log.error(e.getMessage());
 			throw new DAOException(e);
 		} catch (SQLException e) {
 			log.error(e.getMessage());
 			throw new DAOException(e);
+		} finally {
+			try {
+				if (preparedStatement != null && !preparedStatement.isClosed()) {
+					preparedStatement.close();
+				}
+
+				if (connection != null) {
+					connectionPool.free(connection);
+				}
+
+			} catch (SQLException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			} catch (InterruptedException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			}
+
 		}
 	}
 

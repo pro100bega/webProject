@@ -15,17 +15,21 @@ import by.htp6.hospital.dao.pool.ConnectionPool;
 
 public class SQLAddNewPatientDAO implements AddNewPatientDAO {
 	private static final Logger log = LogManager.getLogger(SQLAddNewPatientDAO.class);
+
+	private static final String SQL_ADD_NEW_PATIENT = 
+			"INSERT INTO patient(`name`, `surname`, `sex`, `birth_date`,"
+					+ " `diagnosis`, `doctor_id`, `note`)" + " VALUES (?,?,?,?,?,?,?)";
 	
 	@Override
-	public void addNewPatient(String name, String surname, char sex,
-			Date birthDate , String diagnosis, int doctorId, String note) throws DAOException {
+	public void addNewPatient(String name, String surname, char sex, Date birthDate, String diagnosis, int doctorId,
+			String note) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		try {
-			Connection connection = connectionPool.take();
-			String sql = "INSERT INTO patient(`name`, `surname`, `sex`, `birth_date`,"
-					+ " `diagnosis`, `doctor_id`, `note`)"
-					+ " VALUES (?,?,?,?,?,?,?)";
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			connection = connectionPool.take();
+
+			preparedStatement = connection.prepareStatement(SQL_ADD_NEW_PATIENT);
 			preparedStatement.setString(1, name);
 			preparedStatement.setString(2, surname);
 			preparedStatement.setString(3, "" + sex);
@@ -35,14 +39,30 @@ public class SQLAddNewPatientDAO implements AddNewPatientDAO {
 			preparedStatement.setString(7, note);
 			preparedStatement.executeUpdate();
 
-			preparedStatement.close();
-			connectionPool.free(connection);
 		} catch (InterruptedException e) {
 			log.error(e.getMessage());
 			throw new DAOException(e);
 		} catch (SQLException e) {
 			log.error(e.getMessage());
 			throw new DAOException(e);
+		} finally {
+			try {
+				if (preparedStatement != null && !preparedStatement.isClosed()) {
+					preparedStatement.close();
+				}
+
+				if (connection != null) {
+					connectionPool.free(connection);
+				}
+
+			} catch (SQLException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			} catch (InterruptedException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			}
+
 		}
 	}
 

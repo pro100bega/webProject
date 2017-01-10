@@ -1,6 +1,6 @@
 package by.htp6.hospital.service.factory;
 
-import by.htp6.hospital.service.LogUpService;
+import by.htp6.hospital.service.SignUpService;
 import by.htp6.hospital.service.GetPatientListService;
 import by.htp6.hospital.service.GetPatientService;
 import by.htp6.hospital.service.GetPatientsCountService;
@@ -13,6 +13,7 @@ import by.htp6.hospital.service.GetUsersCountService;
 import by.htp6.hospital.service.PerformAppointmentService;
 import by.htp6.hospital.service.SendReportService;
 import by.htp6.hospital.service.AddNewPatientService;
+import by.htp6.hospital.service.ChangeUserTypeService;
 import by.htp6.hospital.service.AddAppointmentService;
 import by.htp6.hospital.service.DischargePatientService;
 import by.htp6.hospital.service.EditPatientService;
@@ -20,8 +21,8 @@ import by.htp6.hospital.service.FindLogService;
 import by.htp6.hospital.service.FindPatientService;
 import by.htp6.hospital.service.GetAppointmentListService;
 import by.htp6.hospital.service.GetLogService;
-import by.htp6.hospital.service.LogInService;
-import by.htp6.hospital.service.impl.LogUp;
+import by.htp6.hospital.service.SignInService;
+import by.htp6.hospital.service.impl.SignUp;
 import by.htp6.hospital.service.impl.GetPatientList;
 import by.htp6.hospital.service.impl.GetPatientsCount;
 import by.htp6.hospital.service.impl.GetReports;
@@ -33,6 +34,7 @@ import by.htp6.hospital.service.impl.GetUsersCount;
 import by.htp6.hospital.service.impl.PerformAppointment;
 import by.htp6.hospital.service.impl.SendReport;
 import by.htp6.hospital.service.impl.AddNewPatient;
+import by.htp6.hospital.service.impl.ChangeUserType;
 import by.htp6.hospital.service.impl.AddAppointment;
 import by.htp6.hospital.service.impl.DischargePatient;
 import by.htp6.hospital.service.impl.EditPatient;
@@ -41,14 +43,14 @@ import by.htp6.hospital.service.impl.FindPatient;
 import by.htp6.hospital.service.impl.GetAppointmentList;
 import by.htp6.hospital.service.impl.GetLog;
 import by.htp6.hospital.service.impl.GetPatient;
-import by.htp6.hospital.service.impl.LogIn;
+import by.htp6.hospital.service.impl.SignIn;
 
 public class ServiceFactory {
 	private static final ServiceFactory instance = new ServiceFactory();
 
-	private LogInService logIn = new LogIn();
+	private SignInService signIn = new SignIn();
 
-	private LogUpService logUp = new LogUp();
+	private SignUpService signUp = new SignUp();
 
 	private GetPatientListService getPatientList = new GetPatientList();
 
@@ -88,12 +90,14 @@ public class ServiceFactory {
 	
 	private GetUsersCountService getUsersCount = new GetUsersCount();
 	
-	public LogInService getLoginUser() {
-		return this.logIn;
+	private ChangeUserTypeService changeUserType = new ChangeUserType();
+	
+	public SignInService getSignInUser() {
+		return this.signIn;
 	}
 
-	public LogUpService getLogUpUser() {
-		return this.logUp;
+	public SignUpService getSignUpUser() {
+		return this.signUp;
 	}
 
 	public GetPatientListService getGetPatientList() {
@@ -170,6 +174,10 @@ public class ServiceFactory {
 	
 	public GetUsersCountService getGetUsersCount() {
 		return this.getUsersCount;
+	}
+	
+	public ChangeUserTypeService getChangeUserType() {
+		return this.changeUserType;
 	}
 	
 	private ServiceFactory() {

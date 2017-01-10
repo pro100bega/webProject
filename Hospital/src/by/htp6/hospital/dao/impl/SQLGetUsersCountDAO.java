@@ -15,23 +15,25 @@ import by.htp6.hospital.dao.pool.ConnectionPool;
 public class SQLGetUsersCountDAO implements GetUsersCountDAO{
 	private static final Logger log = LogManager.getLogger(SQLGetUsersCountDAO.class);
 
+	private static final String SQL_GET_USERS_COUNT = 
+			"SELECT COUNT(*) FROM user";
+	
 	@Override
 	public int getUsersCount() throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
-
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
 		try {
-			Connection connection = connectionPool.take();
+			connection = connectionPool.take();
 
-			String query = "SELECT COUNT(*) FROM user";
-			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement = connection.prepareStatement(SQL_GET_USERS_COUNT);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			int usersCount = 0;
 			if (resultSet.next()) {
 				usersCount = resultSet.getInt(1);
 			}
-			preparedStatement.close();
-			connectionPool.free(connection);
 
 			return usersCount;
 		} catch (InterruptedException e) {
@@ -40,7 +42,25 @@ public class SQLGetUsersCountDAO implements GetUsersCountDAO{
 		} catch (SQLException e) {
 			log.error(e.getMessage());
 			throw new DAOException(e);
+		} finally {
+			try {
+				if (preparedStatement != null && !preparedStatement.isClosed()) {
+					preparedStatement.close();
+				}
+
+				if (connection != null) {
+					connectionPool.free(connection);
+				}
+
+			} catch (SQLException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			} catch (InterruptedException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			}
+
 		}
-	}
+	} 
 
 }

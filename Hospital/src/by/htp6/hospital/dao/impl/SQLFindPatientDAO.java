@@ -19,6 +19,12 @@ import by.htp6.hospital.dao.pool.ConnectionPool;
 public class SQLFindPatientDAO implements FindPatientDAO{
 	private static final Logger log = LogManager.getLogger(SQLFindPatientDAO.class);
 	
+	private static final String SQL_FIND_PATIENT_BY_DOCTOR_ID = 
+			"CALL find_patients_by_doctor_id(?,?,?,?,'receipt_date')";
+	
+	private static final String SQL_FIND_PATIENT = 
+			"CALL find_patients(?,?,?,'receipt_date')";			
+	
 	/**
 	 * @author Бегенч
 	 * @param searchData - string that is needed to find by
@@ -30,15 +36,18 @@ public class SQLFindPatientDAO implements FindPatientDAO{
 	public List<Patient> findPatientsByDoctorId(String searchData,
 			int doctorId, int offset, int count, String orderBy) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Connection connection = null;
+		CallableStatement callableStatement = null;
+		
 		try {
 			String query;
 			if (null == orderBy) {
-				query = "CALL find_patients_by_doctor_id(?,?,?,?,'receipt_date')";
+				query = SQL_FIND_PATIENT_BY_DOCTOR_ID;
 			} else {
 				query = "CALL find_patients_by_doctor_id(?,?,?,?," + orderBy + ")";
 			}
-			Connection connection = connectionPool.take();
-			CallableStatement callableStatement = connection.prepareCall(query);
+			connection = connectionPool.take();
+			callableStatement = connection.prepareCall(query);
 			callableStatement.setString(1, searchData);
 			callableStatement.setInt(2, doctorId);
 			callableStatement.setInt(3, offset);
@@ -66,8 +75,7 @@ public class SQLFindPatientDAO implements FindPatientDAO{
 				patients.add(patient);
 			
 			}
-			callableStatement.close();
-			connectionPool.free(connection);
+
 			return patients;
 		} catch (InterruptedException e) {
 			log.error(e.getMessage());
@@ -75,6 +83,24 @@ public class SQLFindPatientDAO implements FindPatientDAO{
 		} catch (SQLException e) {
 			log.error(e.getMessage());
 			throw new DAOException(e);
+		} finally {
+			try {
+				if (callableStatement != null && !callableStatement.isClosed()) {
+					callableStatement.close();
+				}
+
+				if (connection != null) {
+					connectionPool.free(connection);
+				}
+
+			} catch (SQLException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			} catch (InterruptedException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			} 
+
 		}
 	}
 
@@ -82,16 +108,19 @@ public class SQLFindPatientDAO implements FindPatientDAO{
 	public List<Patient> findPatients(String searchData, int offset, int count,
 			String orderBy) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Connection connection = null;
+		CallableStatement callableStatement = null;
+		
 		try {
 			String query;
 			if (null == orderBy) {
-				query = "CALL find_patients(?,?,?,'receipt_date')";
+				query = SQL_FIND_PATIENT;
 			} else {
 				query = "CALL find_patients(?,?,?," + orderBy + ")";
 			}
 			
-			Connection connection = connectionPool.take();
-			CallableStatement callableStatement = connection.prepareCall(query);
+			connection = connectionPool.take();
+			callableStatement = connection.prepareCall(query);
 			callableStatement.setString(1, searchData);
 			callableStatement.setInt(2, offset);
 			callableStatement.setInt(3, count);
@@ -118,15 +147,33 @@ public class SQLFindPatientDAO implements FindPatientDAO{
 						diagnosis, doctorId, receiptDate, note);
 				patients.add(patient);
 			}
-			callableStatement.close();
-			connectionPool.free(connection);
+			
 			return patients;
+			
 		} catch (InterruptedException e) {
 			log.error(e.getMessage());
 			throw new DAOException(e);
 		} catch (SQLException e) {
 			log.error(e.getMessage());
 			throw new DAOException(e);
+		} finally {
+			try {
+				if (callableStatement != null && !callableStatement.isClosed()) {
+					callableStatement.close();
+				}
+
+				if (connection != null) {
+					connectionPool.free(connection);
+				}
+
+			} catch (SQLException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			} catch (InterruptedException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			}
+
 		}
 	}
 

@@ -20,13 +20,18 @@ import by.htp6.hospital.dao.pool.ConnectionPool;
 public class SQLGetLogDAO implements GetLogDAO{
 	private static final Logger log = LogManager.getLogger(SQLGetLogDAO.class);
 
+	private static final String SQL_GET_LOG = "SELECT * FROM log";
+	
 	@Override
 	public List<Log> getLog() throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
 		try {
-			Connection connection = connectionPool.take();
-			String query = "SELECT * FROM log";
-			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			connection = connectionPool.take();
+	
+			preparedStatement = connection.prepareStatement(SQL_GET_LOG);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
@@ -43,8 +48,7 @@ public class SQLGetLogDAO implements GetLogDAO{
 				log = new Log(id, message, tableName, rowId, time);
 				logList.add(log);
 			}
-			preparedStatement.close();
-			connectionPool.free(connection);
+			
 			return logList;
 		} catch (InterruptedException e) {
 			log.error(e.getMessage());
@@ -52,6 +56,24 @@ public class SQLGetLogDAO implements GetLogDAO{
 		} catch (SQLException e) {
 			log.error(e.getMessage());
 			throw new DAOException(e);
+		} finally {
+			try {
+				if (preparedStatement != null && !preparedStatement.isClosed()) {
+					preparedStatement.close();
+				}
+
+				if (connection != null) {
+					connectionPool.free(connection);
+				}
+
+			} catch (SQLException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			} catch (InterruptedException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			}
+
 		}
 	}
 

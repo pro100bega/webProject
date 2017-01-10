@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import by.htp6.hospital.command.Command;
-import by.htp6.hospital.service.LogUpService;
+import by.htp6.hospital.service.SignUpService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.factory.ServiceFactory;
 
@@ -23,10 +23,10 @@ public class SignUpCommand implements Command{
 		String userType = request.getParameter("userType");
 		
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		LogUpService logUpUserService = serviceFactory.getLogUpUser();
+		SignUpService logUpUserService = serviceFactory.getSignUpUser();
 
 		try {
-			logUpUserService.logUp(username, password, userType);
+			logUpUserService.signUp(username, password, userType);
 			request.setAttribute("successMessage", "signUp");
 			
 			String url = "success.jsp";

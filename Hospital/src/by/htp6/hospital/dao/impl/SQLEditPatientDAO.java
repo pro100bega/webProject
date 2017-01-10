@@ -15,17 +15,22 @@ import by.htp6.hospital.dao.pool.ConnectionPool;
 public class SQLEditPatientDAO implements EditPatientDAO {
 	private static final Logger log = LogManager.getLogger(SQLEditPatientDAO.class);
 
+	private static final String SQL_EDIT_PATIENT = 
+			"UPDATE patient SET name = ?, surname = ?, sex = ?, birth_date = ?,"
+			+ "diagnosis = ?, note = ? WHERE id = ?";
+	
 	@Override
 	public void editPatient(int patientId, String name, String surname,
 			String sex, Date birthDate, String diagnosis, String note) 
 					throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
 		try {
-			Connection connection = connectionPool.take();
-			String sql = "UPDATE patient SET name = ?, surname = ?, sex = ?, birth_date = ?,"
-					+ "diagnosis = ?, note = ? WHERE id = ?";
+			connection = connectionPool.take();
 
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement = connection.prepareStatement(SQL_EDIT_PATIENT);
 			preparedStatement.setString(1, name);
 			preparedStatement.setString(2, surname);
 			preparedStatement.setString(3, sex);
@@ -35,14 +40,30 @@ public class SQLEditPatientDAO implements EditPatientDAO {
 			preparedStatement.setInt(7, patientId);
 			preparedStatement.executeUpdate();
 
-			preparedStatement.close();
-			connectionPool.free(connection);
 		} catch (InterruptedException e) {
 			log.error(e.getMessage());
 			throw new DAOException(e);
 		} catch (SQLException e) {
 			log.error(e.getMessage());
 			throw new DAOException(e);
+		} finally {
+			try {
+				if (preparedStatement != null && !preparedStatement.isClosed()) {
+					preparedStatement.close();
+				}
+
+				if (connection != null) {
+					connectionPool.free(connection);
+				}
+
+			} catch (SQLException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			} catch (InterruptedException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			}
+
 		}
 	}
 

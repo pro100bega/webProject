@@ -11,20 +11,26 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import by.htp6.hospital.bean.User;
-import by.htp6.hospital.dao.LogInDAO;
+import by.htp6.hospital.dao.SignInDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
-public class SQLLogInDAO implements LogInDAO {
-	private static final Logger log = LogManager.getRootLogger();
+public class SQLSignInDAO implements SignInDAO {
+	private static final Logger log = LogManager.getLogger(SQLSignInDAO.class);
 
+	private static final String SQL_SIGN_IN = 
+			"SELECT * FROM user WHERE username = ?";
+	
 	@Override
-	public User logIn(String username, String password) throws DAOException {
+	public User signIn(String username, String password) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
 		try {
-			Connection connection = connectionPool.take();
-			String query = "SELECT * FROM user WHERE username = ?";
-			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			connection = connectionPool.take();
+
+			preparedStatement = connection.prepareStatement(SQL_SIGN_IN);
 			preparedStatement.setString(1, username);
 			
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
@@ -39,15 +45,11 @@ public class SQLLogInDAO implements LogInDAO {
 					
 					User user = new User(id, username, password, type, createTime);
 					
-					resultSet.close();
-					connectionPool.free(connection);
 					return user;
 				} else {
-					connectionPool.free(connection);
 					throw new DAOException("Incorrect password or username");
 				}
 			} else {
-				connectionPool.free(connection);
 				throw new DAOException("Incorrect password or username");
 			}
 		} catch (SQLException e) {
@@ -56,6 +58,24 @@ public class SQLLogInDAO implements LogInDAO {
 		} catch (InterruptedException e) {
 			log.error(e.getMessage());
 			throw new DAOException(e);
-		} 		
+		} finally {
+			try {
+				if (preparedStatement != null && !preparedStatement.isClosed()) {
+					preparedStatement.close();
+				}
+
+				if (connection != null) {
+					connectionPool.free(connection);
+				}
+
+			} catch (SQLException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			} catch (InterruptedException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			}
+
+		}	
 	}
 }

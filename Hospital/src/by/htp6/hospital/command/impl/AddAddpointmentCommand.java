@@ -1,12 +1,12 @@
 package by.htp6.hospital.command.impl;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import by.htp6.hospital.bean.Patient;
 import by.htp6.hospital.bean.User;
 import by.htp6.hospital.command.Command;
 import by.htp6.hospital.service.AddAppointmentService;
@@ -22,17 +22,21 @@ public class AddAddpointmentCommand implements Command{
 		User user = (User)session.getAttribute("authorisedUser");
 		int doctorId = user.getId();
 		int patientId = Integer.parseInt(request.getParameter("patientId"));
-		String type = request.getParameter("procedureType");
-		String name = request.getParameter("procedureName");
+		
+		String type = request.getParameter("type");
+		String name = request.getParameter("name");
+		String termDate = request.getParameter("termDate");
+		String termTime = request.getParameter("termTime");
 		
 		ServiceFactory serviceFactory  = ServiceFactory.getInstance();
 		AddAppointmentService addAppointmentService = serviceFactory.getAddAppointment();
 		
 		try {
-			addAppointmentService.addAppointment(patientId, doctorId, type, name);
-			Patient selectedPatient = (Patient)session.getAttribute("selectedPatient");
-			int selectedPatientId = selectedPatient.getId();
-			String url = "controller?command=GET_APPOINTMENTS&patientId=" + selectedPatientId;
+			addAppointmentService.addAppointment(patientId, doctorId, type, name,
+					termDate, termTime);
+
+			String url = "controller?command=GET_PATIENT_INFO&status=undone&"
+					+ "patientId=" + patientId;
 			response.sendRedirect(url);
 		} catch (ServiceException e) {
 			request.setAttribute("errorMessage", e.getMessage());

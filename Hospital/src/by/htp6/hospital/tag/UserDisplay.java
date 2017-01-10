@@ -62,7 +62,6 @@ public class UserDisplay extends TagSupport {
 		}
 
 		String username = bundle.getString("placeholder.username");
-		String password = bundle.getString("placeholder.password");
 		String type = bundle.getString("message.userType");
 		String registrationTime = bundle.getString("message.registrationTime");
 		String changeType = bundle.getString("message.changeType");
@@ -76,22 +75,18 @@ public class UserDisplay extends TagSupport {
 		JspWriter out = pageContext.getOut();
 
 		try {
-			out.write("<div class=\"row\">");
+			out.write("<div class='row'>");
 			for (User user : users) {
-				out.write("<div class=\"col-sm-4\">");
-				out.write("<div class=\"panel panel-default\">");
-				out.write("<div class=\"panel-heading\">");
+				out.write("<div class='col-sm-4'>");
+				out.write("<div class='panel panel-default'>");
+				out.write("<div class='panel-heading'>");
 				out.write("<h3 class='panel-title'>" + userMessage + 
 						" №" + user.getId() + "</h3>");
 				out.write("</div>");
-				out.write("<div class=\"panel-body\">");
+				out.write("<div class='panel-body'>");
 				out.write("<p>");
 				out.write("<label>" + username + ":</label><br>");
 				out.write(user.getUsername());
-				out.write("</p>");
-				out.write("<p>");
-				out.write("<label>" + password + ":</label><br>");
-				out.write(user.getPassword());
 				out.write("</p>");
 				out.write("<p>");
 				out.write("<label>" + type + ":</label><br>");
@@ -103,9 +98,9 @@ public class UserDisplay extends TagSupport {
 				out.write("</p>");
 				out.write("<p>");
 				out.write("<label>" + changeType + ":</label><br>");
-				out.write("<form action=\"controller\" method=\"get\">");
-				out.write("<input type='hidden' name='command' valu='CHANGE_USER_TYPE'");
-				out.write("<input type='hidden' name='userId' value=" + user.getId() + ">");
+				out.write("<form action='controller' method='post'>");
+				out.write("<input type='hidden' name='command' value='CHANGE_USER_TYPE'>");
+				out.write("<input type='hidden' name='id' value=" + user.getId() + ">");
 				out.write("<select name='newType' class='form-control'>");
 				out.write("<option value='admin' selected>" + admin + "</option>");
 				out.write("<option value='doctor'>" + doctor + "</option>");

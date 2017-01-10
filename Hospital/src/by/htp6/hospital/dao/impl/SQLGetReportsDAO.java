@@ -22,15 +22,19 @@ import by.htp6.hospital.dao.pool.ConnectionPool;
 public class SQLGetReportsDAO implements GetReportsDAO {
 	private static final Logger log = LogManager.getLogger(SQLGetPatientsCountDAO.class);
 
+	private static final String SQL_GET_REPORTS = 
+			"SELECT * FROM report ORDER BY time DESC limit ?, ?";
+	
 	@Override
 	public List<Report> getReports(int offset, int count) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		
 		try {
-			Connection connection = connectionPool.take();
+			connection = connectionPool.take();
 			
-			String sql = "SELECT * FROM report ORDER BY time DESC limit ?, ?";
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement = connection.prepareStatement(SQL_GET_REPORTS);
 			
 			preparedStatement.setInt(1, offset);
 			preparedStatement.setInt(2, count);
@@ -54,8 +58,7 @@ public class SQLGetReportsDAO implements GetReportsDAO {
 			if (reports.size() == 0){
 				reports = Collections.emptyList();
 			}
-			
-			connectionPool.free(connection);
+
 			return reports;
 			
 		} catch (InterruptedException e) {
@@ -64,6 +67,24 @@ public class SQLGetReportsDAO implements GetReportsDAO {
 		} catch (SQLException e) {
 			log.error(e.getMessage());
 			throw new DAOException(e);
+		} finally {
+			try {
+				if (preparedStatement != null && !preparedStatement.isClosed()) {
+					preparedStatement.close();
+				}
+
+				if (connection != null) {
+					connectionPool.free(connection);
+				}
+
+			} catch (SQLException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			} catch (InterruptedException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			}
+
 		}
 	}
 

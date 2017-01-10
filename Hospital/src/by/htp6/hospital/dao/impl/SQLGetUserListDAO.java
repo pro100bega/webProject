@@ -21,15 +21,19 @@ import by.htp6.hospital.dao.pool.ConnectionPool;
 public class SQLGetUserListDAO implements GetUserListDAO{
 	private static final Logger log = LogManager.getLogger(SQLGetUserListDAO.class);
 
+	private static final String SQL_GET_USER_LIST = 
+			"SELECT * FROM user LIMIT ?, ?";
+	
 	@Override
 	public List<User> getUserList(int offset, int count) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		
 		try {
-			Connection connection = connectionPool.take();
+			connection = connectionPool.take();
 			
-			String sql = "SELECT * FROM user LIMIT ?, ?";
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement = connection.prepareStatement(SQL_GET_USER_LIST);
 			preparedStatement.setInt(1, offset);
 			preparedStatement.setInt(2, count);
 			
@@ -55,9 +59,6 @@ public class SQLGetUserListDAO implements GetUserListDAO{
 				users = Collections.emptyList();
 			}
 			
-			preparedStatement.close();
-			connectionPool.free(connection);
-			
 			return users;
 			
 		} catch (InterruptedException e) {
@@ -66,6 +67,24 @@ public class SQLGetUserListDAO implements GetUserListDAO{
 		} catch (SQLException e) {
 			log.error(e.getMessage());
 			throw new DAOException(e);
+		} finally {
+			try {
+				if (preparedStatement != null && !preparedStatement.isClosed()) {
+					preparedStatement.close();
+				}
+
+				if (connection != null) {
+					connectionPool.free(connection);
+				}
+
+			} catch (SQLException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			} catch (InterruptedException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			}
+
 		}
 	}
 

@@ -17,8 +17,8 @@ public class GetAppointmentList implements GetAppointmentListService{
 
 	@Override
 	public List<Appointment> getAppointmentList(int patientId, String status) throws ServiceException {
-		if (patientId == 0){
-			throw new ServiceException("Incorrect patient id");
+		if (patientId == 0 || null == status || "".equals(status)){
+			throw new ServiceException("Illegal arguments");
 		}
 
 		DAOFactory daoFactory = DAOFactory.getInstance();

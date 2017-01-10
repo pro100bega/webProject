@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import by.htp6.hospital.bean.User;
 import by.htp6.hospital.command.Command;
-import by.htp6.hospital.service.LogInService;
+import by.htp6.hospital.service.SignInService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.factory.ServiceFactory;
 
@@ -26,11 +26,11 @@ public class SignInCommand implements Command{
 		String password = request.getParameter("password");
 		
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
-		LogInService loginUserService = serviceFactory.getLoginUser();
+		SignInService loginUserService = serviceFactory.getSignInUser();
 		
 		User user = null;
 		try {
-			user = loginUserService.logIn(username, password);
+			user = loginUserService.signIn(username, password);
 			String url = null;
 			switch(user.getType()){
 			case "doctor":

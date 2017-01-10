@@ -18,15 +18,19 @@ import by.htp6.hospital.dao.pool.ConnectionPool;
 public class SQLGetPatientDAO implements GetPatientDAO{
 	private static final Logger log = LogManager.getLogger(SQLGetPatientDAO.class);
 
+	private static final String SQL_GET_PATIENT = 
+			"SELECt * FROM patient WHERE id = ? limit 1";
+	
 	@Override
 	public Patient getPatient(int patientId) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		
 		try {
-			Connection connection = connectionPool.take();
+			connection = connectionPool.take();
 			
-			String query = "SELECt * FROM patient WHERE id = ? limit 1";
-			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement = connection.prepareStatement(SQL_GET_PATIENT);
 			preparedStatement.setInt(1, patientId);
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -49,9 +53,6 @@ public class SQLGetPatientDAO implements GetPatientDAO{
 			Patient patient = new Patient(id, name, surname, sex, stringBirthDate,
 					diagnosis, doctorId, stringReceiptDate, note);
 			
-			preparedStatement.close();
-			connectionPool.free(connection);
-			
 			return patient;
 		} catch (InterruptedException e) {
 			log.error(e.getMessage());
@@ -59,6 +60,24 @@ public class SQLGetPatientDAO implements GetPatientDAO{
 		} catch (SQLException e) {
 			log.error(e.getMessage());
 			throw new DAOException(e);
+		} finally {
+			try {
+				if (preparedStatement != null && !preparedStatement.isClosed()) {
+					preparedStatement.close();
+				}
+
+				if (connection != null) {
+					connectionPool.free(connection);
+				}
+
+			} catch (SQLException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			} catch (InterruptedException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			}
+
 		}
 	}
 	

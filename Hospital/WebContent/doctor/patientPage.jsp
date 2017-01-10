@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <%@ include file="../elements/doctor/e_localeMessages.jsp"%>
 <script src="scripts/jquery-3.1.1.js"></script>
@@ -155,21 +156,16 @@
 											</tr>
 										</c:forEach>
 										<tr>
-
-											<td>
-												<form>
-													<button type="button" class="btn btn btn-success"
-														data-toggle="modal" data-target="#newAppointmentModal">
-														<span class="glyphicon glyphicon-plus"></span>
-														<c:out value="${addAppointmentButton}">
-														</c:out>
-													</button>
-												</form>
-											</td>
 										</tr>
 									</tbody>
 								</table>
 							</c:if>
+							<button type="button" class="btn btn btn-success"
+								data-toggle="modal" data-target="#newAppointmentModal">
+								<span class="glyphicon glyphicon-plus"></span>
+								<c:out value="${addAppointmentButton}">
+								</c:out>
+							</button>
 						</div>
 					</div>
 

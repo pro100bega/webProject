@@ -25,16 +25,15 @@ public class ConnectionPool implements Closeable {
 			throw new SQLException(e);
 		}
 		ResourceBundle resourceBundle = ResourceBundle.getBundle("resources.dbResource");
-		String url = "jdbc:mysql://127.0.0.1/hospital?UseSSL=false"
-				+ "?useUnicode=yes&characterEncoding=UTF-8";
+		String dbUrl = resourceBundle.getString("db.localConnectionString");
 		String dbUsername = resourceBundle.getString("db.username");
-		String dbPassword = resourceBundle.getString("db.password");
+		String dbPassword = resourceBundle.getString("db.localPassword");
 		
 		freeConnections = new ArrayBlockingQueue<>(POOL_SIZE);
 		busyConnections = new ArrayBlockingQueue<>(POOL_SIZE);
 		
 		for (int i = 0; i < POOL_SIZE; i++){
-			freeConnections.add(DriverManager.getConnection(url, dbUsername, dbPassword));
+			freeConnections.add(DriverManager.getConnection(dbUrl, dbUsername, dbPassword));
 		}
 	}
 	

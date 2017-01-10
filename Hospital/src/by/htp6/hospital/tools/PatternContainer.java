@@ -23,6 +23,10 @@ public class PatternContainer {
 	public static final Pattern logSearchPattern =
 			Pattern.compile("^[A-Za-z0-9\\._: ]{1,18}$");
 	
+	//Appointment name format pattern
+	public static final Pattern appointmentNamePattern =
+			Pattern.compile("^[А-Яа-я ё]{2,20}$");
+	
 	//Ru date format pattern
 	public static final Pattern enDateFormatPattern =
 			Pattern.compile("^(19|20)\\d\\d-((0[1-9]|1[012])-"

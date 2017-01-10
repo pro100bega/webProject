@@ -53,6 +53,7 @@ public class GetPatientInfoCommand implements Command {
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
+			
 		} catch (ServiceException e) {
 			
 			String url = "error.jsp";

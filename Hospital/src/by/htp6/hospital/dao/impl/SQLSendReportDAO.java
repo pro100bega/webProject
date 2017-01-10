@@ -14,22 +14,23 @@ import by.htp6.hospital.dao.pool.ConnectionPool;
 public class SQLSendReportDAO implements SendReportDAO{
 	private static final Logger log = LogManager.getLogger(SQLSendReportDAO.class);
 
+	private static final String SQL_SEND_REPORT = 
+			"INSERT INTO report(`header`, `message`, `status`)"
+			+ " VALUES (?, ?, 'unread')";
+	
 	@Override
 	public void sendReport(String header, String message) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		
 		try {
-			Connection connection = connectionPool.take();
+			connection = connectionPool.take();
 			
-			String sql = "INSERT INTO report(`header`, `message`, `status`)"
-					+ " VALUES (?, ?, 'unread')";
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement = connection.prepareStatement(SQL_SEND_REPORT);
 			preparedStatement.setString(1, header);
 			preparedStatement.setString(2, message);
 			preparedStatement.executeUpdate();
-			
-			preparedStatement.close();
-			connectionPool.free(connection);
 			
 		} catch (InterruptedException e) {
 			log.error(e.getMessage());
@@ -37,6 +38,24 @@ public class SQLSendReportDAO implements SendReportDAO{
 		} catch (SQLException e) {
 			log.error(e.getMessage());
 			throw new DAOException(e);
+		} finally {
+			try {
+				if (preparedStatement != null && !preparedStatement.isClosed()) {
+					preparedStatement.close();
+				}
+
+				if (connection != null) {
+					connectionPool.free(connection);
+				}
+
+			} catch (SQLException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			} catch (InterruptedException e) {
+				log.error(e.getMessage());
+				throw new DAOException(e);
+			}
+
 		}
 		
 	}

@@ -5,11 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <%@ include file="elements/index/e_localeMessages.jsp" %>
 
 <fmt:message bundle="${local}" key="success.sendReport" var="sendReportSuccess"/>
 <fmt:message bundle="${local}" key="success.signUp" var="signUpSuccess"/>
+<fmt:message bundle="${local}" key="success.discharge" var="dischargeSuccess"/>
 
 <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/starter-template.css">
@@ -40,6 +42,9 @@
 					</c:when>
 					<c:when test="${message == 'signUp'}">
 						<c:set var="successMessage" value="${signUpSuccess}"></c:set>
+					</c:when>
+					<c:when test="${message == 'discharge'}">
+						<c:set var="successMessage" value="${dischargeSuccess}"></c:set>
 					</c:when>
 				</c:choose>
 				<strong><c:out value="${successMessage}"></c:out></strong>
