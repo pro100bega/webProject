@@ -25,12 +25,15 @@
 								<c:out value="${nameMessage}:"></c:out>
 							</h5>
 							<input type="text" class="form-control" name="name"
-								placeholder="${namePlaceholder}" maxlength="20">
+								placeholder="${namePlaceholder}" maxlength="20"
+								pattern="^[А-Яа-я]{1,20}$|^[A-Za-z]{1,20}$">
 							<h5>
 								<c:out value="${surnameMessage}:"></c:out>
 							</h5>
 							<input type="text" class="form-control" name="surname"
-								placeholder="${surnamePlaceholder}" maxlength="20">
+								placeholder="${surnamePlaceholder}"
+								pattern="^[А-Яа-я]{1,20}$|^[A-Za-z]{1,20}$" 
+								maxlength="20">
 							<h5>
 								<c:out value="${birthDateMessage}:"></c:out>
 							</h5>
@@ -39,7 +42,9 @@
 								<c:out value="${diagnosisMessage}:"></c:out>
 							</h5>
 							<input type="text" class="form-control" name="diagnosis"
-								placeholder="${diagnosisPlaceholder}" maxlength="50">
+								placeholder="${diagnosisPlaceholder}"
+								pattern="^[А-Яа-я \\-]{1,50}$|^[A-Za-z \\-]{1,50}$"
+								maxlength="50">
 							<h5>
 								<c:out value="${sexMessage}:"></c:out>
 							</h5>
@@ -50,7 +55,9 @@
 							<h5>
 								<c:out value="${noteMessage}:"></c:out>
 							</h5>
-							<textarea class="form-control" row="5" name="note"
+							<textarea class="form-control" row="5"
+								pattern="^[А-Яа-я0-9\\. \\-,]{0,100}$"
+								name="note"
 								maxlength="100"></textarea>
 							<br />
 							<button type="button" class="btn btn-danger"

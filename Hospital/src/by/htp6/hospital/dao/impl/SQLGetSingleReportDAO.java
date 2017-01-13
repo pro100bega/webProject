@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import by.htp6.hospital.bean.Report;
 import by.htp6.hospital.dao.GetSingleReportDAO;

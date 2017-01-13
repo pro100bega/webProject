@@ -2,10 +2,11 @@ package by.htp6.hospital.dao.impl;
 
 import java.sql.Connection;
 
+
 import java.util.Date;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -38,6 +39,8 @@ public class SQLAddNewPatientDAO implements AddNewPatientDAO {
 			preparedStatement.setInt(6, doctorId);
 			preparedStatement.setString(7, note);
 			preparedStatement.executeUpdate();
+			
+			log.debug("Patient " + name + " " + surname + " was added");
 
 		} catch (InterruptedException e) {
 			log.error(e.getMessage());

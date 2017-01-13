@@ -19,49 +19,6 @@ public class Log {
 		this.id = id;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((time == null) ? 0 : time.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((message == null) ? 0 : message.hashCode());
-		result = prime * result + rowId;
-		result = prime * result + ((tableName == null) ? 0 : tableName.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Log other = (Log) obj;
-		if (time == null) {
-			if (other.time != null)
-				return false;
-		} else if (!time.equals(other.time))
-			return false;
-		if (id != other.id)
-			return false;
-		if (message == null) {
-			if (other.message != null)
-				return false;
-		} else if (!message.equals(other.message))
-			return false;
-		if (rowId != other.rowId)
-			return false;
-		if (tableName == null) {
-			if (other.tableName != null)
-				return false;
-		} else if (!tableName.equals(other.tableName))
-			return false;
-		return true;
-	}
-
 	public Log(){
 	}
 	
@@ -104,5 +61,48 @@ public class Log {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((time == null) ? 0 : time.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((message == null) ? 0 : message.hashCode());
+		result = prime * result + rowId;
+		result = prime * result + ((tableName == null) ? 0 : tableName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Log other = (Log) obj;
+		if (time == null) {
+			if (other.time != null)
+				return false;
+		} else if (!time.equals(other.time))
+			return false;
+		if (id != other.id)
+			return false;
+		if (message == null) {
+			if (other.message != null)
+				return false;
+		} else if (!message.equals(other.message))
+			return false;
+		if (rowId != other.rowId)
+			return false;
+		if (tableName == null) {
+			if (other.tableName != null)
+				return false;
+		} else if (!tableName.equals(other.tableName))
+			return false;
+		return true;
 	}
 }

@@ -20,6 +20,35 @@ public class Appointment {
 
 	private String performDate;
 
+	public Appointment() {
+		super();
+	}
+	
+	public Appointment(int id, int patientId, int doctorId, String type, String name, String status,
+			String appointmentDate, String appointmentTerm, String performDate) {
+		super();
+		this.id = id;
+		this.patientId = patientId;
+		this.doctorId = doctorId;
+		this.type = type;
+		this.name = name;
+		this.status = status;
+		this.appointmentDate = appointmentDate;
+		this.appointmentTerm = appointmentTerm;
+		this.performDate = performDate;
+	}
+	
+	public Appointment(int patientId, int doctorId, String type, String name, 
+			String status, String appointmentTerm) {
+		super();
+		this.patientId = patientId;
+		this.doctorId = doctorId;
+		this.type = type;
+		this.name = name;
+		this.status = status;
+		this.appointmentTerm = appointmentTerm;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -92,24 +121,6 @@ public class Appointment {
 		this.performDate = performDate;
 	}
 
-	public Appointment(int id, int patientId, int doctorId, String type, String name, String status,
-			String appointmentDate, String appointmentTerm, String performDate) {
-		super();
-		this.id = id;
-		this.patientId = patientId;
-		this.doctorId = doctorId;
-		this.type = type;
-		this.name = name;
-		this.status = status;
-		this.appointmentDate = appointmentDate;
-		this.appointmentTerm = appointmentTerm;
-		this.performDate = performDate;
-	}
-
-	public Appointment() {
-		super();
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -173,16 +184,4 @@ public class Appointment {
 			return false;
 		return true;
 	}
-
-	public Appointment(int patientId, int doctorId, String type, String name, 
-			String status, String appointmentTerm) {
-		super();
-		this.patientId = patientId;
-		this.doctorId = doctorId;
-		this.type = type;
-		this.name = name;
-		this.status = status;
-		this.appointmentTerm = appointmentTerm;
-	}
-
 }

@@ -49,7 +49,8 @@
 					<input type="hidden" name="command" value="FIND_PATIENT"> <input
 						type="search" class="form-control" name="searchData"
 						placeholder="${searchPlaceholder}"
-						pattern="^[А-Яа-я0-9\._: ]{1,18}$"
+						pattern = "^[А-Яа-я \-]{1,50}$|^[A-Za-z \-]{1,50}$"
+						autofocus = "true"
 						value="${requestScope.searchData}"> <span
 						class="glyphicon glyphicon-search form-control-feedback"> </span>
 				</div>

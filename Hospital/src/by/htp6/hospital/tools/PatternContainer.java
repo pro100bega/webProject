@@ -13,7 +13,7 @@ public class PatternContainer {
 	
 	//Diagnosis format pattern
 	public static final Pattern diagnosisPattern =
-			Pattern.compile("^[А-Яа-я -]{1,50}$|^[A-Za-z -]{1,50}$");
+			Pattern.compile("^[А-Яа-я \\-]{1,50}$|^[A-Za-z \\-]{1,50}$");
 	
 	//Patient name format pattern
 	public static final Pattern patientNamePattern = 
@@ -25,7 +25,7 @@ public class PatternContainer {
 	
 	//Appointment name format pattern
 	public static final Pattern appointmentNamePattern =
-			Pattern.compile("^[А-Яа-я ё]{2,20}$");
+			Pattern.compile("^[А-Яа-я ё\\-,\\.]{2,50}$");
 	
 	//Ru date format pattern
 	public static final Pattern enDateFormatPattern =
@@ -39,7 +39,7 @@ public class PatternContainer {
 	
 	//Note format pattern
 	public static final Pattern notePatern =
-			Pattern.compile("^[А-Яа-я0-9\\. \\-,]{0,100}");
+			Pattern.compile("^[А-Яа-я0-9\\. \\-,]{0,100}$");
 	
 	//Bug report header format pattern
 	public static final Pattern headerPattern =

@@ -127,18 +127,19 @@
 													</c:out></td>
 												<td><c:out value="${appointment.appointmentTerm}">
 													</c:out></td>
-												<td>
-													<form action="controller" method="post">
-														<input type="hidden" name="command"
-															value="PERFORM_APPOINTMENT"> <input type="hidden"
-															name="id" value="${appointment.id}"> <input
-															type="hidden" name="type" value="${appointment.type}">
-														<button type="submit" class="btn btn-sm btn-success">
-															<c:out value="${performAppointmentButton}">
-															</c:out>
-														</button>
-													</form>
-												</td>
+												<td><c:if test="${appointment.type != 'операция'}">
+														<form action="controller" method="post">
+															<input type="hidden" name="command"
+																value="PERFORM_APPOINTMENT"> <input
+																type="hidden" name="id" value="${appointment.id}">
+															<input type="hidden" name="type"
+																value="${appointment.type}">
+															<button type="submit" class="btn btn-sm btn-success">
+																<c:out value="${performAppointmentButton}">
+																</c:out>
+															</button>
+														</form>
+													</c:if></td>
 											</tr>
 										</c:forEach>
 									</tbody>

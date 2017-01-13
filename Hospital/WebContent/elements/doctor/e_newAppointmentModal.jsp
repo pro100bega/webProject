@@ -43,8 +43,8 @@
 								</strong>
 							</h5>
 							<input type="text" class="form-control" name="name"
-								placeholder="${appointmentNamePlaceholder}" maxlength="20"
-								pattern="^[А-Яа-я ]{2,20}$" required>
+								placeholder="${appointmentNamePlaceholder}" maxlength="50"
+								pattern="^[А-Яа-я -,\.]{2,50}$" required>
 							<h5>
 								<strong> <c:out value="${executionPeriodMessage}:"></c:out>
 								</strong>

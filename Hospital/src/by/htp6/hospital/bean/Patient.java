@@ -23,6 +23,46 @@ public class Patient implements Serializable {
 	private String receiptDate;
 	
 	private String note;
+	
+	public Patient() {
+		super();
+	}
+	
+	public Patient(int id, String name, String surname, String sex, String birthDate, String diagnosis, int doctorId,
+			String receiptDate, String note) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.sex = sex;
+		this.birthDate = birthDate;
+		this.diagnosis = diagnosis;
+		this.doctorId = doctorId;
+		this.receiptDate = receiptDate;
+		this.note = note;
+	}
+
+	public Patient(String name, String surname, String sex, String birthDate, String diagnosis, int doctorId,
+			String note) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.sex = sex;
+		this.birthDate = birthDate;
+		this.diagnosis = diagnosis;
+		this.doctorId = doctorId;
+		this.note = note;
+	}
+
+	public Patient(String name, String surname, String sex, String birthDate, String diagnosis, int doctorId) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.sex = sex;
+		this.birthDate = birthDate;
+		this.diagnosis = diagnosis;
+		this.doctorId = doctorId;
+	}
 
 	public int getId() {
 		return id;
@@ -98,46 +138,6 @@ public class Patient implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public Patient(int id, String name, String surname, String sex, String birthDate, String diagnosis, int doctorId,
-			String receiptDate, String note) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.surname = surname;
-		this.sex = sex;
-		this.birthDate = birthDate;
-		this.diagnosis = diagnosis;
-		this.doctorId = doctorId;
-		this.receiptDate = receiptDate;
-		this.note = note;
-	}
-
-	public Patient() {
-		super();
-	}
-
-	public Patient(String name, String surname, String sex, String birthDate, String diagnosis, int doctorId,
-			String note) {
-		super();
-		this.name = name;
-		this.surname = surname;
-		this.sex = sex;
-		this.birthDate = birthDate;
-		this.diagnosis = diagnosis;
-		this.doctorId = doctorId;
-		this.note = note;
-	}
-
-	public Patient(String name, String surname, String sex, String birthDate, String diagnosis, int doctorId) {
-		super();
-		this.name = name;
-		this.surname = surname;
-		this.sex = sex;
-		this.birthDate = birthDate;
-		this.diagnosis = diagnosis;
-		this.doctorId = doctorId;
 	}
 
 	@Override

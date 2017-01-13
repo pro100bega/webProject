@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<c:if test="${sessionScope.authorisedUser eq null}">
+<c:if test="${sessionScope.authorisedUser.type != 'nurse'}">
 	<c:redirect url="../index.jsp" />
 </c:if>
 <c:set var="patientId" value="${requestScope.selectedPatient.id}"></c:set>

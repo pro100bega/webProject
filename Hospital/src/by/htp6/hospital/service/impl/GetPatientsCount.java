@@ -1,7 +1,7 @@
 package by.htp6.hospital.service.impl;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import by.htp6.hospital.dao.GetPatientsCountDAO;
 import by.htp6.hospital.dao.exception.DAOException;

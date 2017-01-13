@@ -7,8 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import by.htp6.hospital.dao.SignUpDAO;
 import by.htp6.hospital.dao.exception.DAOException;
@@ -68,12 +68,6 @@ public class SQLSignUpDAO implements SignUpDAO {
 		}
 	}
 
-	// checks if user name already exists in database
-	/**
-	 * @param username
-	 *            Returns {@code true} if user name already exists in database
-	 *            or {@code false} in another case.
-	 */
 	private boolean checkUsernameInBase(String username, Connection connection) throws DAOException {
 		CallableStatement callableStatement = null;
 		try {

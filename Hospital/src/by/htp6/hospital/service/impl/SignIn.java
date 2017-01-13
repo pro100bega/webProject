@@ -3,8 +3,8 @@ package by.htp6.hospital.service.impl;
 import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import by.htp6.hospital.bean.User;
 import by.htp6.hospital.dao.SignInDAO;
