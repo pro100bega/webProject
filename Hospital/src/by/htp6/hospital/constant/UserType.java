@@ -1,13 +1,11 @@
 package by.htp6.hospital.constant;
 
 /**
- * 
  * Виды пользователей в программе
  * 
  * User types in program
  * 
- * @author Begench Shamuradov
- *
+ * @author Begench Shamuradov, 2017
  */
 public class UserType {
 

@@ -8,16 +8,20 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.htp6.hospital.constant.ErrorMessage;
+import by.htp6.hospital.constant.SqlQuery;
 import by.htp6.hospital.dao.PerformAppointmentDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
+/**
+ * Класс для выполнения назначения в базе данных
+ * 
+ * Class for performing appointment in database
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class SQLPerformAppointmentDAO implements PerformAppointmentDAO{
 	private static final Logger log = LogManager.getLogger(SQLPerformAppointmentDAO.class);
-
-	private static final String SQL_PERFORM_APPOINTMENT = 
-			"UPDATE appointment SET status = 'done', "
-			+ "perform_date = CURRENT_TIMESTAMP WHERE id = ?";
 	
 	@Override
 	public void performAppointment(int appointmentId) throws DAOException {
@@ -28,7 +32,8 @@ public class SQLPerformAppointmentDAO implements PerformAppointmentDAO{
 		try {
 			connection = connectionPool.take();
 			
-			preparedStatement = connection.prepareStatement(SQL_PERFORM_APPOINTMENT);
+			preparedStatement = connection.prepareStatement(
+					SqlQuery.PERFORM_APPOINTMENT);
 			preparedStatement.setInt(1, appointmentId);
 			preparedStatement.executeUpdate();
 			

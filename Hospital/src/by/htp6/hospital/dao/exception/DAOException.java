@@ -1,7 +1,7 @@
 package by.htp6.hospital.dao.exception;
 
 public class DAOException extends Exception{
-	private static final long serialVersionUID = -994643345559415570L;
+	private static final long serialVersionUID = 1L;
 
 	public DAOException(){
 		super();

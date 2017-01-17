@@ -30,6 +30,7 @@
 <fmt:message bundle="${local}" key="message.sortByName" var="sortByNameMessage" />
 <fmt:message bundle="${local}" key="message.sortBySurname" var="sortBySurnameMessage" />
 <fmt:message bundle="${local}" key="message.sortByDiagnosis" var="sortByDiagnosisMessage" />
+<fmt:message bundle="${local}" key="message.sortByReceiptDate" var="sortByReceiptDateMessage" />
 <fmt:message bundle="${local}" key="message.patientId" var="patientIdMessage" />
 <fmt:message bundle="${local}" key="message.doctorId" var="doctorIdMessage" />
 <fmt:message bundle="${local}" key="message.appointmentType" var="appointmentTypeMessage" />

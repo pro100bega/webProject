@@ -8,16 +8,20 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.htp6.hospital.constant.ErrorMessage;
+import by.htp6.hospital.constant.SqlQuery;
 import by.htp6.hospital.dao.SendReportDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
+/**
+ * Класс для добавления жалобы и предложения в базу данных
+ * 
+ * Class for adding report to database
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class SQLSendReportDAO implements SendReportDAO{
 	private static final Logger log = LogManager.getLogger(SQLSendReportDAO.class);
-
-	private static final String SQL_SEND_REPORT = 
-			"INSERT INTO report(`header`, `message`, `status`)"
-			+ " VALUES (?, ?, 'unread')";
 	
 	@Override
 	public void sendReport(String header, String message) throws DAOException {
@@ -28,7 +32,8 @@ public class SQLSendReportDAO implements SendReportDAO{
 		try {
 			connection = connectionPool.take();
 			
-			preparedStatement = connection.prepareStatement(SQL_SEND_REPORT);
+			preparedStatement = connection.prepareStatement(
+					SqlQuery.SEND_REPORT);
 			preparedStatement.setString(1, header);
 			preparedStatement.setString(2, message);
 			preparedStatement.executeUpdate();
@@ -56,9 +61,6 @@ public class SQLSendReportDAO implements SendReportDAO{
 			} catch (InterruptedException e) {
 				log.error(ErrorMessage.UNABLE_TO_FREE_CONNECTION, e);
 			}
-
-		}
-		
+		}	
 	}
-
 }

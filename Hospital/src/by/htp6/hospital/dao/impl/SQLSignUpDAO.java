@@ -11,17 +11,20 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.htp6.hospital.constant.ErrorMessage;
+import by.htp6.hospital.constant.SqlQuery;
 import by.htp6.hospital.dao.SignUpDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
+/**
+ * Класс для проверки данных пользователя в базе данных и регистрации пользователя
+ * 
+ * Class for checking user data in database and signing up user
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class SQLSignUpDAO implements SignUpDAO {
 	private static final Logger log = LogManager.getLogger(SQLSignUpDAO.class);
-
-	private static final String SQL_CHECK_USERNAME = "CALL check_username(?)";
-	
-	private static final String SQL_SIGN_UP = 
-			"INSERT INTO user(username, password, type) VALUES(?,?,?)";
 	
 	private static final String DEFAULT_USER = "guest";
 	
@@ -34,14 +37,18 @@ public class SQLSignUpDAO implements SignUpDAO {
 		try {
 			connection = connectionPool.take();
 			if (!checkUsernameInBase(username, connection)) {
-				preparedStatement = connection.prepareStatement(SQL_SIGN_UP);
+				preparedStatement = connection.prepareStatement(
+						SqlQuery.SIGN_UP);
 				preparedStatement.setString(1, username);
 				preparedStatement.setString(2, password);
 				preparedStatement.setString(3, DEFAULT_USER);
 				preparedStatement.executeUpdate();
 
 			} else {
-				throw new DAOException("Username \"" + username + "\" is already exists");
+				log.error(ErrorMessage.USERNAME_IS_ALREADY_EXIST + " :"
+						+ username);
+				throw new DAOException(ErrorMessage.USERNAME_IS_ALREADY_EXIST + " :"
+						+ username);
 			}
 
 		} catch (InterruptedException e) {
@@ -74,7 +81,8 @@ public class SQLSignUpDAO implements SignUpDAO {
 	private boolean checkUsernameInBase(String username, Connection connection) throws DAOException {
 		CallableStatement callableStatement = null;
 		try {
-			callableStatement = connection.prepareCall(SQL_CHECK_USERNAME);
+			callableStatement = connection.prepareCall(
+					SqlQuery.CHECK_USERNAME);
 			callableStatement.setString(1, username);
 			ResultSet resultSet = callableStatement.executeQuery();
 			if (resultSet.next()) {

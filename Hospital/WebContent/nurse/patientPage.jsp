@@ -129,9 +129,10 @@
 													</c:out></td>
 												<td><c:if test="${appointment.type != 'операция'}">
 														<form action="controller" method="post">
-															<input type="hidden" name="command"
-																value="PERFORM_APPOINTMENT"> <input
-																type="hidden" name="id" value="${appointment.id}">
+															<input type="hidden" name="patientId"
+																value="${selectedPatient.id}"> <input
+																type="hidden" name="command" value="PERFORM_APPOINTMENT">
+															<input type="hidden" name="id" value="${appointment.id}">
 															<input type="hidden" name="type"
 																value="${appointment.type}">
 															<button type="submit" class="btn btn-sm btn-success">

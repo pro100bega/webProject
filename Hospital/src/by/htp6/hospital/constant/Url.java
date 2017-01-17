@@ -5,7 +5,7 @@ package by.htp6.hospital.constant;
  * 
  * Program URL list
  * 
- * @author Begench Shamuradov, 2016
+ * @author Begench Shamuradov, 2017
  */
 public class Url {
 

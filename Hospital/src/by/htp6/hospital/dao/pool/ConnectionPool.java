@@ -1,6 +1,7 @@
 package by.htp6.hospital.dao.pool;
 
 import java.io.Closeable;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,10 +10,26 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import by.htp6.hospital.constant.ErrorMessage;
+
 public class ConnectionPool implements Closeable {
+	private static final Logger log = LogManager.getLogger(ConnectionPool.class);
+	
+	private static final String DRIVER_NAME = "org.gjt.mm.mysql.Driver";
+	
 	static final int POOL_SIZE = 5;
+	
 	private BlockingQueue<Connection> freeConnections;
 	private BlockingQueue<Connection> busyConnections;
+	
+	private final static ConnectionPool instance = new ConnectionPool();
+
+	private ConnectionPool() {
+
+	}
 
 	public static ConnectionPool getInstance() {
 		return instance;
@@ -20,8 +37,9 @@ public class ConnectionPool implements Closeable {
 
 	public void init() throws SQLException{
 		try {
-			Class.forName("org.gjt.mm.mysql.Driver");
+			Class.forName(DRIVER_NAME);
 		} catch (ClassNotFoundException e) {
+			log.error(ErrorMessage.DATABASE_ERROR, e);
 			throw new SQLException(e);
 		}
 		ResourceBundle resourceBundle = ResourceBundle.getBundle("resources.dbResource");
@@ -45,7 +63,8 @@ public class ConnectionPool implements Closeable {
 
 	public void free(Connection connection) throws InterruptedException{
 		if (connection == null){
-			throw new RuntimeException("Connection is NULL");
+			log.error(ErrorMessage.CONNECTION_IS_NULL);
+			throw new RuntimeException(ErrorMessage.CONNECTION_IS_NULL);
 		}
 		Connection temporaryConnection = connection;
 		connection = null;
@@ -63,9 +82,9 @@ public class ConnectionPool implements Closeable {
 						temporaryConnection.close();
 					}
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					log.error(ErrorMessage.DATABASE_ERROR, e);
 				} catch (SQLException e) {
-					e.printStackTrace();
+					log.error(ErrorMessage.DATABASE_ERROR, e);
 				}	
 			}
 		}
@@ -78,19 +97,12 @@ public class ConnectionPool implements Closeable {
 						temporaryConnection.close();
 					}
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					log.error(ErrorMessage.DATABASE_ERROR, e);
 				} catch (SQLException e) {
-					e.printStackTrace();
+					log.error(ErrorMessage.DATABASE_ERROR, e);
 				}	
 			}
 		}
 		
 	}
-
-	private final static ConnectionPool instance = new ConnectionPool();
-
-	private ConnectionPool() {
-
-	}
-
 }

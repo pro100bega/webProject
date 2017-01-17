@@ -15,17 +15,23 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.htp6.hospital.bean.Appointment;
+import by.htp6.hospital.constant.DatabaseColumnName;
+import by.htp6.hospital.constant.DateFormat;
 import by.htp6.hospital.constant.ErrorMessage;
+import by.htp6.hospital.constant.SqlQuery;
 import by.htp6.hospital.dao.GetAppointmentListDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
+/**
+ * Класс для получения списка назначений из базы данных
+ * 
+ * Class for getting appointments list from database
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class SQLGetAppointmentListDAO implements GetAppointmentListDAO{
 	private static final Logger log = LogManager.getLogger(SQLGetAppointmentListDAO.class);
-
-	private static final String SQL_GET_APPOINTMENT_LIST = 
-			"SELECT * FROM appointment WHERE patient_id = ? AND status = ?"
-			+ " ORDER BY appointment_term DESC";
 	
 	@Override
 	public List<Appointment> getAppointmentList(int patientId, String status) throws DAOException {
@@ -36,25 +42,25 @@ public class SQLGetAppointmentListDAO implements GetAppointmentListDAO{
 		try {
 			connection = connectionPool.take();
 			
-			preparedStatement = connection.prepareStatement(SQL_GET_APPOINTMENT_LIST);
+			preparedStatement = connection.prepareStatement(SqlQuery.GET_APPOINTMENT_LIST);
 			preparedStatement.setInt(1, patientId);
 			preparedStatement.setString(2, status);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy, HH:mm");
+			SimpleDateFormat dateFormat = new SimpleDateFormat(DateFormat.RU_DATE_FROMAT_WC);
 			Timestamp date;
 			Appointment appointment;
 			List<Appointment> appointments = new ArrayList<>();
 			while (resultSet.next()){
-				int id = resultSet.getInt("id");
-				int doctorId = resultSet.getInt("doctor_id");
-				String type = resultSet.getString("type");
-				String name = resultSet.getString("name");
-				date = resultSet.getTimestamp("appointment_date");
+				int id = resultSet.getInt(DatabaseColumnName.ID);
+				int doctorId = resultSet.getInt(DatabaseColumnName.DOCTOR_ID);
+				String type = resultSet.getString(DatabaseColumnName.TYPE);
+				String name = resultSet.getString(DatabaseColumnName.NAME);
+				date = resultSet.getTimestamp(DatabaseColumnName.APPOINTMENT_DATE);
 				String appointmentDate = dateFormat.format(date);
-				date = resultSet.getTimestamp("appointment_term");
+				date = resultSet.getTimestamp(DatabaseColumnName.APPOINTMENT_TERM);
 				String appointmentTerm = dateFormat.format(date);
-				date = resultSet.getTimestamp("perform_date");
+				date = resultSet.getTimestamp(DatabaseColumnName.PERFORM_DATE);
 				String performDate = (date == null) ? null : dateFormat.format(date);
 				appointment = new Appointment(id, patientId, doctorId, type, name,
 						status, appointmentDate, appointmentTerm, performDate);

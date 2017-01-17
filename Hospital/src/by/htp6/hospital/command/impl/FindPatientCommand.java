@@ -38,11 +38,6 @@ public class FindPatientCommand implements Command {
 		HttpSession session = request.getSession(false);
 		User user = (User) session.getAttribute(ParameterName.AUTHORISED_USER);
 		String userType = user.getType();
-		
-		String orderBy = request.getParameter(ParameterName.ORDER_BY);;
-		if (orderBy == null){
-			orderBy = (String)session.getAttribute(ParameterName.ORDER_BY);
-		}
 
 		String requestCurrentPage = request.getParameter(ParameterName.CURRENT_PAGE);
 		int currentPage;
@@ -83,12 +78,12 @@ public class FindPatientCommand implements Command {
 					patientsCount = getPatientsCount.getPatientsCountByDoctorId(searchData, 
 							doctorId);
 					patients = findPatientService.findPatientsByDoctorId(searchData, doctorId,
-							offset, patientsPerPage, orderBy);
+							offset, patientsPerPage);
 					url = Url.DOCTOR_FOUND_PATIENTS;
 				} else if (userType.equals(UserType.NURSE)) {
 					patientsCount = getPatientsCount.getPatientsCount(searchData);
 					patients = findPatientService.findPatients(searchData, offset,
-							patientsPerPage, orderBy);
+							patientsPerPage);
 					url = Url.NURSE_FOUND_PATIENTS;
 				}
 
@@ -97,9 +92,6 @@ public class FindPatientCommand implements Command {
 				session.setAttribute(ParameterName.PATIENTS_PER_PAGE, patientsPerPage);
 				request.setAttribute(ParameterName.PATIENTS_COUNT, patientsCount);
 				request.setAttribute(ParameterName.SEARCH_DATA, searchData);
-				if (orderBy != null){
-					session.setAttribute(ParameterName.ORDER_BY, orderBy);
-				}
 				
 				RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 				dispatcher.forward(request, response);

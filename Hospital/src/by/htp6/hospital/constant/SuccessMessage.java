@@ -5,7 +5,7 @@ package by.htp6.hospital.constant;
  * 
  * Parameter names that presents in queries
  * 
- * @author Begench Shamuradov, 2016
+ * @author Begench Shamuradov, 2017
  */
 public class SuccessMessage {
 

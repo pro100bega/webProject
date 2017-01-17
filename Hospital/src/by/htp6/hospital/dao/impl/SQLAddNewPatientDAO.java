@@ -12,16 +12,20 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import by.htp6.hospital.constant.ErrorMessage;
+import by.htp6.hospital.constant.SqlQuery;
 import by.htp6.hospital.dao.AddNewPatientDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
+/**
+ * Класс для добавления нового пациента в базу данных
+ * 
+ * Class for adding new patient to database
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class SQLAddNewPatientDAO implements AddNewPatientDAO {
 	private static final Logger log = LogManager.getLogger(SQLAddNewPatientDAO.class);
-
-	private static final String SQL_ADD_NEW_PATIENT = 
-			"INSERT INTO patient(`name`, `surname`, `sex`, `birth_date`,"
-					+ " `diagnosis`, `doctor_id`, `note`)" + " VALUES (?,?,?,?,?,?,?)";
 	
 	@Override
 	public void addNewPatient(String name, String surname, String sex, 
@@ -33,7 +37,7 @@ public class SQLAddNewPatientDAO implements AddNewPatientDAO {
 		try {
 			connection = connectionPool.take();
 
-			preparedStatement = connection.prepareStatement(SQL_ADD_NEW_PATIENT);
+			preparedStatement = connection.prepareStatement(SqlQuery.ADD_NEW_PATIENT);
 			preparedStatement.setString(1, name);
 			preparedStatement.setString(2, surname);
 			preparedStatement.setString(3, sex);

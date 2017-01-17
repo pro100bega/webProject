@@ -9,16 +9,20 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.htp6.hospital.constant.ErrorMessage;
+import by.htp6.hospital.constant.SqlQuery;
 import by.htp6.hospital.dao.EditPatientDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
+/**
+ * Класс для изменения пациента в базе данных
+ * 
+ * Class for editing patient in database
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class SQLEditPatientDAO implements EditPatientDAO {
 	private static final Logger log = LogManager.getLogger(SQLEditPatientDAO.class);
-
-	private static final String SQL_EDIT_PATIENT = 
-			"UPDATE patient SET name = ?, surname = ?, sex = ?, birth_date = ?,"
-			+ "diagnosis = ?, note = ? WHERE id = ?";
 	
 	@Override
 	public void editPatient(int patientId, String name, String surname,
@@ -31,7 +35,7 @@ public class SQLEditPatientDAO implements EditPatientDAO {
 		try {
 			connection = connectionPool.take();
 
-			preparedStatement = connection.prepareStatement(SQL_EDIT_PATIENT);
+			preparedStatement = connection.prepareStatement(SqlQuery.EDIT_PATIENT);
 			preparedStatement.setString(1, name);
 			preparedStatement.setString(2, surname);
 			preparedStatement.setString(3, sex);

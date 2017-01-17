@@ -9,15 +9,20 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.htp6.hospital.constant.ErrorMessage;
+import by.htp6.hospital.constant.SqlQuery;
 import by.htp6.hospital.dao.GetUsersCountDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
+/**
+ * Класс для получения количества пользователей в базе данных
+ * 
+ * Class for getting users count in database
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class SQLGetUsersCountDAO implements GetUsersCountDAO{
 	private static final Logger log = LogManager.getLogger(SQLGetUsersCountDAO.class);
-
-	private static final String SQL_GET_USERS_COUNT = 
-			"SELECT COUNT(*) FROM user";
 	
 	@Override
 	public int getUsersCount() throws DAOException {
@@ -27,8 +32,8 @@ public class SQLGetUsersCountDAO implements GetUsersCountDAO{
 		
 		try {
 			connection = connectionPool.take();
-
-			preparedStatement = connection.prepareStatement(SQL_GET_USERS_COUNT);
+			preparedStatement = connection.prepareStatement(
+					SqlQuery.GET_USERS_COUNT);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			int usersCount = 0;

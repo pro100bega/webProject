@@ -9,15 +9,20 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.htp6.hospital.constant.ErrorMessage;
+import by.htp6.hospital.constant.SqlQuery;
 import by.htp6.hospital.dao.GetUnreadReportsCountDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
+/**
+ * Класс для получения количества непрочитанных жалоб и предложений из базы данных
+ * 
+ * Class for getting unread reports count from database
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class SQLGetUnreadReportsCountDAO implements GetUnreadReportsCountDAO {
 	private static final Logger log = LogManager.getLogger(SQLGetUnreadReportsCountDAO.class);
-
-	private static final String SQL_GET_UNREAD_REPORTS_COUNT = 
-			"SELECT COUNT(*) FROM report WHERE status = 'unread'";
 	
 	@Override
 	public int getUnreadReportsCount() throws DAOException {
@@ -27,7 +32,8 @@ public class SQLGetUnreadReportsCountDAO implements GetUnreadReportsCountDAO {
 		try {
 			connection = connectionPool.take();
 
-			preparedStatement = connection.prepareStatement(SQL_GET_UNREAD_REPORTS_COUNT);
+			preparedStatement = connection.prepareStatement(
+					SqlQuery.GET_UNREAD_REPORTS_COUNT);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			int reportsCount = 0;
 			if (resultSet.next()) {

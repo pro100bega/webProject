@@ -15,16 +15,23 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.htp6.hospital.bean.Report;
+import by.htp6.hospital.constant.DatabaseColumnName;
+import by.htp6.hospital.constant.DateFormat;
 import by.htp6.hospital.constant.ErrorMessage;
+import by.htp6.hospital.constant.SqlQuery;
 import by.htp6.hospital.dao.GetReportsDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
+/**
+ * Класс для получения списка жалоб и предложений из базы данных
+ * 
+ * Class for getting reports list from database
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class SQLGetReportsDAO implements GetReportsDAO {
 	private static final Logger log = LogManager.getLogger(SQLGetPatientsCountDAO.class);
-
-	private static final String SQL_GET_REPORTS = 
-			"SELECT * FROM report ORDER BY time DESC limit ?, ?";
 	
 	@Override
 	public List<Report> getReports(int offset, int count) throws DAOException {
@@ -35,7 +42,7 @@ public class SQLGetReportsDAO implements GetReportsDAO {
 		try {
 			connection = connectionPool.take();
 			
-			preparedStatement = connection.prepareStatement(SQL_GET_REPORTS);
+			preparedStatement = connection.prepareStatement(SqlQuery.GET_REPORTS);
 			
 			preparedStatement.setInt(1, offset);
 			preparedStatement.setInt(2, count);
@@ -45,14 +52,14 @@ public class SQLGetReportsDAO implements GetReportsDAO {
 			List<Report> reports = new ArrayList<>();
 			
 			
-			SimpleDateFormat timeFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+			SimpleDateFormat timeFormat = new SimpleDateFormat(DateFormat.RU_DATE_FORMAT_HM);
 			while (resultSet.next()){
-				int id = resultSet.getInt("id");
-				String header = resultSet.getString("header");
-				String message = resultSet.getString("message");
-				Timestamp date = resultSet.getTimestamp("time");
+				int id = resultSet.getInt(DatabaseColumnName.ID);
+				String header = resultSet.getString(DatabaseColumnName.HEADER);
+				String message = resultSet.getString(DatabaseColumnName.MESSAGE);
+				Timestamp date = resultSet.getTimestamp(DatabaseColumnName.TIME);
 				String time = timeFormat.format(date);
-				String status = resultSet.getString("status");
+				String status = resultSet.getString(DatabaseColumnName.STATUS);
 				reports.add(new Report(id, header, message, time, status));
 			}
 			

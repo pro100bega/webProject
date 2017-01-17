@@ -11,21 +11,21 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.htp6.hospital.constant.ErrorMessage;
+import by.htp6.hospital.constant.SqlQuery;
 import by.htp6.hospital.dao.GetPatientsCountDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
+/**
+ * Класс для получения количества пациентов в базе данных
+ * 
+ * Class for getting patients count in database
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class SQLGetPatientsCountDAO implements GetPatientsCountDAO {
 	private static final Logger log = LogManager.getLogger(SQLGetPatientsCountDAO.class);
-
-	private static final String SQL_GET_PATIENTS_COUNT_FOR_NURSE = "CALL get_patient_count(?)";
-
-	private static final String SQL_GET_PATIENTS_COUNT_FOR_DOCTOR = "CALL get_patient_count_by_doctor_id(?,?)";
-
-	private static final String SQL_GET_ALL_PATIENTS_COUNT_FOR_NURSE = "SELECT COUNT(*) FROM patient";
-
-	private static final String SQL_GET_ALL_PATIENTS_COUNT_FOR_DOCTOR = "SELECT COUNT(*) FROM patient WHERE doctor_id = ?";
-
+	
 	@Override
 	public int getPatientsCountByDoctorId(int doctorId) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -35,7 +35,8 @@ public class SQLGetPatientsCountDAO implements GetPatientsCountDAO {
 		try {
 			connection = connectionPool.take();
 
-			preparedStatement = connection.prepareStatement(SQL_GET_ALL_PATIENTS_COUNT_FOR_DOCTOR);
+			preparedStatement = connection.prepareStatement(
+					SqlQuery.GET_ALL_PATIENTS_COUNT_FOR_DOCTOR);
 			preparedStatement.setInt(1, doctorId);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			int patientsCount = 0;
@@ -79,7 +80,8 @@ public class SQLGetPatientsCountDAO implements GetPatientsCountDAO {
 		try {
 			connection = connectionPool.take();
 
-			preparedStatement = connection.prepareStatement(SQL_GET_ALL_PATIENTS_COUNT_FOR_NURSE);
+			preparedStatement = connection.prepareStatement(
+					SqlQuery.GET_ALL_PATIENTS_COUNT_FOR_NURSE);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			int patientsCount = 0;
 			if (resultSet.next()) {
@@ -123,7 +125,8 @@ public class SQLGetPatientsCountDAO implements GetPatientsCountDAO {
 		try {
 			connection = connectionPool.take();
 
-			callableStatement = connection.prepareCall(SQL_GET_PATIENTS_COUNT_FOR_DOCTOR);
+			callableStatement = connection.prepareCall(
+					SqlQuery.GET_PATIENTS_COUNT_FOR_DOCTOR);
 			callableStatement.setString(1, searchData);
 			callableStatement.setInt(2, doctorId);
 			ResultSet resultSet = callableStatement.executeQuery();
@@ -169,7 +172,8 @@ public class SQLGetPatientsCountDAO implements GetPatientsCountDAO {
 		try {
 			connection = connectionPool.take();
 
-			callableStatement = connection.prepareCall(SQL_GET_PATIENTS_COUNT_FOR_NURSE);
+			callableStatement = connection.prepareCall(
+					SqlQuery.GET_PATIENTS_COUNT_FOR_NURSE);
 			callableStatement.setString(1, searchData);
 			ResultSet resultSet = callableStatement.executeQuery();
 			int patientsCount = 0;

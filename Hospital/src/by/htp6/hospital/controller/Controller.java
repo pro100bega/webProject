@@ -40,7 +40,6 @@ public class Controller extends HttpServlet {
 			throws ServletException, IOException {
 		CommandProvider commandProvider = CommandProvider.getInstance();
 		String commandName = request.getParameter("command");
-		System.out.println("Command name - " + commandName);
 		Command command = commandProvider.getCommand(commandName);
 		
 		command.execute(request, response);

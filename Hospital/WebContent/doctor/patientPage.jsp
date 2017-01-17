@@ -143,10 +143,12 @@
 													</c:out></td>
 												<td>
 													<form action="controller" method="post">
-														<input type="hidden" name="command"
-															value="PERFORM_APPOINTMENT"> <input type="hidden"
-															name="id" value="${appointment.id}"> <input
-															type="hidden" name="type" value="${appointment.type}">
+														<input type="hidden" name="patientId"
+															value="${selectedPatient.id}"> <input
+															type="hidden" name="command" value="PERFORM_APPOINTMENT">
+														<input type="hidden" name="id" value="${appointment.id}">
+														<input type="hidden" name="type"
+															value="${appointment.type}">
 														<button type="submit" class="btn btn-sm btn-success">
 															<c:out value="${performAppointmentButton}">
 															</c:out>
@@ -200,11 +202,9 @@
 					</button>
 
 					<form action="controller" method="get">
-						<input type="hidden" name="command"
-							value="GET_EDIT_PATIENT_PAGE">
+						<input type="hidden" name="command" value="GET_EDIT_PATIENT_PAGE">
 						<input type="hidden" name="patientId"
-							value="${selectedPatient.id}">
-						<br> 
+							value="${selectedPatient.id}"> <br>
 						<button type="submit" class="btn btn btn-warning">
 							<span class="glyphicon glyphicon-pencil"></span>
 							<c:out value="${editButton}"></c:out>

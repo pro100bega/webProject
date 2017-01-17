@@ -49,6 +49,10 @@
 						href="controller?command=GET_PATIENT_LIST&orderBy=diagnosis">
 							<c:out value="${sortByDiagnosisMessage}"></c:out>
 					</a></li>
+					<li><a
+						href="controller?command=GET_PATIENT_LIST&orderBy=receipt"> <c:out
+								value="${sortByReceiptDateMessage}"></c:out>
+					</a></li>
 				</ul>
 			</div>
 

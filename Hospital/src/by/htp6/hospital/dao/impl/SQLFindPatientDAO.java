@@ -13,36 +13,36 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.htp6.hospital.bean.Patient;
+import by.htp6.hospital.constant.DatabaseColumnName;
+import by.htp6.hospital.constant.DateFormat;
 import by.htp6.hospital.constant.ErrorMessage;
+import by.htp6.hospital.constant.SqlQuery;
 import by.htp6.hospital.dao.FindPatientDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
+/**
+ * Класс для поиска пациента в базе данных
+ * 
+ * Class for searching patient in database
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class SQLFindPatientDAO implements FindPatientDAO{
 	private static final Logger log = LogManager.getLogger(SQLFindPatientDAO.class);
-	
-	private static final String SQL_FIND_PATIENT_BY_DOCTOR_ID = 
-			"CALL find_patients_by_doctor_id(?,?,?,?,'receipt_date')";
-	
-	private static final String SQL_FIND_PATIENT = 
-			"CALL find_patients(?,?,?,'receipt_date')";			
+
 	
 	@Override
 	public List<Patient> findPatientsByDoctorId(String searchData,
-			int doctorId, int offset, int count, String orderBy) throws DAOException {
+			int doctorId, int offset, int count) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		Connection connection = null;
 		CallableStatement callableStatement = null;
 		
 		try {
-			String query;
-			if (null == orderBy) {
-				query = SQL_FIND_PATIENT_BY_DOCTOR_ID;
-			} else {
-				query = "CALL find_patients_by_doctor_id(?,?,?,?," + orderBy + ")";
-			}
+			
 			connection = connectionPool.take();
-			callableStatement = connection.prepareCall(query);
+			callableStatement = connection.prepareCall(SqlQuery.FIND_PATIENT_BY_DOCTOR_ID);
 			callableStatement.setString(1, searchData);
 			callableStatement.setInt(2, doctorId);
 			callableStatement.setInt(3, offset);
@@ -53,18 +53,21 @@ public class SQLFindPatientDAO implements FindPatientDAO{
 			List<Patient> patients = new ArrayList<Patient>();
 			// Single patient object
 			
-			SimpleDateFormat birthDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-			SimpleDateFormat receiptDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+			SimpleDateFormat birthDateFormat = new SimpleDateFormat(DateFormat.RU_DATE_FORMAT);
+			SimpleDateFormat receiptDateFormat = new SimpleDateFormat(
+					DateFormat.RU_DATE_FORMAT_HM);
 			Patient patient = null;
 			while (resultSet.next()){
-				int patientId = resultSet.getInt("id");
-				String name = resultSet.getString("name");
-				String surname = resultSet.getString("surname");
-				String sex = resultSet.getString("sex");
-				String birthDate = birthDateFormat.format(resultSet.getDate("birth_date"));
-				String diagnosis = resultSet.getString("diagnosis");
-				String receiptDate = receiptDateFormat.format(resultSet.getDate("receipt_date"));
-				String note = resultSet.getString("note");
+				int patientId = resultSet.getInt(DatabaseColumnName.ID);
+				String name = resultSet.getString(DatabaseColumnName.NAME);
+				String surname = resultSet.getString(DatabaseColumnName.SURNAME);
+				String sex = resultSet.getString(DatabaseColumnName.SEX);
+				String birthDate = birthDateFormat.format(resultSet.getDate(
+						DatabaseColumnName.BIRTH_DATE));
+				String diagnosis = resultSet.getString(DatabaseColumnName.DIAGNOSIS);
+				String receiptDate = receiptDateFormat.format(resultSet.getTimestamp(
+						DatabaseColumnName.RECEIPT_DATE));
+				String note = resultSet.getString(DatabaseColumnName.NOTE);
 				patient = new Patient(patientId, name, surname, sex, birthDate,
 						diagnosis, doctorId, receiptDate, note);
 				patients.add(patient);
@@ -100,22 +103,16 @@ public class SQLFindPatientDAO implements FindPatientDAO{
 	}
 
 	@Override
-	public List<Patient> findPatients(String searchData, int offset, int count,
-			String orderBy) throws DAOException {
+	public List<Patient> findPatients(String searchData, int offset, int count)
+			throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		Connection connection = null;
 		CallableStatement callableStatement = null;
 		
 		try {
-			String query;
-			if (null == orderBy) {
-				query = SQL_FIND_PATIENT;
-			} else {
-				query = "CALL find_patients(?,?,?," + orderBy + ")";
-			}
 			
 			connection = connectionPool.take();
-			callableStatement = connection.prepareCall(query);
+			callableStatement = connection.prepareCall(SqlQuery.FIND_PATIENT);
 			callableStatement.setString(1, searchData);
 			callableStatement.setInt(2, offset);
 			callableStatement.setInt(3, count);
@@ -125,19 +122,22 @@ public class SQLFindPatientDAO implements FindPatientDAO{
 			List<Patient> patients = new ArrayList<Patient>();
 			// Single patient object
 			
-			SimpleDateFormat birthDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-			SimpleDateFormat receiptDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+			SimpleDateFormat birthDateFormat = new SimpleDateFormat(DateFormat.RU_DATE_FORMAT);
+			SimpleDateFormat receiptDateFormat = new SimpleDateFormat(
+					DateFormat.RU_DATE_FORMAT_HM);
 			Patient patient = null;
 			while (resultSet.next()){
-				int patientId = resultSet.getInt("id");
-				String name = resultSet.getString("name");
-				String surname = resultSet.getString("surname");
-				String sex = resultSet.getString("sex");
-				String birthDate = birthDateFormat.format(resultSet.getDate("birth_date"));
-				String diagnosis = resultSet.getString("diagnosis");
-				String receiptDate = receiptDateFormat.format(resultSet.getDate("receipt_date"));
-				int doctorId = resultSet.getInt("doctor_id");
-				String note = resultSet.getString("note");
+				int patientId = resultSet.getInt(DatabaseColumnName.ID);
+				String name = resultSet.getString(DatabaseColumnName.NAME);
+				String surname = resultSet.getString(DatabaseColumnName.SURNAME);
+				String sex = resultSet.getString(DatabaseColumnName.SEX);
+				String birthDate = birthDateFormat.format(resultSet.getDate(
+						DatabaseColumnName.BIRTH_DATE));
+				String diagnosis = resultSet.getString(DatabaseColumnName.DIAGNOSIS);
+				String receiptDate = receiptDateFormat.format(resultSet.getTimestamp(
+						DatabaseColumnName.RECEIPT_DATE));
+				int doctorId = resultSet.getInt(DatabaseColumnName.DOCTOR_ID);
+				String note = resultSet.getString(DatabaseColumnName.NOTE);
 				patient = new Patient(patientId, name, surname, sex, birthDate,
 						diagnosis, doctorId, receiptDate, note);
 				patients.add(patient);

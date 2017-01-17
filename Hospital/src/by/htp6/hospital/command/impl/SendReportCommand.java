@@ -6,7 +6,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import by.htp6.hospital.command.Command;
 import by.htp6.hospital.constant.ParameterName;

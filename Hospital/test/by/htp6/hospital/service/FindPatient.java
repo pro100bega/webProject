@@ -31,12 +31,12 @@ public class FindPatient {
 
 	@Test(expected = ServiceException.class)
 	public void testFindPatients() throws ServiceException {
-		findPatient.findPatients("Вася", -1, 5, null);
+		findPatient.findPatients("Вася", -1, 5);
 	}
 
 	@Test(expected = ServiceException.class)
 	public void testFindPatientByDoctorId() throws ServiceException {
-		findPatient.findPatientsByDoctorId("Вася",21, -1, 5, null);
+		findPatient.findPatientsByDoctorId("Вася",21, -1, 5);
 	}
 	
 	@After

@@ -29,7 +29,7 @@ public class FindPatient implements FindPatientService{
 
 	@Override
 	public List<Patient> findPatientsByDoctorId(String searchData, int doctorId,
-			int offset, int count, String orderBy) throws ServiceException {
+			int offset, int count) throws ServiceException {
 		
 		try {
 			
@@ -45,7 +45,7 @@ public class FindPatient implements FindPatientService{
 			FindPatientDAO findPatientDAO = daoFactory.getFindPatientDAO();
 			
 			List<Patient> patients = findPatientDAO.findPatientsByDoctorId(searchData,
-					doctorId, offset, count, orderBy);
+					doctorId, offset, count);
 			return patients;
 			
 		} catch (DAOException e) {
@@ -56,8 +56,8 @@ public class FindPatient implements FindPatientService{
 	}
 
 	@Override
-	public List<Patient> findPatients(String searchData, int offset, int count,
-			String orderBy) throws ServiceException {
+	public List<Patient> findPatients(String searchData, int offset, int count)
+			throws ServiceException {
 		
 		try {
 			
@@ -73,7 +73,7 @@ public class FindPatient implements FindPatientService{
 			FindPatientDAO findPatientDAO = daoFactory.getFindPatientDAO();
 			
 			List<Patient> patients = findPatientDAO.findPatients(searchData,
-					offset, count, orderBy);
+					offset, count);
 			return patients;
 			
 		} catch (DAOException e) {

@@ -15,16 +15,23 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.htp6.hospital.bean.User;
+import by.htp6.hospital.constant.DatabaseColumnName;
+import by.htp6.hospital.constant.DateFormat;
 import by.htp6.hospital.constant.ErrorMessage;
+import by.htp6.hospital.constant.SqlQuery;
 import by.htp6.hospital.dao.GetUserListDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
+/**
+ * Класс для получения списка пользователей из базы данных
+ * 
+ * Class for getting users list from database
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class SQLGetUserListDAO implements GetUserListDAO{
 	private static final Logger log = LogManager.getLogger(SQLGetUserListDAO.class);
-
-	private static final String SQL_GET_USER_LIST = 
-			"SELECT * FROM user LIMIT ?, ?";
 	
 	@Override
 	public List<User> getUserList(int offset, int count) throws DAOException {
@@ -35,23 +42,21 @@ public class SQLGetUserListDAO implements GetUserListDAO{
 		try {
 			connection = connectionPool.take();
 			
-			preparedStatement = connection.prepareStatement(SQL_GET_USER_LIST);
+			preparedStatement = connection.prepareStatement(SqlQuery.GET_USER_LIST);
 			preparedStatement.setInt(1, offset);
 			preparedStatement.setInt(2, count);
 			
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-			
-			
+			SimpleDateFormat dateFormat = new SimpleDateFormat(DateFormat.RU_DATE_FORMAT_HM);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
 			List<User> users = new ArrayList<>();
 			while(resultSet.next()) {
-				int id = resultSet.getInt("id");
-				String username = resultSet.getString("username");
-				String password = "********";
-				String type = resultSet.getString("type");
+				int id = resultSet.getInt(DatabaseColumnName.ID);
+				String username = resultSet.getString(DatabaseColumnName.USERNAME);
+				String password = "";
+				String type = resultSet.getString(DatabaseColumnName.TYPE);
 				
-				Timestamp dbTime = resultSet.getTimestamp("create_time");
+				Timestamp dbTime = resultSet.getTimestamp(DatabaseColumnName.CREATE_TIME);
 				String createTime = dateFormat.format(dbTime);
 				
 				users.add(new User(id, username, password, type, createTime));

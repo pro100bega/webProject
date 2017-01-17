@@ -34,4 +34,10 @@ public class ErrorMessage {
 			+ " connection back to connection pool";
 	public static final String UNABLE_TO_CLOSE_STATEMENT = "Unable to close statement";
 	public static final String DATABASE_ERROR = "Database error";
+	public static final String WRONG_REPORT_ID = "Wrong report id";
+	public static final String INCORRECT_PASSWORD_OR_USERNAME = "Incorrect "
+			+ "password or username";
+	public static final String USERNAME_IS_ALREADY_EXIST = "Username is already"
+			+ " exists";
+	public static final String CONNECTION_IS_NULL = "Connection is null";
 }

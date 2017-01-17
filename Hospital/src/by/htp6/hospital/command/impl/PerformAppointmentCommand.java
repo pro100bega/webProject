@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import by.htp6.hospital.bean.Patient;
 import by.htp6.hospital.bean.User;
 import by.htp6.hospital.command.Command;
 import by.htp6.hospital.constant.ParameterName;
@@ -26,7 +25,7 @@ import by.htp6.hospital.service.factory.ServiceFactory;
 public class PerformAppointmentCommand implements Command{
 	
 	private static final String APPOINTMENTS_DISPLAY_COMMAND =
-			"controller?command=GET_APPOINTMENTS&status=undone&patientId=";
+			"controller?command=GET_PATIENT_INFO&status=undone&patientId=";
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
@@ -42,8 +41,8 @@ public class PerformAppointmentCommand implements Command{
 		PerformAppointmentService performAppointment = serviceFactory.getPerformAppointment();
 		try {
 			performAppointment.performAppointment(appointmentId, userType, appointmentType);
-			Patient selectedPatient = (Patient)session.getAttribute(ParameterName.SELECTED_PATIENT);
-			int selectedPatientId = selectedPatient.getId();
+			int selectedPatientId = Integer.parseInt(request.getParameter(
+					ParameterName.PATIENT_ID));
 			String url = APPOINTMENTS_DISPLAY_COMMAND + selectedPatientId;
 			response.sendRedirect(url);
 		} catch (ServiceException e) {

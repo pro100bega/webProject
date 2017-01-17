@@ -6,22 +6,30 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.htp6.hospital.bean.Patient;
+import by.htp6.hospital.constant.DatabaseColumnName;
+import by.htp6.hospital.constant.DateFormat;
 import by.htp6.hospital.constant.ErrorMessage;
+import by.htp6.hospital.constant.SqlQuery;
 import by.htp6.hospital.dao.GetPatientDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
+/**
+ * Класс для получения конкретного пациента из базы данных
+ * 
+ * Class for getting single patient from database
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class SQLGetPatientDAO implements GetPatientDAO{
 	private static final Logger log = LogManager.getLogger(SQLGetPatientDAO.class);
-
-	private static final String SQL_GET_PATIENT = 
-			"SELECt * FROM patient WHERE id = ? limit 1";
 	
 	@Override
 	public Patient getPatient(int patientId) throws DAOException {
@@ -32,26 +40,27 @@ public class SQLGetPatientDAO implements GetPatientDAO{
 		try {
 			connection = connectionPool.take();
 			
-			preparedStatement = connection.prepareStatement(SQL_GET_PATIENT);
+			preparedStatement = connection.prepareStatement(SqlQuery.GET_PATIENT);
 			preparedStatement.setInt(1, patientId);
 			
 			ResultSet resultSet = preparedStatement.executeQuery();
 			resultSet.next();
 			
-			SimpleDateFormat birthDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-			SimpleDateFormat receiptDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+			SimpleDateFormat birthDateFormat = new SimpleDateFormat(DateFormat.RU_DATE_FORMAT);
+			SimpleDateFormat receiptDateFormat = new SimpleDateFormat(
+					DateFormat.RU_DATE_FORMAT_HM);
 			
-			int id = resultSet.getInt("id");
-			String name = resultSet.getString("name");
-			String surname = resultSet.getString("surname");
-			String diagnosis = resultSet.getString("diagnosis");
-			String sex = resultSet.getString("sex");
-			Date birthDate = resultSet.getDate("birth_date");
+			int id = resultSet.getInt(DatabaseColumnName.ID);
+			String name = resultSet.getString(DatabaseColumnName.NAME);
+			String surname = resultSet.getString(DatabaseColumnName.SURNAME);
+			String diagnosis = resultSet.getString(DatabaseColumnName.DIAGNOSIS);
+			String sex = resultSet.getString(DatabaseColumnName.SEX);
+			Date birthDate = resultSet.getDate(DatabaseColumnName.BIRTH_DATE);
 			String stringBirthDate = birthDateFormat.format(birthDate);
-			Date receiptDate = resultSet.getDate("receipt_date");
-			int doctorId = resultSet.getInt("doctor_id");
+			Timestamp receiptDate = resultSet.getTimestamp(DatabaseColumnName.RECEIPT_DATE);
+			int doctorId = resultSet.getInt(DatabaseColumnName.DOCTOR_ID);
 			String stringReceiptDate = receiptDateFormat.format(receiptDate);
-			String note = resultSet.getString("note");
+			String note = resultSet.getString(DatabaseColumnName.NOTE);
 			Patient patient = new Patient(id, name, surname, sex, stringBirthDate,
 					diagnosis, doctorId, stringReceiptDate, note);
 			

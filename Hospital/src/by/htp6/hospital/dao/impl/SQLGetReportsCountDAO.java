@@ -10,15 +10,20 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.htp6.hospital.constant.ErrorMessage;
+import by.htp6.hospital.constant.SqlQuery;
 import by.htp6.hospital.dao.GetReportsCountDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
 
+/**
+ * Класс для получения количества жалоб и предложений в базе данных
+ * 
+ * Class for getting reports count in database
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class SQLGetReportsCountDAO implements GetReportsCountDAO{
 	private static final Logger log = LogManager.getLogger(SQLGetReportsCountDAO.class);
-
-	private static final String SQL_GET_REPORTS_COUNT = 
-			"SELECT COUNT(*) FROM report";
 	
 	@Override
 	public int getReportsCount() throws DAOException {
@@ -28,7 +33,7 @@ public class SQLGetReportsCountDAO implements GetReportsCountDAO{
 		try {
 			connection = connectionPool.take();
 
-			preparedStatement = connection.prepareStatement(SQL_GET_REPORTS_COUNT);
+			preparedStatement = connection.prepareStatement(SqlQuery.GET_REPORTS_COUNT);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			int reportsCount = 0;
 			if (resultSet.next()) {
