@@ -1,4 +1,4 @@
-package by.htp6.hospital.tools;
+package by.htp6.hospital.tool;
 
 import java.util.regex.Pattern;
 

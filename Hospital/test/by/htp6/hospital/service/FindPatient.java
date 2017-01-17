@@ -1,4 +1,4 @@
-package by.htp6.hospital.test.service;
+package by.htp6.hospital.service;
 
 import static org.junit.Assert.*;
 
@@ -10,32 +10,35 @@ import org.junit.Before;
 import org.junit.Test;
 
 import by.htp6.hospital.dao.pool.ConnectionPool;
-import by.htp6.hospital.service.AddNewPatientService;
+import by.htp6.hospital.service.FindPatientService;
 import by.htp6.hospital.service.exception.ServiceException;
 
-public class AddNewPatient {
+public class FindPatient {
 
-	private ConnectionPool connectionPool;
+	ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-	private AddNewPatientService addNewPatient;
-
+	FindPatientService findPatient;
+	
 	@Before
 	public void before() {
-		connectionPool = ConnectionPool.getInstance();
 		try {
 			connectionPool.init();
-			addNewPatient= new by.htp6.hospital.service.impl.AddNewPatient();
+			findPatient = new by.htp6.hospital.service.impl.FindPatient();
 		} catch (SQLException e) {
 			fail("Couldn`t initialize connection pool");
 		}
 	}
 
 	@Test(expected = ServiceException.class)
-	public void testAddNewPatient() throws ServiceException {
-		
-		addNewPatient.addNewPatient("Вася", "Иванов", 'м', "awf", "111", 0, null);
+	public void testFindPatients() throws ServiceException {
+		findPatient.findPatients("Вася", -1, 5, null);
 	}
 
+	@Test(expected = ServiceException.class)
+	public void testFindPatientByDoctorId() throws ServiceException {
+		findPatient.findPatientsByDoctorId("Вася",21, -1, 5, null);
+	}
+	
 	@After
 	public void after() {
 		try {

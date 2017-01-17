@@ -1,4 +1,4 @@
-package by.htp6.hospital.test.service;
+package by.htp6.hospital.service;
 
 import static org.junit.Assert.*;
 
@@ -10,30 +10,31 @@ import org.junit.Before;
 import org.junit.Test;
 
 import by.htp6.hospital.dao.pool.ConnectionPool;
-import by.htp6.hospital.service.GetPatientService;
+import by.htp6.hospital.service.ChangeUserTypeService;
 import by.htp6.hospital.service.exception.ServiceException;
 
-public class GetPatient {
+public class ChangeUserType {
 
-	ConnectionPool connectionPool = ConnectionPool.getInstance();
+	private ConnectionPool connectionPool = ConnectionPool.getInstance();
 
-	GetPatientService getPatient;
-	
+	private ChangeUserTypeService changeUserType;
+
 	@Before
 	public void before() {
 		try {
 			connectionPool.init();
-			getPatient = new by.htp6.hospital.service.impl.GetPatient();
+			changeUserType = new by.htp6.hospital.service.impl.ChangeUserType();
+			
 		} catch (SQLException e) {
 			fail("Couldn`t initialize connection pool");
 		}
 	}
 
 	@Test(expected = ServiceException.class)
-	public void testGetPatient() throws ServiceException {
-		getPatient.getPatient(0);
+	public void testChangeUserType() throws ServiceException {
+		changeUserType.changeUserType("doctor", "doctor", 6);
 	}
-
+	
 	@After
 	public void after() {
 		try {

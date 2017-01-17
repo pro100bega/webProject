@@ -1,4 +1,4 @@
-package by.htp6.hospital.test.service;
+package by.htp6.hospital.service;
 
 import static org.junit.Assert.*;
 
@@ -10,28 +10,28 @@ import org.junit.Before;
 import org.junit.Test;
 
 import by.htp6.hospital.dao.pool.ConnectionPool;
-import by.htp6.hospital.service.FindLogService;
+import by.htp6.hospital.service.GetAppointmentListService;
 import by.htp6.hospital.service.exception.ServiceException;
 
-public class FindLog {
+public class GetAppointmentList {
 
 	ConnectionPool connectionPool = ConnectionPool.getInstance();
-
-	FindLogService findLog;
 	
+	GetAppointmentListService getAppointmentList;
+
 	@Before
 	public void before() {
 		try {
 			connectionPool.init();
-			findLog = new by.htp6.hospital.service.impl.FindLog();
+			getAppointmentList = new by.htp6.hospital.service.impl.GetAppointmentList();
 		} catch (SQLException e) {
 			fail("Couldn`t initialize connection pool");
 		}
 	}
 
 	@Test(expected = ServiceException.class)
-	public void testFindLog() throws ServiceException {
-		findLog.findLog("ins", "doctor");
+	public void testGetAppointmentList() throws ServiceException {
+		getAppointmentList.getAppointmentList(10, null);
 	}
 
 	@After

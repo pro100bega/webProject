@@ -1,6 +1,10 @@
 package by.htp6.hospital.bean;
 
-public class Appointment {
+import java.io.Serializable;
+
+public class Appointment implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 

@@ -1,7 +1,7 @@
 package by.htp6.hospital.service.exception;
 
 public class ServiceException extends Exception{
-	private static final long serialVersionUID = -3757273135607617166L;
+	private static final long serialVersionUID = 1L;
 
 	public ServiceException() {
 		super();

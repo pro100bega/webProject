@@ -7,11 +7,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<c:if test="${requestScope.successMessage == null}">
+	<c:redirect url="index.jsp"></c:redirect>
+</c:if>
+
 <%@ include file="elements/index/e_localeMessages.jsp" %>
 
 <fmt:message bundle="${local}" key="success.sendReport" var="sendReportSuccess"/>
 <fmt:message bundle="${local}" key="success.signUp" var="signUpSuccess"/>
 <fmt:message bundle="${local}" key="success.discharge" var="dischargeSuccess"/>
+<fmt:message bundle="${local}" key="success.patientAdd" var="patientAddSuccess"/>
 
 <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/starter-template.css">
@@ -28,7 +33,7 @@
 </head>
 <body>
 
-	<c:set var="message" value="${sessionScope.successMessage}"></c:set>
+	<c:set var="message" value="${requestScope.successMessage}"></c:set>
 	
 	<%@ include file="elements/index/e_navbar.jsp" %>
 
@@ -45,6 +50,9 @@
 					</c:when>
 					<c:when test="${message == 'discharge'}">
 						<c:set var="successMessage" value="${dischargeSuccess}"></c:set>
+					</c:when>
+					<c:when test="${message == 'patientAdd'}">
+						<c:set var="successMessage" value="${patientAddSuccess}"></c:set>
 					</c:when>
 				</c:choose>
 				<strong><c:out value="${successMessage}"></c:out></strong>

@@ -3,5 +3,5 @@ package by.htp6.hospital.dao;
 import by.htp6.hospital.dao.exception.DAOException;
 
 public interface SignUpDAO {
-	void signUp(String username, String password, String userType) throws DAOException;
+	void signUp(String username, String password) throws DAOException;
 }

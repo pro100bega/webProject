@@ -200,8 +200,11 @@
 					</button>
 
 					<form action="controller" method="get">
-						<br> <input type="hidden" name="command"
+						<input type="hidden" name="command"
 							value="GET_EDIT_PATIENT_PAGE">
+						<input type="hidden" name="patientId"
+							value="${selectedPatient.id}">
+						<br> 
 						<button type="submit" class="btn btn btn-warning">
 							<span class="glyphicon glyphicon-pencil"></span>
 							<c:out value="${editButton}"></c:out>

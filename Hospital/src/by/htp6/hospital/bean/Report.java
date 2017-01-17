@@ -1,6 +1,11 @@
 package by.htp6.hospital.bean;
 
-public class Report {
+import java.io.Serializable;
+
+public class Report implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+
 	private int id;
 	
 	private String header;
@@ -10,6 +15,19 @@ public class Report {
 	private String time;
 	
 	private String status;
+	
+	public Report() {
+		super();
+	}
+
+	public Report(int id, String header, String message, String time, String status) {
+		super();
+		this.id = id;
+		this.header = header;
+		this.message = message;
+		this.time = time;
+		this.status = status;
+	}
 
 	public int getId() {
 		return id;
@@ -48,19 +66,6 @@ public class Report {
 	}
 
 	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public Report() {
-		super();
-	}
-
-	public Report(int id, String header, String message, String time, String status) {
-		super();
-		this.id = id;
-		this.header = header;
-		this.message = message;
-		this.time = time;
 		this.status = status;
 	}
 

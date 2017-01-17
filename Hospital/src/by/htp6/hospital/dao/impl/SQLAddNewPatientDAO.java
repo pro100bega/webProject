@@ -10,6 +10,8 @@ import org.apache.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import by.htp6.hospital.constant.ErrorMessage;
 import by.htp6.hospital.dao.AddNewPatientDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.pool.ConnectionPool;
@@ -22,8 +24,9 @@ public class SQLAddNewPatientDAO implements AddNewPatientDAO {
 					+ " `diagnosis`, `doctor_id`, `note`)" + " VALUES (?,?,?,?,?,?,?)";
 	
 	@Override
-	public void addNewPatient(String name, String surname, char sex, Date birthDate, String diagnosis, int doctorId,
-			String note) throws DAOException {
+	public void addNewPatient(String name, String surname, String sex, 
+			Date birthDate, String diagnosis, int doctorId,
+				String note) throws DAOException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -33,7 +36,7 @@ public class SQLAddNewPatientDAO implements AddNewPatientDAO {
 			preparedStatement = connection.prepareStatement(SQL_ADD_NEW_PATIENT);
 			preparedStatement.setString(1, name);
 			preparedStatement.setString(2, surname);
-			preparedStatement.setString(3, "" + sex);
+			preparedStatement.setString(3, sex);
 			preparedStatement.setDate(4, new java.sql.Date(birthDate.getTime()));
 			preparedStatement.setString(5, diagnosis);
 			preparedStatement.setInt(6, doctorId);
@@ -43,10 +46,10 @@ public class SQLAddNewPatientDAO implements AddNewPatientDAO {
 			log.debug("Patient " + name + " " + surname + " was added");
 
 		} catch (InterruptedException e) {
-			log.error(e.getMessage());
+			log.error(ErrorMessage.UNABLE_TO_TAKE_CONNECTION, e);
 			throw new DAOException(e);
 		} catch (SQLException e) {
-			log.error(e.getMessage());
+			log.error(e.getMessage(), e);
 			throw new DAOException(e);
 		} finally {
 			try {
@@ -54,16 +57,16 @@ public class SQLAddNewPatientDAO implements AddNewPatientDAO {
 					preparedStatement.close();
 				}
 
+			} catch (SQLException e) {
+				log.error(ErrorMessage.UNABLE_TO_CLOSE_STATEMENT, e);
+			}
+			
+			try {
 				if (connection != null) {
 					connectionPool.free(connection);
 				}
-
-			} catch (SQLException e) {
-				log.error(e.getMessage());
-				throw new DAOException(e);
 			} catch (InterruptedException e) {
-				log.error(e.getMessage());
-				throw new DAOException(e);
+				log.error(ErrorMessage.UNABLE_TO_FREE_CONNECTION, e);
 			}
 
 		}

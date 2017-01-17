@@ -11,6 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import by.htp6.hospital.command.Command;
 import by.htp6.hospital.command.CommandProvider;
 
+/**
+ * Front controller
+ * 
+ * Главный контроллер 
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -21,17 +28,19 @@ public class Controller extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		CommandProvider commandProvider = CommandProvider.getInstance();
-		String commandName = request.getParameter("command");
-		Command command = commandProvider.getCommand(commandName);
-		
-		command.execute(request, response);
+		getAndExecuteCommand(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		getAndExecuteCommand(request, response);
+	}
+	
+	private void getAndExecuteCommand(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		CommandProvider commandProvider = CommandProvider.getInstance();
 		String commandName = request.getParameter("command");
+		System.out.println("Command name - " + commandName);
 		Command command = commandProvider.getCommand(commandName);
 		
 		command.execute(request, response);

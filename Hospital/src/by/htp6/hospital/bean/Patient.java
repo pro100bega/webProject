@@ -136,10 +136,6 @@ public class Patient implements Serializable {
 		this.note = note;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

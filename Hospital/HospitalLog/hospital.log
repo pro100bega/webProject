@@ -1,0 +1,75 @@
+16.01.2017 15:25:29 ERROR by.htp6.hospital.service.impl.DischargePatient - Illegal arguments
+16.01.2017 15:25:29 ERROR by.htp6.hospital.service.impl.DischargePatient - Patient id can`t be zero or less Diagnosis can`t be null or empty
+16.01.2017 15:25:29 ERROR by.htp6.hospital.service.impl.FindPatient - Illegal arguments
+16.01.2017 15:25:29 ERROR by.htp6.hospital.service.impl.FindPatient - Doctor id can`t be less than zero Order by can`t be null or empty
+16.01.2017 15:25:29 ERROR by.htp6.hospital.service.impl.FindPatient - Illegal arguments
+16.01.2017 15:25:29 ERROR by.htp6.hospital.service.impl.FindPatient - Offset can`t be less than zero Order by can`t be null or empty
+16.01.2017 15:25:29 ERROR by.htp6.hospital.service.impl.AddAppointment - Illegal arguments
+16.01.2017 15:25:29 ERROR by.htp6.hospital.service.impl.AddAppointment - Patient id can`t be zero or less Appointment term date can`t be null or empty Appointment term time can`t be null or empty
+16.01.2017 15:25:29 ERROR by.htp6.hospital.service.impl.GetAppointmentList - Illegal arguments
+16.01.2017 15:25:29 ERROR by.htp6.hospital.service.impl.GetAppointmentList - Status can`t be null or empty
+16.01.2017 15:25:29 ERROR by.htp6.hospital.service.impl.FindLog - Insufficient permission
+16.01.2017 15:25:29 ERROR by.htp6.hospital.service.impl.GetPatient - Illegal arguments
+16.01.2017 15:25:29 ERROR by.htp6.hospital.service.impl.GetPatient - Patient id can`t be zero or less
+16.01.2017 15:25:29 ERROR by.htp6.hospital.service.impl.GetLog - Insufficient permission
+16.01.2017 15:25:29 ERROR by.htp6.hospital.service.impl.GetLog - Insufficient permission
+16.01.2017 15:25:29 ERROR by.htp6.hospital.service.impl.EditPatient - Illegal arguments
+16.01.2017 15:25:29 ERROR by.htp6.hospital.service.impl.EditPatient - Sex: wrong format 
+16.01.2017 15:25:30 ERROR by.htp6.hospital.service.impl.AddNewPatient - Illegal arguments
+16.01.2017 15:25:30 ERROR by.htp6.hospital.service.impl.AddNewPatient - Sex: wrong format Doctor id can`t be zero or less 
+16.01.2017 15:26:48 ERROR by.htp6.hospital.service.impl.DischargePatient - Illegal arguments
+16.01.2017 15:26:48 ERROR by.htp6.hospital.service.impl.DischargePatient - Patient id can`t be zero or less Diagnosis can`t be null or empty
+16.01.2017 15:26:48 ERROR by.htp6.hospital.service.impl.FindPatient - Illegal arguments
+16.01.2017 15:26:48 ERROR by.htp6.hospital.service.impl.FindPatient - Doctor id can`t be less than zero Order by can`t be null or empty
+16.01.2017 15:26:48 ERROR by.htp6.hospital.service.impl.FindPatient - Illegal arguments
+16.01.2017 15:26:48 ERROR by.htp6.hospital.service.impl.FindPatient - Offset can`t be less than zero Order by can`t be null or empty
+16.01.2017 15:26:48 ERROR by.htp6.hospital.service.impl.AddAppointment - Illegal arguments
+16.01.2017 15:26:48 ERROR by.htp6.hospital.service.impl.AddAppointment - Patient id can`t be zero or less Appointment term date can`t be null or empty Appointment term time can`t be null or empty
+16.01.2017 15:26:49 ERROR by.htp6.hospital.service.impl.GetAppointmentList - Illegal arguments
+16.01.2017 15:26:49 ERROR by.htp6.hospital.service.impl.GetAppointmentList - Status can`t be null or empty
+16.01.2017 15:26:49 ERROR by.htp6.hospital.service.impl.FindLog - Insufficient permission
+16.01.2017 15:26:49 ERROR by.htp6.hospital.service.impl.GetPatient - Illegal arguments
+16.01.2017 15:26:49 ERROR by.htp6.hospital.service.impl.GetPatient - Patient id can`t be zero or less
+16.01.2017 15:26:49 ERROR by.htp6.hospital.service.impl.GetLog - Insufficient permission
+16.01.2017 15:26:49 ERROR by.htp6.hospital.service.impl.GetLog - Insufficient permission
+16.01.2017 15:26:49 ERROR by.htp6.hospital.service.impl.EditPatient - Illegal arguments
+16.01.2017 15:26:49 ERROR by.htp6.hospital.service.impl.EditPatient - Sex: wrong format 
+16.01.2017 15:26:49 ERROR by.htp6.hospital.service.impl.AddNewPatient - Illegal arguments
+16.01.2017 15:26:49 ERROR by.htp6.hospital.service.impl.AddNewPatient - Sex: wrong format Doctor id can`t be zero or less 
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.DischargePatient - Illegal arguments
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.DischargePatient - Patient id can`t be zero or less Diagnosis can`t be null or empty
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.FindPatient - Illegal arguments
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.FindPatient - Doctor id can`t be less than zero Order by can`t be null or empty
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.FindPatient - Illegal arguments
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.FindPatient - Offset can`t be less than zero Order by can`t be null or empty
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.AddAppointment - Illegal arguments
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.AddAppointment - Patient id can`t be zero or less Appointment term date can`t be null or empty Appointment term time can`t be null or empty
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.GetAppointmentList - Illegal arguments
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.GetAppointmentList - Status can`t be null or empty
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.FindLog - Insufficient permission
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.GetPatient - Illegal arguments
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.GetPatient - Patient id can`t be zero or less
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.GetLog - Insufficient permission
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.GetLog - Insufficient permission
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.EditPatient - Illegal arguments
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.EditPatient - Sex: wrong format 
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.AddNewPatient - Illegal arguments
+16.01.2017 15:27:12 ERROR by.htp6.hospital.service.impl.AddNewPatient - Sex: wrong format Doctor id can`t be zero or less 
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.DischargePatient - Illegal arguments
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.DischargePatient - Patient id can`t be zero or less Diagnosis can`t be null or empty
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.GetAppointmentList - Illegal arguments
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.GetAppointmentList - Status can`t be null or empty
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.FindLog - Insufficient permission
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.GetPatient - Illegal arguments
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.GetPatient - Patient id can`t be zero or less
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.AddNewPatient - Illegal arguments
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.AddNewPatient - Doctor id can`t be zero or less 
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.GetLog - Insufficient permission
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.GetLog - Insufficient permission
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.EditPatient - Invalid diagnosis format
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.FindPatient - Illegal arguments
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.FindPatient - Doctor id can`t be less than zero 
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.FindPatient - Illegal arguments
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.FindPatient - Offset can`t be less than zero 
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.AddAppointment - Illegal arguments
+17.01.2017 14:10:43 ERROR by.htp6.hospital.service.impl.AddAppointment - Patient id can`t be zero or less Appointment term date can`t be null or empty Appointment term time can`t be null or empty

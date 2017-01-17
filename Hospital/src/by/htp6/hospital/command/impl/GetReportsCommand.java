@@ -13,25 +13,34 @@ import javax.servlet.http.HttpSession;
 import by.htp6.hospital.bean.Report;
 import by.htp6.hospital.bean.User;
 import by.htp6.hospital.command.Command;
+import by.htp6.hospital.constant.ParameterName;
+import by.htp6.hospital.constant.Url;
 import by.htp6.hospital.service.GetReportsCountService;
 import by.htp6.hospital.service.GetReportsService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.factory.ServiceFactory;
 
+/**
+ * Команда получения списка сообщений о неполадках
+ * 
+ * Command designed to get reports list 
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class GetReportsCommand implements Command {
-
+	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 
-		User user = (User) session.getAttribute("authorisedUser");
+		User user = (User) session.getAttribute(ParameterName.AUTHORISED_USER);
 		String userType = user.getType();
 
-		String requestCurrentPage = request.getParameter("currentPage");
+		String requestCurrentPage = request.getParameter(ParameterName.CURRENT_PAGE);
 		int currentPage;
 		if (requestCurrentPage == null) {
-			String sessionCurrentPage = "" + session.getAttribute("currentPage");
+			String sessionCurrentPage = "" + session.getAttribute(ParameterName.CURRENT_PAGE);
 			currentPage = (sessionCurrentPage == null) 
 					? 1 
 					: Integer.parseInt(sessionCurrentPage);
@@ -39,11 +48,11 @@ public class GetReportsCommand implements Command {
 			currentPage = Integer.parseInt(requestCurrentPage);
 		}
 
-		String requestReportsPerPage = request.getParameter("reportsPerPage");
+		String requestReportsPerPage = request.getParameter(ParameterName.REPORTS_PER_PAGE);
 		int reportsPerPage;
 		if (requestReportsPerPage == null) {
 			String sessionReportsPerPage = "" + 
-		session.getAttribute("reportsPerPage");
+		session.getAttribute(ParameterName.REPORTS_PER_PAGE);
 			reportsPerPage = (sessionReportsPerPage == null) 
 					? 10 
 					: Integer.parseInt(sessionReportsPerPage);
@@ -61,18 +70,17 @@ public class GetReportsCommand implements Command {
 			List<Report> reports = getReports.getReports(userType, offset, 
 					reportsPerPage);
 		
-			session.setAttribute("currentPage", currentPage);
-			session.setAttribute("reportsPerPage", reportsPerPage);
-			request.setAttribute("reports", reports);
-			request.setAttribute("reportsCount", reportsCount);
-			
-			String url = "administrator/reports.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+			session.setAttribute(ParameterName.CURRENT_PAGE, currentPage);
+			session.setAttribute(ParameterName.REPORTS_PER_PAGE, reportsPerPage);
+			request.setAttribute(ParameterName.REPORTS, reports);
+			request.setAttribute(ParameterName.REPORTS_COUNT, reportsCount);
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher(Url.REPORTS);
 			dispatcher.forward(request, response);
 			
 		} catch (ServiceException e) {
-			String url = "error";
-			response.sendRedirect(url);
+			
+			response.sendRedirect(Url.ERROR);
 		}
 	}
 

@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="css/dashboard.css">
 
 
-<c:set var="selectedPatient" value="${sessionScope.selectedPatient}"></c:set>
+<c:set var="selectedPatient" value="${requestScope.selectedPatient}"></c:set>
 <c:set var="patientName" value="${selectedPatient.name}"></c:set>
 <c:set var="patientSurname" value="${selectedPatient.surname}"></c:set>
 
@@ -42,6 +42,8 @@
 						</h1>
 					</div>
 					<form action="controller" method="post" id="editPatient">
+						<input type="hidden" name="patientId" 
+						value="${selectedPatient.id}">
 						<input type="hidden" name="command" value="EDIT_PATIENT">
 						<p>
 							<label> <c:out value="${nameMessage}:"></c:out>

@@ -10,24 +10,34 @@ import javax.servlet.http.HttpSession;
 
 import by.htp6.hospital.bean.User;
 import by.htp6.hospital.command.Command;
+import by.htp6.hospital.constant.ParameterName;
+import by.htp6.hospital.constant.SuccessMessage;
+import by.htp6.hospital.constant.Url;
 import by.htp6.hospital.service.AddNewPatientService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.factory.ServiceFactory;
 
+/**
+ * Команда предназначенная для добавления нового пациента
+ * 
+ * Command designed to add new patient
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class AddNewPatientCommand implements Command{
-
+	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
-		String name = request.getParameter("name");
-		String surname = request.getParameter("surname");
-		char sex = request.getParameter("sex").charAt(0);
-		String birthDate = request.getParameter("birthDate");
-		String note = request.getParameter("note");
-		String diagnosis = request.getParameter("diagnosis");
+		String name = request.getParameter(ParameterName.NAME);
+		String surname = request.getParameter(ParameterName.SURNAME);
+		String sex = request.getParameter(ParameterName.SEX);
+		String birthDate = request.getParameter(ParameterName.BIRTH_DATE);
+		String note = request.getParameter(ParameterName.NOTE);
+		String diagnosis = request.getParameter(ParameterName.DIAGNOSIS);
 		
-		User doctor = (User)session.getAttribute("authorisedUser");
+		User doctor = (User)session.getAttribute(ParameterName.AUTHORISED_USER);
 		int doctorId = doctor.getId();
 		
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -36,15 +46,14 @@ public class AddNewPatientCommand implements Command{
 		try {
 			addNewPatientService.addNewPatient(name, surname, sex, birthDate,
 					diagnosis, doctorId, note);
-			String url = "doctor/success.jsp";
-			String successMessage = "patientAdded";
-			request.setAttribute("successMessage", successMessage);
-			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+			
+			request.setAttribute(ParameterName.SUCCESS_MESSAGE, SuccessMessage.PATIENT_ADD);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher(Url.SUCCESS);
 			dispatcher.forward(request, response);
 		} catch (ServiceException e) {
-			String url = "doctor/error.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-			dispatcher.forward(request, response);
+			
+			response.sendRedirect(Url.ERROR);
 		}
 	}
 

@@ -70,6 +70,7 @@ public class SQLGetPatientListDAO implements GetPatientListDAO{
 				preparedStatement.close();
 				connectionPool.free(connection);
 				return patients;
+				
 			} catch (SQLException e) {
 				log.error(e.getMessage());
 				connectionPool.free(connection);
