@@ -40,9 +40,9 @@ public class ConnectionPool implements Closeable {
 			Class.forName(DRIVER_NAME);
 		} catch (ClassNotFoundException e) {
 			log.error(ErrorMessage.DATABASE_ERROR, e);
-			throw new SQLException(e);
+			throw new SQLException(e);//!!!!!!!! не надо выбрасывать не свои исключения, это ошибка
 		}
-		ResourceBundle resourceBundle = ResourceBundle.getBundle("resources.dbResource");
+		ResourceBundle resourceBundle = ResourceBundle.getBundle("resources.dbResource");// константные неименованные строки. именовать
 		String dbUrl = resourceBundle.getString("db.localConnectionString");
 		String dbUsername = resourceBundle.getString("db.username");
 		String dbPassword = resourceBundle.getString("db.localPassword");
@@ -64,7 +64,7 @@ public class ConnectionPool implements Closeable {
 	public void free(Connection connection) throws InterruptedException{
 		if (connection == null){
 			log.error(ErrorMessage.CONNECTION_IS_NULL);
-			throw new RuntimeException(ErrorMessage.CONNECTION_IS_NULL);
+			throw new RuntimeException(ErrorMessage.CONNECTION_IS_NULL);// если выбрасываешь Runtime, то лучше выбрасывай свой Runtime
 		}
 		Connection temporaryConnection = connection;
 		connection = null;

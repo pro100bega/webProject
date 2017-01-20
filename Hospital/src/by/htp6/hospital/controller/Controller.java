@@ -19,7 +19,7 @@ import by.htp6.hospital.command.CommandProvider;
  * @author Begench Shamuradov, 2017
  */
 @WebServlet("/controller")
-public class Controller extends HttpServlet {
+public class Controller extends HttpServlet {// этот класс желательно объявить final
 	private static final long serialVersionUID = 1L;
 
 	public Controller() {
@@ -39,7 +39,7 @@ public class Controller extends HttpServlet {
 	private void getAndExecuteCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		CommandProvider commandProvider = CommandProvider.getInstance();
-		String commandName = request.getParameter("command");
+		String commandName = request.getParameter("command");// неименованная константная строка
 		Command command = commandProvider.getCommand(commandName);
 		
 		command.execute(request, response);

@@ -45,7 +45,8 @@ import by.htp6.hospital.dao.impl.SQLSendReportDAO;
 import by.htp6.hospital.dao.impl.SQLSignInDAO;
 import by.htp6.hospital.dao.impl.SQLSignUpDAO;
 
-public class DAOFactory {
+public class DAOFactory {// очень много команд
+	// лучше такую фабрику сделать через шаблон Command
 	private static final DAOFactory instance = new DAOFactory();
 
 	private SignInDAO signInDAO = new SQLSignInDAO();

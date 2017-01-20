@@ -79,7 +79,7 @@ public class CommandProvider {
 		return instance;
 	}
 	
-	public Command getCommand(String commandName){
+	public Command getCommand(String commandName){// метод может вернуть null
 		Command command;
 		command = commands.get(commandName);
 		return command;
