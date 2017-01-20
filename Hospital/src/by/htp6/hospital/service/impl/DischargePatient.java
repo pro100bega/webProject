@@ -39,11 +39,13 @@ public class DischargePatient implements DischargePatientService{
 			DAOFactory daoFactory = DAOFactory.getInstance();
 			DischargePatientDAO dischargePatientDAO = daoFactory.getDischargePatientDAO();
 			return dischargePatientDAO.dishcargePatient(patientId, finalDiagnosis);
-		} catch (DAOException e) {
-			log.error(e.getMessage());
+		} catch (DAOException e) {// используй одинаковый стиль логгирования
+			// или так, где ты гасишь исключение, или там, где оно возникает
+			log.error(e.getMessage());// и надо логгировать все исключение, а не только message
 			throw new ServiceException(e);
 		} catch (ValidationException e) {
-			throw new ServiceException(e);
+			throw new ServiceException(e);// если твой private метод выбрасывает исключение - то оно может быть само исключение сервисов
+			// и оборачивать его еще в одно исключение того же слоя излишне
 		}
 	}
 	
