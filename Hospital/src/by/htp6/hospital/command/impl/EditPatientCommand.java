@@ -48,7 +48,7 @@ public class EditPatientCommand implements Command{
 			
 			response.sendRedirect(GET_PATIENT_INFO_COMMAND + patientId);
 		} catch (ServiceException e) {
-			
+			// а логгер где?
 			response.sendRedirect(Url.ERROR);
 		}
 	}
