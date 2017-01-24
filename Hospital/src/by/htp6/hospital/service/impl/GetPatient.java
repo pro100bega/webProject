@@ -8,7 +8,7 @@ import by.htp6.hospital.constant.ErrorMessage;
 import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.dao.GetPatientDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.GetPatientFactory;
 import by.htp6.hospital.service.GetPatientService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -30,7 +30,7 @@ public class GetPatient implements GetPatientService{
 			
 			validate(patientId);
 			
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			GetPatientFactory daoFactory = GetPatientFactory.getInstance();
 			GetPatientDAO getPatientDAO = daoFactory.getGetPatientDAO();
 			
 			Patient patient = getPatientDAO.getPatient(patientId);

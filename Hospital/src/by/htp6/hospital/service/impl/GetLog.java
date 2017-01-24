@@ -11,7 +11,7 @@ import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.constant.UserType;
 import by.htp6.hospital.dao.GetLogDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.GetLogFactory;
 import by.htp6.hospital.service.GetLogService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -38,7 +38,7 @@ public class GetLog implements GetLogService {
 				throw new ServiceException(ErrorMessage.INSUFFICIENT_PERMISSION);
 			}
 
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			GetLogFactory daoFactory = GetLogFactory.getInstance();
 			GetLogDAO getLogDAO = daoFactory.getGetLogDAO();
 			List<Log> logs;
 			

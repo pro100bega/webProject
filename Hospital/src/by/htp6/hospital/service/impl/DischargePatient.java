@@ -9,7 +9,7 @@ import by.htp6.hospital.constant.ErrorMessage;
 import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.dao.DischargePatientDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.DischargePatientFactory;
 import by.htp6.hospital.service.DischargePatientService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -36,11 +36,11 @@ public class DischargePatient implements DischargePatientService{
 				throw new ServiceException(ErrorMessage.DIAGNOSIS_FORMAT);
 			}
 			
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			DischargePatientFactory daoFactory = DischargePatientFactory.getInstance();
 			DischargePatientDAO dischargePatientDAO = daoFactory.getDischargePatientDAO();
 			return dischargePatientDAO.dishcargePatient(patientId, finalDiagnosis);
 		} catch (DAOException e) {
-			log.error(e.getMessage());
+
 			throw new ServiceException(e);
 		} catch (ValidationException e) {
 			throw new ServiceException(e);

@@ -11,7 +11,7 @@ import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.constant.UserType;
 import by.htp6.hospital.dao.GetReportsDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.GetReportsFactory;
 import by.htp6.hospital.service.GetReportsService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -37,7 +37,7 @@ public class GetReports implements GetReportsService {
 				throw new ServiceException(ErrorMessage.INSUFFICIENT_PERMISSION);
 			}
 
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			GetReportsFactory daoFactory = GetReportsFactory.getInstance();
 			GetReportsDAO getReportsDAO = daoFactory.getGetReportsDAO();
 			
 			List<Report> reports = getReportsDAO.getReports(offset, count);

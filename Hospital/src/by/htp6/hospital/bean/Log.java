@@ -2,6 +2,13 @@ package by.htp6.hospital.bean;
 
 import java.io.Serializable;
 
+/**
+ * Класс, описывающий сущность "лог"
+ * 
+ * Class describing "log" bean
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class Log implements Serializable{
 
 	private static final long serialVersionUID = 1L;

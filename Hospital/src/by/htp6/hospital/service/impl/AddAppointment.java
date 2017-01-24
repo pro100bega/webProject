@@ -13,7 +13,7 @@ import by.htp6.hospital.constant.ErrorMessage;
 import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.dao.AddAppointmentDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.AddAppointmentFactory;
 import by.htp6.hospital.service.AddAppointmentService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -58,7 +58,7 @@ public class AddAppointment implements AddAppointmentService {
 
 			String fullDate = termDate + " " + termTime;
 
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			AddAppointmentFactory daoFactory = AddAppointmentFactory.getInstance();
 			AddAppointmentDAO assignProcedureDAO = daoFactory.getAddAppointmentDAO();
 
 			Timestamp termDateTimestamp = new Timestamp(termDateFormat.parse(fullDate).getTime());

@@ -9,7 +9,7 @@ import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.constant.UserType;
 import by.htp6.hospital.dao.GetSingleReportDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.GetSingleReportFactory;
 import by.htp6.hospital.service.GetSingleReportService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -35,7 +35,7 @@ public class GetSingleReport implements GetSingleReportService{
 				throw new ServiceException(ErrorMessage.INSUFFICIENT_PERMISSION);
 			}
 			
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			GetSingleReportFactory daoFactory = GetSingleReportFactory.getInstance();
 			GetSingleReportDAO getSingleReportDAO = daoFactory.getGetSingleReportDAO();
 			
 			Report report = getSingleReportDAO.getReport(reportId);

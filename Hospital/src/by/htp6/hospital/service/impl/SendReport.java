@@ -9,7 +9,7 @@ import by.htp6.hospital.constant.ErrorMessage;
 import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.dao.SendReportDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.SendReportFactory;
 import by.htp6.hospital.service.SendReportService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -45,7 +45,7 @@ public class SendReport implements SendReportService{
 				throw new ServiceException(ErrorMessage.MESSAGE_FORMAT);
 			}
 			
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			SendReportFactory daoFactory = SendReportFactory.getInstance();
 			SendReportDAO sendReportDAO = daoFactory.getSendReportDAO();
 			
 			sendReportDAO.sendReport(header, message);

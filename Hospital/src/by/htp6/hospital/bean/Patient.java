@@ -2,6 +2,13 @@ package by.htp6.hospital.bean;
 
 import java.io.Serializable;
 
+/**
+ * Класс, описывающий сущность "пациент"
+ * 
+ * Class describing "patient" bean
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class Patient implements Serializable {
 
 	private static final long serialVersionUID = 1L;

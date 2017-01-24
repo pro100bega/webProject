@@ -3,7 +3,6 @@ package by.htp6.hospital.dao;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,6 +13,7 @@ import by.htp6.hospital.dao.SignInDAO;
 import by.htp6.hospital.dao.exception.DAOException;
 import by.htp6.hospital.dao.impl.SQLSignInDAO;
 import by.htp6.hospital.dao.pool.ConnectionPool;
+import by.htp6.hospital.dao.pool.exception.ConnectionPoolException;
 
 public class SignInTest {
 	private static final String USERNAME = "test";
@@ -24,7 +24,7 @@ public class SignInTest {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		try {
 			connectionPool.init();
-		} catch (SQLException e1) {
+		} catch (ConnectionPoolException e1) {
 			fail("ConnectionPool was not initialized");
 		}
 	}

@@ -13,6 +13,14 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import by.htp6.hospital.bean.Patient;
 
+/**
+ * Пользовательский тег, предназначеный для отображения списка пациентов
+ * с помощью технологии пагинации
+ * 
+ * Custom tag created for display patients with pagination technology
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 @SuppressWarnings("serial")
 public class PatientDisplay extends TagSupport {
 

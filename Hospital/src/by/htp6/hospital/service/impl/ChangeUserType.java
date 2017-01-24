@@ -8,7 +8,7 @@ import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.constant.UserType;
 import by.htp6.hospital.dao.ChangeUserTypeDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.ChangeUserTypeFactory;
 import by.htp6.hospital.service.ChangeUserTypeService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -32,7 +32,7 @@ public class ChangeUserType implements ChangeUserTypeService {
 		try {
 			validate(type, userId);
 			
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			ChangeUserTypeFactory daoFactory = ChangeUserTypeFactory.getInstance();
 			ChangeUserTypeDAO changeUserTypeDao = daoFactory.getChangeUserTypeDAO();
 			changeUserTypeDao.changeUserType(type, userId);
 

@@ -12,6 +12,14 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import by.htp6.hospital.bean.Report;
 
+/**
+ * Пользовательский тег, предназначеный для отображения списка жалоб и
+ * предложений с помощью технологии пагинации
+ * 
+ * Custom tag created for display reports with pagination technology
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class ReportDisplay extends TagSupport {
 	private static final long serialVersionUID = 1L;
 

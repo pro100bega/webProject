@@ -7,7 +7,7 @@ import by.htp6.hospital.constant.ErrorMessage;
 import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.dao.GetPatientsCountDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.GetPatientsCountFactory;
 import by.htp6.hospital.service.GetPatientsCountService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -28,7 +28,7 @@ public class GetPatientsCount implements GetPatientsCountService {
 		try {
 			validate(doctorId);
 
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			GetPatientsCountFactory daoFactory = GetPatientsCountFactory.getInstance();
 			GetPatientsCountDAO getPatientsCountDAO = daoFactory.getGetPatientsCountDAO();
 			
 			int patientsCount = getPatientsCountDAO.getPatientsCountByDoctorId(doctorId);
@@ -42,14 +42,13 @@ public class GetPatientsCount implements GetPatientsCountService {
 
 	@Override
 	public int getPatientsCount() throws ServiceException {
-		DAOFactory daoFactory = DAOFactory.getInstance();
+		GetPatientsCountFactory daoFactory = GetPatientsCountFactory.getInstance();
 		GetPatientsCountDAO getPatientsCountDAO = daoFactory.getGetPatientsCountDAO();
 
 		try {
 			int patientsCount = getPatientsCountDAO.getPatientsCount();
 			return patientsCount;
 		} catch (DAOException e) {
-			log.error(e.getMessage());
 			throw new ServiceException(e);
 		}
 	}
@@ -61,7 +60,7 @@ public class GetPatientsCount implements GetPatientsCountService {
 		try {
 			validate(doctorId, searchData);
 
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			GetPatientsCountFactory daoFactory = GetPatientsCountFactory.getInstance();
 			GetPatientsCountDAO getPatientsCountDAO = daoFactory.getGetPatientsCountDAO();
 			
 			int patientsCount = getPatientsCountDAO.
@@ -81,7 +80,7 @@ public class GetPatientsCount implements GetPatientsCountService {
 		try {
 			validate(searchData);
 
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			GetPatientsCountFactory daoFactory = GetPatientsCountFactory.getInstance();
 			GetPatientsCountDAO getPatientsCountDAO = daoFactory.getGetPatientsCountDAO();
 			
 			int patientsCount = getPatientsCountDAO.getPatientsCount(searchData);

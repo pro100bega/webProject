@@ -11,7 +11,7 @@ import by.htp6.hospital.constant.ErrorMessage;
 import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.dao.SignInDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.SignInFactory;
 import by.htp6.hospital.service.SignInService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -46,7 +46,7 @@ public class SignIn implements SignInService{
 				throw new ServiceException(ErrorMessage.PASSWORD_FORMAT);
 			}
 			
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			SignInFactory daoFactory = SignInFactory.getInstance();
 			
 			SignInDAO logInDao = daoFactory.getSignInDAO();			
 			

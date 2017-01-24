@@ -10,7 +10,7 @@ import by.htp6.hospital.constant.ErrorMessage;
 import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.dao.GetPatientListDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.GetPatientListFactory;
 import by.htp6.hospital.service.GetPatientListService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -33,7 +33,7 @@ public class GetPatientList implements GetPatientListService {
 			
 			validate(doctorId, offset, patientsPerPage);
 
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			GetPatientListFactory daoFactory = GetPatientListFactory.getInstance();
 			GetPatientListDAO getPatientListDAO = daoFactory.getGetPatientListDAO();
 			
 			List<Patient> patients = getPatientListDAO.getPatientListForDoctor(doctorId,
@@ -55,7 +55,7 @@ public class GetPatientList implements GetPatientListService {
 			
 			validate(offset, patientsPerPage);
 
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			GetPatientListFactory daoFactory = GetPatientListFactory.getInstance();
 			GetPatientListDAO getPatientListDAO = daoFactory.getGetPatientListDAO();
 			
 			List<Patient> patients = getPatientListDAO.getAllPatientList(offset,

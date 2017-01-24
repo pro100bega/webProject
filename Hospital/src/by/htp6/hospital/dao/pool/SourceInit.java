@@ -1,10 +1,16 @@
-package by.htp6.hospital.dao;
+package by.htp6.hospital.dao.pool;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
-import by.htp6.hospital.dao.pool.ConnectionPool;
+import by.htp6.hospital.dao.pool.exception.ConnectionPoolException;
 
+/**
+ * Класс инициализации пула соединений
+ * 
+ * Connection pool initializing class
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class SourceInit {
 	private static final SourceInit instance = new SourceInit();
 
@@ -14,7 +20,7 @@ public class SourceInit {
 		return instance;
 	}
 
-	public void init() throws SQLException {
+	public void init() throws ConnectionPoolException {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		connectionPool.init();
 	}

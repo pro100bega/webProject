@@ -9,6 +9,7 @@ package by.htp6.hospital.constant;
  */
 public class ErrorMessage {
 
+	public static final String COMMAND_WAS_NOT_FOUND = "Command was not found :";
 	public static final String CANT_BE_ZERO_OR_LESS = "can`t be zero or less";
 	public static final String CANT_BE_LESS_THAN_ZERO = "can`t be less than zero";
 	public static final String CANT_BE_EMPTY = "can`t be null or empty";
@@ -40,4 +41,6 @@ public class ErrorMessage {
 	public static final String USERNAME_IS_ALREADY_EXIST = "Username is already"
 			+ " exists";
 	public static final String CONNECTION_IS_NULL = "Connection is null";
+	public static final String DRIVER_LOAD_ERROR = "Driver load error";
+	public static final String WRONG_TECHNOLOGY = "Wrong technology name";
 }

@@ -13,7 +13,7 @@ import by.htp6.hospital.constant.ErrorMessage;
 import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.dao.EditPatientDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.EditPatientFactory;
 import by.htp6.hospital.service.EditPatientService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -69,7 +69,7 @@ public class EditPatient implements EditPatientService {
 				try {
 					date = dateFormat.parse(birthDate);
 				} catch (ParseException e) {
-					log.error(e.getMessage());
+					log.error(e.getMessage(), e);
 					throw new ServiceException(e);
 				}
 			} else {
@@ -77,7 +77,7 @@ public class EditPatient implements EditPatientService {
 				try {
 					date = dateFormat.parse(birthDate);
 				} catch (ParseException e) {
-					log.error(e.getMessage());
+					log.error(e.getMessage(), e);
 					throw new ServiceException(e);
 				}
 			}
@@ -90,7 +90,7 @@ public class EditPatient implements EditPatientService {
 				}
 			}
 			
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			EditPatientFactory daoFactory = EditPatientFactory.getInstance();
 			EditPatientDAO editPatientDAO = daoFactory.getEditPatientDAO();
 
 			editPatientDAO.editPatient(patientId, name, surname, sex, date, diagnosis, note);

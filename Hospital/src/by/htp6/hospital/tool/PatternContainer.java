@@ -2,6 +2,13 @@ package by.htp6.hospital.tool;
 
 import java.util.regex.Pattern;
 
+/**
+ * Класс, содержащий регулярные выражения для проверки полей
+ * 
+ * Regular expression container class
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class PatternContainer {
 	//User name format pattern
 	public static final Pattern usernamePattern = 

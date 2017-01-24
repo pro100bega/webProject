@@ -36,11 +36,9 @@ public class SqlQuery {
 	public static final String GET_PATIENT_LIST_FOR_DOCTOR_ORDER_BY_RECEIPT = 
 			"SELECT * FROM patient WHERE doctor_id = ? ORDER BY receipt_date DESC limit ?, ?";
 	public static final String GET_ALL_PATIENTS_LIST_ORDER_BY_NAME = "SELECT * FROM patient"
-			+ " ORDER"
-			+ " BY name LIMIT ?, ?";
+			+ " ORDER BY name LIMIT ?, ?";
 	public static final String GET_ALL_PATIENTS_LIST_ORDER_BY_SURNAME = "SELECT * FROM patient "
-			+ "ORDER"
-			+ " BY surname LIMIT ?, ?";
+			+ "ORDER BY surname LIMIT ?, ?";
 	public static final String GET_ALL_PATIENTS_LIST_ORDER_BY_DIAGNOSIS = "SELECT * FROM patient "
 			+ "ORDER BY diagnosis LIMIT ?, ?";
 	public static final String GET_ALL_PATIENTS_LIST_ORDER_BY_RECEIPT = "SELECT * FROM patient "

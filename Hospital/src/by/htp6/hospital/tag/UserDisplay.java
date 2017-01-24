@@ -12,6 +12,14 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import by.htp6.hospital.bean.User;
 
+/**
+ * Пользовательский тег, предназначеный для отображения списка пользователей
+ * с помощью технологии пагинации
+ * 
+ * Custom tag created for display users with pagination technology
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class UserDisplay extends TagSupport {
 	private static final long serialVersionUID = 1L;
 

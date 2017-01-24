@@ -2,7 +2,7 @@ package by.htp6.hospital.service.impl;
 
 import by.htp6.hospital.dao.GetUnreadReportsCountDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.GetUnreadReportsCountFactory;
 import by.htp6.hospital.service.GetUnreadReportsCountService;
 import by.htp6.hospital.service.exception.ServiceException;
 
@@ -18,7 +18,7 @@ public class GetUnreadReportsCount implements GetUnreadReportsCountService{
 	@Override
 	public int getUnreadReportsCountService() throws ServiceException {
 
-		DAOFactory daoFactory = DAOFactory.getInstance();
+		GetUnreadReportsCountFactory daoFactory = GetUnreadReportsCountFactory.getInstance();
 		GetUnreadReportsCountDAO getUnreadReportsCountDAO = 
 				daoFactory.getGetUnreadReportsCountDAO();
 		

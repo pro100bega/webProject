@@ -25,6 +25,13 @@ import by.htp6.hospital.command.impl.PerformAppointmentCommand;
 import by.htp6.hospital.command.impl.SendReportCommand;
 import by.htp6.hospital.command.impl.SetLocaleCommand;
 
+/**
+ * Класс, предназначенный для хранения комманд
+ * 
+ * Command providing class
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 public class CommandProvider {
 	private static final CommandProvider instance = new CommandProvider();
 	
@@ -79,9 +86,13 @@ public class CommandProvider {
 		return instance;
 	}
 	
-	public Command getCommand(String commandName){
+	public Command getCommand(String commandName) throws CommandWasNotFoundException{
 		Command command;
 		command = commands.get(commandName);
+		
+		if(command == null) {
+			throw new CommandWasNotFoundException();
+		}
 		return command;
 	}
 	

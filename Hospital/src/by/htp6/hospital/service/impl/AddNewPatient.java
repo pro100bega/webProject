@@ -2,6 +2,7 @@ package by.htp6.hospital.service.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import java.util.regex.Matcher;
 
@@ -13,7 +14,7 @@ import by.htp6.hospital.constant.ErrorMessage;
 import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.dao.AddNewPatientDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.AddNewPatientFactory;
 import by.htp6.hospital.service.AddNewPatientService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -65,7 +66,7 @@ public class AddNewPatient implements AddNewPatientService {
 				try {
 					date = dateFormat.parse(birthDate);
 				} catch (ParseException e) {
-					log.error(e.getMessage());
+					log.error(e.getMessage(), e);
 					throw new ServiceException(e);
 				}
 			} else {
@@ -73,7 +74,7 @@ public class AddNewPatient implements AddNewPatientService {
 				try {
 					date = dateFormat.parse(birthDate);
 				} catch (ParseException e) {
-					log.error(e.getMessage());
+					log.error(e.getMessage(), e);
 					throw new ServiceException(e);
 				}
 			}
@@ -85,12 +86,12 @@ public class AddNewPatient implements AddNewPatientService {
 				}
 			}
 
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			AddNewPatientFactory daoFactory = AddNewPatientFactory.getInstance();
 			AddNewPatientDAO addNewPatientDAO = daoFactory.getAddNewPatientDAO();
 
 			addNewPatientDAO.addNewPatient(name, surname, sex, date, diagnosis, doctorId, note);
 		} catch (DAOException e) {
-			log.error(e.getMessage(),e);
+			log.error(e.getMessage(), e);
 			throw new ServiceException(e);
 			
 		} catch (ValidationException e) {

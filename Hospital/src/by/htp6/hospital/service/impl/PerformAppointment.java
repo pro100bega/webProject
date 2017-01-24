@@ -8,7 +8,7 @@ import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.constant.UserType;
 import by.htp6.hospital.dao.PerformAppointmentDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.PerformAppointmentFactory;
 import by.htp6.hospital.service.PerformAppointmentService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -45,7 +45,7 @@ public class PerformAppointment implements PerformAppointmentService{
 				throw new ServiceException(ErrorMessage.INSUFFICIENT_PERMISSION);
 			}
 			
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			PerformAppointmentFactory daoFactory = PerformAppointmentFactory.getInstance();
 			PerformAppointmentDAO performAppointmentDAO = daoFactory.getPerformAppointmentDAO();
 			
 			performAppointmentDAO.performAppointment(appointmentId);

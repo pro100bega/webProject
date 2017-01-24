@@ -11,7 +11,7 @@ import by.htp6.hospital.constant.ErrorMessage;
 import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.dao.SignUpDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.SignUpFactory;
 import by.htp6.hospital.service.SignUpService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -39,7 +39,7 @@ public class SignUp implements SignUpService{
 				throw new ServiceException(ErrorMessage.PASSWORD_FORMAT);
 			}
 			
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			SignUpFactory daoFactory = SignUpFactory.getInstance();
 			SignUpDAO logUpDAO = daoFactory.getSignUpDAO();
 			
 			String encryptedPassword = MD5Encryptor.getHashCode(password);

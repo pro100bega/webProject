@@ -11,7 +11,7 @@ import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.constant.UserType;
 import by.htp6.hospital.dao.GetUserListDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.GetUserListFactory;
 import by.htp6.hospital.service.GetUserListService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -38,7 +38,7 @@ public class GetUserList implements GetUserListService{
 				throw new ServiceException(ErrorMessage.INSUFFICIENT_PERMISSION);
 			}
 			
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			GetUserListFactory daoFactory = GetUserListFactory.getInstance();
 			GetUserListDAO getUserListDAO = daoFactory.getGetUserListDAO();
 			
 			List<User> users = getUserListDAO.getUserList(offset, count);

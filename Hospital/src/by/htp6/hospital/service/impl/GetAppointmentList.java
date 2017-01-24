@@ -10,7 +10,7 @@ import by.htp6.hospital.constant.ErrorMessage;
 import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.dao.GetAppointmentListDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.GetAppointmentListFactory;
 import by.htp6.hospital.service.GetAppointmentListService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -33,7 +33,7 @@ public class GetAppointmentList implements GetAppointmentListService{
 			
 			validate(patientId, status);
 
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			GetAppointmentListFactory daoFactory = GetAppointmentListFactory.getInstance();
 			GetAppointmentListDAO getAppointmentLitDAO = daoFactory.getGetAppointmentListDAO();
 			
 			List<Appointment> appointments = getAppointmentLitDAO.

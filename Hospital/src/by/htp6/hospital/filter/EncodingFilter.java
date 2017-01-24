@@ -9,6 +9,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
+/**
+ * Фильтр для изменения кодировки запросов и ответов
+ * 
+ * Reqest and response encoding changing filter
+ * 
+ * @author Begench Shamuradov, 2017
+ */
 @WebFilter("/*")
 public class EncodingFilter implements Filter {
 	private static final String encoding = "UTF-8";

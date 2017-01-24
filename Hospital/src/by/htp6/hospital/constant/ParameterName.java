@@ -9,6 +9,7 @@ package by.htp6.hospital.constant;
  */
 public class ParameterName {
 
+	public static final String COMMAND = "command";
 	public static final String PATIENT_ID = "patientId";
 	public static final String AUTHORISED_USER = "authorisedUser";
 	public static final String TYPE = "type";

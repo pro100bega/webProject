@@ -12,7 +12,7 @@ import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.constant.UserType;
 import by.htp6.hospital.dao.FindLogDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.FindLogFactory;
 import by.htp6.hospital.service.FindLogService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -46,7 +46,7 @@ public class FindLog implements FindLogService{
 				throw new ServiceException(ErrorMessage.SEARCH_DATA_FORMAT);
 			}
 			
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			FindLogFactory daoFactory = FindLogFactory.getInstance();
 			FindLogDAO findPatientDAO = daoFactory.getFindLogDAO();
 			
 			List<Log> logList = findPatientDAO.findLog(searchData);

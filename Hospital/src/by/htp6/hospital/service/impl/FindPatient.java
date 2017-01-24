@@ -11,7 +11,7 @@ import by.htp6.hospital.constant.ErrorMessage;
 import by.htp6.hospital.constant.FieldName;
 import by.htp6.hospital.dao.FindPatientDAO;
 import by.htp6.hospital.dao.exception.DAOException;
-import by.htp6.hospital.dao.factory.DAOFactory;
+import by.htp6.hospital.dao.factory.FindPatientFactory;
 import by.htp6.hospital.service.FindPatientService;
 import by.htp6.hospital.service.exception.ServiceException;
 import by.htp6.hospital.service.exception.ValidationException;
@@ -41,7 +41,7 @@ public class FindPatient implements FindPatientService{
 				throw new ServiceException(ErrorMessage.DIAGNOSIS_FORMAT);
 			}
 			
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			FindPatientFactory daoFactory = FindPatientFactory.getInstance();
 			FindPatientDAO findPatientDAO = daoFactory.getFindPatientDAO();
 			
 			List<Patient> patients = findPatientDAO.findPatientsByDoctorId(searchData,
@@ -69,7 +69,7 @@ public class FindPatient implements FindPatientService{
 				throw new ServiceException(ErrorMessage.DIAGNOSIS_FORMAT);
 			}
 			
-			DAOFactory daoFactory = DAOFactory.getInstance();
+			FindPatientFactory daoFactory = FindPatientFactory.getInstance();
 			FindPatientDAO findPatientDAO = daoFactory.getFindPatientDAO();
 			
 			List<Patient> patients = findPatientDAO.findPatients(searchData,

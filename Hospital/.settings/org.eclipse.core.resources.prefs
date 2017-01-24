@@ -22,7 +22,6 @@ encoding//src/by/htp6/hospital/command/impl/SignUpCommand.java=UTF-8
 encoding//src/by/htp6/hospital/dao/SignInDAO.java=UTF-8
 encoding//src/by/htp6/hospital/dao/SignUpDAO.java=UTF-8
 encoding//src/by/htp6/hospital/dao/exception/DAOException.java=UTF-8
-encoding//src/by/htp6/hospital/dao/factory/DAOFactory.java=UTF-8
 encoding//src/by/htp6/hospital/dao/impl/SQLSignInDAO.java=UTF-8
 encoding//src/by/htp6/hospital/dao/impl/SQLSignUpDAO.java=UTF-8
 encoding//src/by/htp6/hospital/listener/SourceListener.java=UTF-8
